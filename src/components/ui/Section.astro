@@ -1,0 +1,26 @@
+---
+interface Props {
+    class?: string;
+    variant?: "default" | "dark" | "black";
+    id?: string;
+}
+
+const { class: className, variant = "default", id } = Astro.props;
+
+const variants = {
+    default: "bg-brand-dark text-brand-text",
+    dark: "bg-brand-dark text-brand-text",
+    black: "bg-brand-black text-brand-text",
+};
+
+const baseStyles = "py-24 md:py-32 px-6 md:px-12 relative overflow-hidden";
+---
+
+<section
+    id={id}
+    class={`${baseStyles} ${variants[variant]} ${className || ""}`}
+>
+    <div class="max-w-[1920px] mx-auto reveal">
+        <slot />
+    </div>
+</section>

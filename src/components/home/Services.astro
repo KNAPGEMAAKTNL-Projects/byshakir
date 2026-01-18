@@ -1,0 +1,84 @@
+---
+import Section from "../ui/Section.astro";
+import { Image } from "astro:assets";
+import designProcessImg from "../../assets/images/3d-design-process.png";
+
+const services = [
+    {
+        number: "01",
+        title: "Interior Design",
+        description:
+            "Bespoke spatial concepts that blend international luxury ensuring every square meter tells a story.",
+    },
+    {
+        number: "02",
+        title: "3D Visualization",
+        description:
+            "Photorealistic rendering allowing you to experience your future space before construction begins.",
+    },
+    {
+        number: "03",
+        title: "Realisation",
+        description:
+            "Turnkey project management and execution, ensuring the final result matches the vision perfectly.",
+    },
+];
+---
+
+<Section id="services" variant="black">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <!-- Left: Content -->
+        <div>
+            <h2 class="text-4xl md:text-5xl font-heading mb-12">
+                <span class="text-brand-gold italic">Refining</span>
+                <br />
+                Living Spaces
+            </h2>
+
+            <div class="space-y-12">
+                {
+                    services.map((service) => (
+                        <div class="group border-b border-brand-text/10 pb-8 hover:border-brand-gold/50 transition-colors duration-500">
+                            <span class="text-xs font-bold text-brand-gold mb-2 block tracking-widest">
+                                {service.number}
+                            </span>
+                            <h3 class="text-2xl font-body font-light mb-4 group-hover:pl-4 transition-all duration-300">
+                                {service.title}
+                            </h3>
+                            <p class="text-brand-text/60 text-sm leading-relaxed max-w-md">
+                                {service.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="relative h-[600px] w-full hidden md:block">
+            <div
+                class="absolute inset-0 bg-brand-gold/5 transform translate-x-4 translate-y-4 transition-transform duration-700 group-hover:translate-x-6 group-hover:translate-y-6"
+            >
+            </div>
+            <Image
+                src={designProcessImg}
+                alt="3D Design Process"
+                class="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+            />
+
+            <!-- Overlays -->
+            <div
+                class="absolute top-8 right-[-2rem] bg-brand-dark p-6 border border-brand-text/10 backdrop-blur-md bg-opacity-90 max-w-[200px]"
+            >
+                <p
+                    class="text-brand-gold text-xs uppercase tracking-widest mb-2"
+                >
+                    Precision
+                </p>
+                <p class="text-brand-text text-sm">
+                    Every detail modeled to perfection before execution.
+                </p>
+            </div>
+        </div>
+    </div>
+</Section>

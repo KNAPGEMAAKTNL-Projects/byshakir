@@ -1,0 +1,166 @@
+---
+const links = [
+    { name: "Projects", href: "/projects" },
+    { name: "Inspiration", href: "/inspiration" },
+    { name: "Services", href: "/services" },
+    { name: "Contact", href: "/contact" },
+];
+import { Image } from "astro:assets";
+import logo from "../assets/logo.svg";
+---
+
+<header
+    id="main-header"
+    class="fixed top-0 left-0 w-full z-50 py-6 px-6 md:px-12 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+>
+    <div class="max-w-[1920px] mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <!-- Logo -->
+        <a
+            href="/"
+            class="relative z-50 text-2xl font-heading font-bold tracking-tighter text-brand-text hover:text-brand-gold transition-colors duration-300"
+        >
+            <Image src={logo} alt="By Shakir" class="h-12 w-auto" />
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center space-x-12">
+            {
+                links.map((link) => (
+                    <a
+                        href={link.href}
+                        class="text-xs font-bold uppercase tracking-[0.2em] text-brand-text hover:text-brand-gold transition-colors duration-300"
+                    >
+                        {link.name}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+            id="mobile-menu-toggle"
+            class="md:hidden relative z-[60] text-brand-text hover:text-brand-gold transition-colors p-2"
+            aria-label="Toggle Menu"
+        >
+            <div class="w-6 h-5 relative flex flex-col justify-between">
+                <span
+                    class="w-full h-0.5 bg-current transition-all duration-300 origin-left"
+                    id="line-1"></span>
+                <span
+                    class="w-full h-0.5 bg-current transition-all duration-300"
+                    id="line-2"></span>
+                <span
+                    class="w-full h-0.5 bg-current transition-all duration-300 origin-left"
+                    id="line-3"></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-brand-black/98 z-[55] flex flex-col items-center justify-center translate-x-full"
+    >
+        <nav class="flex flex-col items-center space-y-8">
+            {
+                links.map((link) => (
+                    <a
+                        href={link.href}
+                        class="mobile-link text-2xl font-heading font-bold uppercase tracking-[0.2em] text-brand-text hover:text-brand-gold transition-colors duration-300 block"
+                    >
+                        {link.name}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <div class="absolute bottom-12 text-center mobile-link opacity-0">
+            <p
+                class="text-[10px] uppercase tracking-[0.3em] text-brand-text/40 mb-4"
+            >
+                Inquire
+            </p>
+            <a href="mailto:info@byshakir.com" class="text-brand-gold font-bold"
+                >info@byshakir.com</a
+            >
+        </div>
+    </div>
+</header>
+
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const header = document.getElementById("main-header");
+    const menuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+    const line1 = document.getElementById("line-1");
+    const line2 = document.getElementById("line-2");
+    const line3 = document.getElementById("line-3");
+
+    let isMenuOpen = false;
+
+    // Scroll trigger for header background
+    ScrollTrigger.create({
+        start: "top -80",
+        end: 99999,
+        toggleClass: {
+            className: "bg-brand-dark/90 backdrop-blur-md shadow-2xl py-4",
+            targets: header,
+        },
+    });
+
+    // Mobile menu animations
+    const menuTl = gsap.timeline({ paused: true });
+
+    menuTl.to(mobileMenu, {
+        x: 0,
+        duration: 0.6,
+        ease: "power4.inOut",
+    });
+
+    menuTl.from(
+        mobileLinks,
+        {
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.4,
+            ease: "power2.out",
+        },
+        "-=0.2",
+    );
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+            menuTl.play();
+            document.body.style.overflow = "hidden";
+            // Hamburger to X
+            gsap.to(line1, { rotate: 45, width: "1.75rem", duration: 0.3 });
+            gsap.to(line2, { opacity: 0, duration: 0.3 });
+            gsap.to(line3, { rotate: -45, width: "1.75rem", duration: 0.3 });
+        } else {
+            menuTl.reverse();
+            document.body.style.overflow = "";
+            // X to Hamburger
+            gsap.to(line1, { rotate: 0, width: "100%", duration: 0.3 });
+            gsap.to(line2, { opacity: 1, duration: 0.3 });
+            gsap.to(line3, { rotate: 0, width: "100%", duration: 0.3 });
+        }
+    }
+
+    menuToggle?.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking a link
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            if (isMenuOpen) toggleMenu();
+        });
+    });
+</script>

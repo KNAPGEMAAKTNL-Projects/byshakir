@@ -1,0 +1,40 @@
+---
+interface Props {
+    href?: string;
+    variant?: "solid" | "ghost";
+    class?: string;
+    type?: "button" | "submit" | "reset";
+}
+
+const {
+    href,
+    variant = "ghost",
+    class: className,
+    type = "button",
+} = Astro.props;
+
+const baseStyles =
+    "inline-flex items-center justify-center px-8 py-3 uppercase tracking-widest text-xs font-bold transition-all duration-300 ease-out group relative overflow-hidden";
+const variants = {
+    solid: "bg-brand-gold text-brand-black hover:bg-white hover:text-black",
+    ghost: "border border-brand-gold/30 text-brand-gold hover:border-brand-gold hover:bg-brand-gold/10",
+};
+
+const styles = `${baseStyles} ${variants[variant]} ${className || ""}`;
+---
+
+{
+    href ? (
+        <a href={href} class={styles}>
+            <span class="relative z-10 font-heading">
+                <slot />
+            </span>
+        </a>
+    ) : (
+        <button type={type} class={styles}>
+            <span class="relative z-10 font-heading">
+                <slot />
+            </span>
+        </button>
+    )
+}

@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import ProjectArchive from "../../components/projects/ProjectArchive.astro";
+
+// Updated to use the Editorial "ProjectArchive" component instead of the standard grid
+---
+
+<Layout title="Projects | By Shakir">
+    <Section class="pt-32 pb-16 md:pb-24">
+        <h1 class="text-5xl md:text-7xl font-heading mb-8">
+            Selected <span class="text-brand-gold italic">Works</span>
+        </h1>
+        <p class="text-brand-text/60 max-w-xl text-lg">
+            A curated collection of our defined masterpieces. <br />
+            Where precision meets passion.
+        </p>
+    </Section>
+
+    <ProjectArchive />
+</Layout>

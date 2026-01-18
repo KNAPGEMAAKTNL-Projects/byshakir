@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/home/Services.astro";
+import Projects from "../components/home/Projects.astro";
+import About from "../components/home/About.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<Layout title="By Shakir | Metropolitan Luxury Interiors">
+	<Hero />
+
+	<Services />
+
+	<Projects limit={3} />
+
+	<About />
+
+	<!-- CTA / Contact Teaser -->
+	<section
+		class="py-32 bg-brand-dark flex items-center justify-center relative overflow-hidden"
+	>
+		<div class="absolute inset-0 bg-brand-gold/5"></div>
+		<div class="text-center relative z-10 reveal px-4">
+			<h2 class="text-4xl md:text-6xl font-heading mb-8">
+				Ready to <span class="text-brand-gold italic">Upgrade?</span>
+			</h2>
+			<p class="text-brand-text/60 mb-12 max-w-lg mx-auto">
+				Visit our showroom in Tiel or schedule a private consultation to
+				discuss your vision.
+			</p>
+			<div class="flex flex-col md:flex-row gap-6 justify-center">
+				<Button href="/contact#contact-form" variant="solid"
+					>Request Consultation</Button
+				>
+			</div>
+		</div>
+	</section>
+</Layout>

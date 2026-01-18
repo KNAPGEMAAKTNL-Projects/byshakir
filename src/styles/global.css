@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand-dark: #1A1A1A;
+    --color-brand-black: #050505;
+    --color-brand-gold: #C5A059;
+    --color-brand-text: #E0E0E0;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+    @apply bg-brand-dark text-brand-text font-body antialiased;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-heading text-brand-text;
+}

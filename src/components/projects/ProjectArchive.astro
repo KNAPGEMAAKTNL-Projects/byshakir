@@ -1,0 +1,119 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import { Image } from "astro:assets";
+import Button from "../../components/ui/Button.astro";
+
+// Images
+import malagaImg from "../../assets/images/projects/beach-house-malaga/herov2.jpeg";
+import antwerpenImg from "../../assets/images/projects/country-estate-antwerpen/herov3.png";
+import barcelonaImg from "../../assets/images/projects/duplex-penthouse-barcelona/herov2.png";
+import dubaiImg from "../../assets/images/projects/penthouse-dubai-marina/herov2.jpeg";
+import nlImg from "../../assets/images/projects/villa-mansion-netherlands/herov2.jpeg";
+
+const projects = [
+    {
+        title: "Penthouse Marina",
+        location: "Dubai",
+        year: "2025",
+        description:
+            "A gravity-defying penthouse overlooking the marina. We stripped the space to its core to introduce a palette of dark velvet, brushed bronze, and Italian marble.",
+        image: dubaiImg,
+        href: "/projects/dubai-marina",
+    },
+    {
+        title: "Beach House",
+        location: "Malaga",
+        year: "2024",
+        description:
+            "Where the Mediterranean meets metropolitan luxury. This beach house redefines coastal living by rejecting traditional white-washed aesthetics.",
+        image: malagaImg,
+        href: "/projects/malaga",
+    },
+    {
+        title: "Country Estate",
+        location: "Antwerpen",
+        year: "2024",
+        description:
+            "A historic estate reimagined for modern luxury. We preserved the original architectural soul while injecting a bold, contemporary darkness.",
+        image: antwerpenImg,
+        href: "/projects/antwerpen",
+    },
+    {
+        title: "Duplex Penthouse",
+        location: "Barcelona",
+        year: "2023",
+        description:
+            "Urban sophistication in the heart of Catalonia. This duplex utilizes a stark, high-contrast palette to frame the vibrant city views.",
+        image: barcelonaImg,
+        href: "/projects/barcelona",
+    },
+    {
+        title: "Villa Mansion",
+        location: "Netherlands",
+        year: "2025",
+        description:
+            "A monumental new construction project where we defined every detail from the architectural shell to the custom furniture joinery.",
+        image: nlImg,
+        href: "/projects/netherlands",
+    },
+];
+---
+
+<div class="space-y-32 pb-32 pt-0">
+    {
+        projects.map((project, index) => (
+            <div class="group relative">
+                <div
+                    class={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} gap-12 md:gap-24 items-center max-w-[1920px] mx-auto px-6 md:px-12`}
+                >
+                    {/* Image Side */}
+                    <div class="w-full md:w-3/5 reveal">
+                        <a
+                            href={project.href}
+                            class="block overflow-hidden relative aspect-[16/10]"
+                        >
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                width={1600}
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 contrast-110"
+                            />
+                            <div class="absolute inset-0 bg-brand-black/20 group-hover:bg-brand-black/0 transition-colors duration-500" />
+                        </a>
+                    </div>
+
+                    {/* Text Side */}
+                    <div class="w-full md:w-2/5 reveal">
+                        <div class="sticky top-32">
+                            <div class="flex items-center gap-4 mb-6">
+                                <span class="text-brand-gold font-heading text-xl">
+                                    0{index + 1}
+                                </span>
+                                <div class="h-px bg-brand-gold/30 flex-grow" />
+                                <span class="text-xs font-bold uppercase tracking-widest text-brand-text/60">
+                                    {project.year}
+                                </span>
+                            </div>
+
+                            <h2 class="text-4xl md:text-6xl font-heading text-brand-text mb-2">
+                                {project.title}
+                            </h2>
+                            <p class="text-sm font-bold uppercase tracking-widest text-brand-gold mb-8">
+                                {project.location}
+                            </p>
+
+                            <p class="text-brand-text/70 leading-relaxed text-lg mb-8 max-w-md">
+                                {project.description}
+                            </p>
+
+                            <Button href={project.href} variant="ghost">
+                                Explore Project
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+</div>

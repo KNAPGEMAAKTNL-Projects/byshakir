@@ -1,0 +1,68 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import "@fontsource/playfair-display";
+import "@fontsource/montserrat";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="nl" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="description"
+			content="By Shakir - International Design Authority"
+		/>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body
+		class="bg-brand-dark text-brand-text antialiased overflow-x-hidden selection:bg-brand-gold selection:text-brand-black"
+	>
+		<Header />
+
+		<main class="min-h-screen">
+			<slot />
+		</main>
+
+		<Footer />
+
+		<script>
+			import gsap from "gsap";
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			// Global Reveal Animation
+			// Add class 'reveal' to any element to fade it up on scroll
+			const revealElements = document.querySelectorAll(".reveal");
+
+			revealElements.forEach((element) => {
+				gsap.fromTo(
+					element,
+					{ y: 50, opacity: 0 },
+					{
+						y: 0,
+						opacity: 1,
+						duration: 1.2,
+						ease: "power3.out",
+						scrollTrigger: {
+							trigger: element,
+							start: "top 85%",
+							toggleActions: "play none none reverse",
+						},
+					},
+				);
+			});
+		</script>
+	</body>
+</html>
