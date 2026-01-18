@@ -73,9 +73,12 @@ const shuffledImages = shuffleArray([...images]);
                         >
                             <Image
                                 src={item.image}
-                                alt={item.title}
-                                class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                                alt={`${item.title} luxury interior design inspiration - metropolitan aesthetic and modern finishes`}
                                 width={1200}
+                                height={1600}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105"
                                 quality="high"
                             />
                             

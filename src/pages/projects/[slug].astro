@@ -174,7 +174,11 @@ const nextHeroImage = imageMap[nextProject.hero];
             heroImage && (
                 <Image
                     src={heroImage}
-                    alt={project.title}
+                    alt={`${project.title} - ${project.location} luxury interior design project`}
+                    width={1920}
+                    height={1080}
+                    loading="eager"
+                    fetchpriority="high"
                     class="absolute inset-0 w-full h-full object-cover opacity-60"
                     quality="high"
                 />
@@ -235,17 +239,24 @@ const nextHeroImage = imageMap[nextProject.hero];
     <Section variant="default" class="pt-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {
-                galleryImages.map((img, index) => (
-                    <div
-                        class={`reveal overflow-hidden relative group ${index % 3 === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/5]"}`}
-                    >
-                        <Image
-                            src={img}
-                            alt={`${project.title} detail ${index + 1}`}
-                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
-                    </div>
-                ))
+                galleryImages.map((img, index) => {
+                    const isWide = index % 3 === 0;
+                    return (
+                        <div
+                            class={`reveal overflow-hidden relative group ${isWide ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/5]"}`}
+                        >
+                            <Image
+                                src={img}
+                                alt={`${project.title} interior detail - ${project.location} - view ${index + 1}`}
+                                width={isWide ? 1600 : 800}
+                                height={isWide ? 900 : 1000}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                        </div>
+                    );
+                })
             }
         </div>
     </Section>
@@ -259,7 +270,11 @@ const nextHeroImage = imageMap[nextProject.hero];
             nextHeroImage && (
                 <Image
                     src={nextHeroImage}
-                    alt={nextProject.title}
+                    alt={`Next project - ${nextProject.title} luxury interior design`}
+                    width={1920}
+                    height={1080}
+                    loading="lazy"
+                    decoding="async"
                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
                 />
             )
