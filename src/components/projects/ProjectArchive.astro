@@ -75,8 +75,11 @@ const projects = [
                         >
                             <Image
                                 src={project.image}
-                                alt={project.title}
+                                alt={`${project.title} - ${project.location} luxury interior design project`}
                                 width={1600}
+                                height={1000}
+                                loading="lazy"
+                                decoding="async"
                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 contrast-110"
                             />
                             <div class="absolute inset-0 bg-brand-black/20 group-hover:bg-brand-black/0 transition-colors duration-500" />

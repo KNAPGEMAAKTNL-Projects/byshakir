@@ -9,6 +9,17 @@ import { Image } from "astro:assets";
 >
     <!-- Background Video / Image -->
     <div class="absolute inset-0 z-0 select-none">
+        <!-- Poster Image (fallback while video loads) -->
+        <Image
+            src={heroPoster}
+            alt="Luxury modern living room interior with contemporary furniture and ambient lighting"
+            width={1920}
+            height={1080}
+            loading="eager"
+            fetchpriority="high"
+            class="absolute inset-0 w-full h-full object-cover opacity-80"
+        />
+
         <!-- Video -->
         <video
             class="absolute inset-0 w-full h-full object-cover opacity-80"
