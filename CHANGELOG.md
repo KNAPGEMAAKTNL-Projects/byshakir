@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/KNAPGEMAAKTNL/byshakir/compare/v1.0.2...v1.0.3) (2026-01-18)
+
+
+### Bug Fixes
+
+* test automated release workflow ([b729c3b](https://github.com/KNAPGEMAAKTNL/byshakir/commit/b729c3b50d6669fb3daa76fb5a8ea1b3c5619e36))
+
 ## [1.0.2](https://github.com/KNAPGEMAAKTNL/byshakir/compare/v1.0.1...v1.0.2) (2026-01-18)
 
 
