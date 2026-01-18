@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Section from "../components/ui/Section.astro";
 import { Image } from "astro:assets";
 
-// Import all project images
+// Import all project images (WebP format only)
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-    "../assets/images/projects/**/*.{jpeg,jpg,png,webp}",
+    "../assets/images/projects/**/*.webp",
     { eager: true },
 );
 
@@ -79,7 +79,6 @@ const shuffledImages = shuffleArray([...images]);
                                 loading="lazy"
                                 decoding="async"
                                 class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-                                quality="high"
                             />
                             
                             <!-- Project Title Overlay - Bottom Corner -->
