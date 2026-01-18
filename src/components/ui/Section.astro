@@ -3,9 +3,15 @@ interface Props {
     class?: string;
     variant?: "default" | "dark" | "black";
     id?: string;
+    animate?: boolean;
 }
 
-const { class: className, variant = "default", id } = Astro.props;
+const {
+    class: className,
+    variant = "default",
+    id,
+    animate = true,
+} = Astro.props;
 
 const variants = {
     default: "bg-brand-dark text-brand-text",
@@ -20,7 +26,7 @@ const baseStyles = "py-24 md:py-32 px-6 md:px-12 relative overflow-hidden";
     id={id}
     class={`${baseStyles} ${variants[variant]} ${className || ""}`}
 >
-    <div class="max-w-[1920px] mx-auto reveal">
+    <div class:list={["max-w-[1920px] mx-auto", { reveal: animate }]}>
         <slot />
     </div>
 </section>
