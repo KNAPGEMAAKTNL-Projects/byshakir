@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.6](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/compare/v1.0.5...v1.0.6) (2026-02-09)
+
+
+### Bug Fixes
+
+* prevent demo site from being indexed 🐛 ([#21](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/issues/21)) ([9933769](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/commit/9933769c50db402e3df4888feb8749bc8fabaed9))
+* resolve inspiration page gallery glitching ([#16](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/issues/16)) ([fbd6446](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/commit/fbd64467bbf7a37094cae50f57a9b43d9354d26b))
+* set trailing slashes to always for Cloudflare policy 🐛 ([#20](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/issues/20)) ([601a759](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/commit/601a759dd29ac186f5fa362356f81a0d5d6151fa)), closes [#19](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/issues/19)
+
 ## [1.0.5](https://github.com/KNAPGEMAAKTNL-Projects/byshakir/compare/v1.0.4...v1.0.5) (2026-01-18)
 
 
