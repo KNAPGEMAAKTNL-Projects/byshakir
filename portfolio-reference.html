@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Shakir — Portfolio Reference · /projects/ + /projects/penthouse-dubai-marina/</title>
+<meta name="description" content="Design reference file — twee pagina-templates: portfolio overzicht en projectpagina detail.">
+<!-- ── FONTS ─── Cormorant Garamond + DM Sans (variable, with opsz) ──────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — identical to homepage-reference.html
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --c-gold:             #C9A962;
+  --c-gold-light:       #E8C26C;
+  --c-gold-dark:        #745B16;
+  --c-dark:             #2C1F17;
+  --c-dark-alt:         #1E150D;
+  --c-bg:               #F0E8DC;
+  --c-surface:          #E8DDD0;
+  --c-surface-elevated: #FAF7F3;
+  --c-terracotta:       #8B5230;
+  --c-terracotta-warm:  #B87856;
+  --c-text:             #2C1F17;
+  --c-text-muted:       #7A756E;
+  --c-text-on-dark:     #F0E8DC;
+  --c-text-muted-dark:  #CEC4B6;
+  --c-border:           #CEC4B6;
+
+  --f-heading: 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  --t-sm:      0.7502rem;
+  --t-base:    1rem;
+  --t-lg:      1.333rem;
+  --t-xl:      1.7769rem;
+  --t-2xl:     2.3686rem;
+  --t-3xl:     3.1573rem;
+  --t-display: clamp(3rem, 2rem + 5vw, 7rem);
+
+  --ease:        cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-reveal:  1.4s;
+  --dur-hover:   0.7s;
+  --dur-page:    1.0s;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+ul, ol { list-style: none; }
+address { font-style: normal; }
+
+/* ── SCROLL REVEALS ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: scale(1) translateY(0); }
+  .reveal.d1 { transition-delay: 0.10s; }
+  .reveal.d2 { transition-delay: 0.20s; }
+  .reveal.d3 { transition-delay: 0.30s; }
+  .reveal.d4 { transition-delay: 0.40s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ── SHARED COMPONENTS ──────────────────────────────────────────────────── */
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.gold-rule--center { margin-inline: auto; }
+
+.overline {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.gold-dot::after { content: '.'; color: var(--c-gold); }
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px;
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn-gold {
+  background: var(--c-gold);
+  color: var(--c-dark);
+}
+.btn-gold:hover { background: var(--c-gold-light); }
+
+.microcopy {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  color: rgba(206, 196, 182, 0.75);
+  margin-top: 0.875rem;
+}
+.microcopy--dark { color: var(--c-text-muted); }
+
+.link-cta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--c-gold);
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.link-cta:hover { opacity: 0.65; }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
+}
+
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0.22;
+}
+
+/* ── NAV ────────────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vh, 1.75rem) clamp(1.5rem, 5vw, 5rem);
+  transition:
+    background 0.6s var(--ease),
+    backdrop-filter 0.6s;
+}
+.nav.is-scrolled {
+  background: rgba(44, 31, 23, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.nav-logo sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--c-text-on-dark); }
+.nav-links a.active { color: var(--c-gold); }
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--c-text-muted-dark);
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--c-dark);
+  z-index: 99;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+}
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2.75rem; }
+.mobile-nav-links a {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.mobile-nav-links a:hover { color: var(--c-gold); }
+
+/* ── FOOTER ─────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--c-dark-alt);
+  border-top: 1px solid rgba(201, 169, 98, 0.18);
+  padding-block: clamp(3rem, 3.5vw + 1rem, 5rem);
+}
+.footer-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 5vw, 7rem);
+  align-items: start;
+}
+.footer-brand { font-family: var(--f-heading); font-size: 1rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-gold); display: block; margin-bottom: 0.4rem; }
+.footer-brand sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; }
+.footer-tagline { font-family: var(--f-body); font-size: 0.5625rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-text-muted-dark); opacity: 0.5; display: block; margin-bottom: 1.5rem; }
+.footer-address { font-family: var(--f-body); font-size: 0.75rem; font-weight: 300; line-height: 1.75; color: var(--c-text-muted-dark); }
+.footer-legal { margin-top: 2rem; font-family: var(--f-body); font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(206, 196, 182, 0.35); }
+.footer-legal a { border-bottom: 1px solid rgba(206, 196, 182, 0.15); }
+.footer-nav { display: grid; grid-template-columns: repeat(2, auto); column-gap: 2.25rem; row-gap: 0.625rem; margin-bottom: 2rem; align-items: start; }
+.footer-nav a { font-family: var(--f-body); font-size: 0.6875rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-text-muted-dark); transition: color 0.3s; }
+.footer-nav a:hover { color: var(--c-text-on-dark); }
+.footer-whatsapp { color: var(--c-text-on-dark); }
+
+/* ── REFERENCE DIVIDER ──────────────────────────────────────────────────── */
+.template-divider {
+  background: #1a120a;
+  padding: 2.5rem clamp(1.5rem, 5vw, 5rem);
+  border-top: 3px solid var(--c-gold);
+  border-bottom: 3px solid var(--c-gold);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.template-divider-label {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.template-divider-title {
+  font-family: var(--f-heading);
+  font-size: var(--t-xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+}
+.template-divider-path {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  color: var(--c-text-muted-dark);
+  letter-spacing: 0.06em;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEMPLATE 1 — /projects/ — PORTFOLIO OVERVIEW PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── INNER PAGE HEADER — dark bg, ~50vh ──────────────────────────────────── */
+.page-header {
+  position: relative;
+  height: clamp(380px, 50vh, 600px);
+  background: var(--c-dark);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+.page-header-content {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.page-header-content .overline {
+  color: var(--c-terracotta);
+  margin-bottom: 0.875rem;
+}
+.page-header-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.page-header-sub {
+  font-family: var(--f-heading);
+  font-size: var(--t-lg);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--c-text-muted-dark);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+/* Diagonal decorative line — breaks rectangular header (craft library §1.1) */
+.page-header-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.page-header-deco svg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  opacity: 0.04;
+}
+
+/* ── PORTFOLIO MASONRY OVERVIEW GRID ────────────────────────────────────── */
+.portfolio-overview {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 5vw, 9rem);
+}
+.portfolio-overview-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.portfolio-overview-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: clamp(2.5rem, 3.5vw, 4rem);
+  gap: 1rem;
+}
+.portfolio-overview-header .overline {
+  color: var(--c-terracotta);
+  margin-bottom: 0.625rem;
+}
+.portfolio-overview-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
+}
+.portfolio-overview-count {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* CSS columns masonry — 3-col desktop, 2-col tablet, 1-col mobile */
+.masonry-grid {
+  column-count: 3;
+  column-gap: clamp(0.875rem, 1.5vw, 1.25rem);
+}
+
+/* Masonry card */
+.mcard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  break-inside: avoid;
+  margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+  /* 3D tilt */
+  transform-style: preserve-3d;
+}
+/* Individual aspect ratios — varied editorial rhythm */
+.mcard:nth-child(1) { aspect-ratio: 2/3; }   /* Featured: taller */
+.mcard:nth-child(2) { aspect-ratio: 4/5; }
+.mcard:nth-child(3) { aspect-ratio: 4/5; }
+.mcard:nth-child(4) { aspect-ratio: 4/5; }
+.mcard:nth-child(5) { aspect-ratio: 3/4; }
+
+.mcard-img {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.mcard:hover .mcard-img { transform: scale(1.04); }
+
+.mcard-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: linear-gradient(to top, rgba(44,31,23,0.88) 0%, rgba(44,31,23,0.2) 40%, transparent 65%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+}
+.mcard:hover .mcard-overlay { opacity: 1; transform: translateY(0); }
+
+/* Mobile — overlay always visible */
+@media (hover: none) {
+  .mcard-overlay { opacity: 1; transform: none; }
+}
+
+.mcard-location {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 0.3rem;
+}
+.mcard-name {
+  font-family: var(--f-heading);
+  font-size: var(--t-lg);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--c-text-on-dark);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+/* Arrow CTA on card — slides right on hover */
+.mcard-arrow {
+  position: absolute;
+  top: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(201, 169, 98, 0.4);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.mcard-arrow::after {
+  content: '→';
+  font-size: 0.75rem;
+  color: var(--c-gold);
+  display: block;
+}
+.mcard:hover .mcard-arrow { opacity: 1; transform: translateX(0); }
+
+/* Portfolio CTA footer */
+.portfolio-overview-footer {
+  margin-top: clamp(3rem, 4vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: clamp(2rem, 2.5vw, 3rem);
+  border-top: 1px solid var(--c-border);
+}
+.portfolio-overview-footer .link-cta { color: var(--c-text); }
+.portfolio-contact-note {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  color: var(--c-text-muted);
+  max-width: 36ch;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* ── RESPONSIVE: OVERVIEW ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (max-width: 640px) {
+  .masonry-grid { column-count: 1; }
+  .portfolio-overview-header { flex-direction: column; }
+  .portfolio-overview-footer { flex-direction: column; align-items: flex-start; }
+  .portfolio-contact-note { text-align: left; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .footer-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-nav { column-gap: 2.5rem; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEMPLATE 2 — /projects/penthouse-dubai-marina/ — DETAIL PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── PROJECT HERO — full-bleed, ~60vh, content bottom-left ─────────────── */
+.project-hero {
+  position: relative;
+  height: clamp(440px, 60vh, 720px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.project-hero-bg {
+  position: absolute;
+  inset: 0;
+  /* Production: replace with <img> or <video> */
+  background: linear-gradient(145deg, #2A1E14 0%, #1C1209 50%, #3C2E18 100%);
+}
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28, 18, 9, 0.88) 0%, rgba(28, 18, 9, 0.3) 55%, transparent 85%);
+  pointer-events: none;
+}
+.project-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 4vw, 4.5rem);
+  width: 100%;
+}
+.project-hero-content .gold-rule { margin-bottom: 1rem; }
+.project-hero-location {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-terracotta-warm);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.project-hero-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.8rem, 2rem + 4.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+  max-width: 14ch;
+}
+.project-hero-year {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--c-text-muted-dark);
+  opacity: 0.6;
+}
+
+/* ── PROJECT META STRIP ─────────────────────────────────────────────────── */
+.project-meta {
+  background: var(--c-surface);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.project-meta::-webkit-scrollbar { display: none; }
+.project-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 120px;
+  padding-inline: clamp(1rem, 2.5vw, 2.5rem);
+}
+.project-meta-item:first-child { padding-left: 0; }
+.project-meta-item:last-child { padding-right: 0; }
+/* Thin gold vertical line between items */
+.project-meta-item + .project-meta-item {
+  border-left: 1px solid rgba(201, 169, 98, 0.3);
+}
+.project-meta-label {
+  font-family: var(--f-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.project-meta-value {
+  font-family: var(--f-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--c-text);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* ── CASE STUDY NARRATIVE — 2-col: text 65% + sidebar 35% ──────────────── */
+.project-narrative {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 6vw, 9rem);
+}
+.project-narrative-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 65fr 35fr;
+  gap: clamp(3rem, 5vw, 6rem);
+  align-items: start;
+}
+/* Main copy column */
+.narrative-main .overline {
+  color: var(--c-terracotta);
+  margin-bottom: 0.875rem;
+}
+.narrative-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
+  margin-bottom: 2rem;
+}
+.narrative-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--c-text);
+  margin-bottom: 1.625rem;
+  max-width: 66ch;
+}
+.narrative-body:last-of-type { margin-bottom: 0; }
+/* Inline pull quote — breaks paragraph flow */
+.narrative-pull {
+  font-family: var(--f-heading);
+  font-size: var(--t-xl);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--c-text);
+  border-left: 2px solid var(--c-gold);
+  padding-left: 1.5rem;
+  margin-block: 2.5rem;
+  max-width: 38ch;
+}
+
+/* Sidebar column */
+.narrative-sidebar {
+  position: sticky;
+  top: clamp(5rem, 7vh, 8rem);
+}
+.sidebar-block {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--c-border);
+}
+.sidebar-block:last-child { border-bottom: none; margin-bottom: 0; }
+.sidebar-label {
+  font-family: var(--f-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  margin-bottom: 1rem;
+}
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.sidebar-list li {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  color: var(--c-text);
+  line-height: 1.5;
+  padding-left: 1rem;
+  position: relative;
+}
+.sidebar-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--c-gold);
+  font-size: 0.625rem;
+  top: 0.05em;
+}
+
+/* ── IMAGE GALLERY ──────────────────────────────────────────────────────── */
+.project-gallery {
+  background: var(--c-surface);
+  padding-block: clamp(4rem, 5vw, 7rem);
+}
+.project-gallery-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.gallery-header {
+  margin-bottom: clamp(2rem, 3vw, 3.5rem);
+}
+.gallery-header .overline {
+  color: var(--c-text-muted);
+}
+/* 3-col grid with varied row spans for editorial depth */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: clamp(180px, 22vw, 320px);
+  gap: clamp(0.625rem, 1vw, 1rem);
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+/* Selected items span 2 rows for rhythm variation */
+.gallery-item:nth-child(1) { grid-row: span 2; }
+.gallery-item:nth-child(4) { grid-row: span 2; }
+
+.gallery-item:hover .gallery-img { transform: scale(1.04); }
+.gallery-img {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.8s var(--ease);
+}
+
+/* ── CLIENT QUOTE ───────────────────────────────────────────────────────── */
+.project-quote {
+  background: var(--c-dark);
+  padding-block: clamp(5rem, 7vw, 9rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.project-quote-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 10vw, 14rem);
+}
+.project-quote-mark {
+  font-family: var(--f-heading);
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 300;
+  color: var(--c-gold);
+  opacity: 0.3;
+  line-height: 0.7;
+  display: block;
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+}
+.project-blockquote {
+  font-family: var(--f-heading);
+  font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 2.25rem;
+  max-width: 36ch;
+  margin-inline: auto;
+}
+.project-quote-attribution {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+}
+.project-quote-attribution span {
+  display: block;
+  font-weight: 300;
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  color: var(--c-terracotta-warm);
+  margin-top: 0.35rem;
+}
+
+/* ── PROJECT NAVIGATION — prev/next ────────────────────────────────────── */
+.project-nav {
+  background: var(--c-bg);
+  padding-block: clamp(3.5rem, 4vw, 5.5rem);
+  border-top: 1px solid var(--c-border);
+}
+.project-nav-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.project-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--c-border);
+  transition: border-color 0.3s;
+}
+.project-nav-link:hover { border-color: var(--c-gold); }
+.project-nav-dir {
+  font-family: var(--f-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  transition: color 0.3s;
+}
+.project-nav-link:hover .project-nav-dir { color: var(--c-gold); }
+.project-nav-title {
+  font-family: var(--f-heading);
+  font-size: var(--t-xl);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--c-text);
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  transition: color 0.3s;
+}
+.project-nav-link:hover .project-nav-title { color: var(--c-dark); }
+.project-nav-title .arrow {
+  font-size: 0.875rem;
+  color: var(--c-gold);
+  transition: transform 0.4s var(--ease);
+}
+.project-nav-link:hover .arrow { transform: translateX(5px); }
+.project-nav-link--next {
+  text-align: right;
+  align-items: flex-end;
+}
+.project-nav-location {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  color: var(--c-text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── RESPONSIVE: DETAIL PAGE ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .project-narrative-inner {
+    grid-template-columns: 1fr;
+  }
+  .narrative-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 2.5rem;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(4) { grid-row: span 1; }
+}
+@media (max-width: 768px) {
+  .project-meta { gap: 0; padding: 1.25rem clamp(1rem, 4vw, 2rem); }
+  .project-meta-item { min-width: 100px; }
+  .narrative-sidebar { grid-template-columns: 1fr; }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: clamp(200px, 60vw, 340px);
+  }
+  .project-nav-inner { grid-template-columns: 1fr; }
+  .project-nav-link--next { align-items: flex-start; text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── SKIP LINK ─────────────────────────────────────────────────────────── -->
+<a href="#template-1" class="skip-link" style="position:absolute;top:-100%;left:1rem;z-index:200;background:var(--c-gold);color:var(--c-dark);padding:8px 16px;font-family:var(--f-body);font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;">
+  Ga naar inhoud
+</a>
+<style>.skip-link:focus { top: 1rem; }</style>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAVIGATION (shared — identical to homepage-reference.html)
+     ══════════════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — naar startpagina">By Shakir<sup>®</sup></a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/projects/" class="active" aria-current="page">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+
+  <button class="nav-burger" id="burger" aria-label="Menu openen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button class="mobile-nav-close" id="nav-close" aria-label="Menu sluiten">Sluiten</button>
+  <ul class="mobile-nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ▓▓▓  TEMPLATE 1 — /projects/  ▓▓▓
+     Portfolio overzichtspagina
+     ══════════════════════════════════════════════════════════════════════ -->
+<div id="template-1">
+
+  <!-- ── INNER PAGE HEADER ───────────────────────────────────────────── -->
+  <header class="page-header" aria-label="Projecten pagina header">
+
+    <!-- Grain texture — unique ID: g-ph1 -->
+    <svg class="grain" aria-hidden="true" style="opacity: 0.22;">
+      <filter id="g-ph1">
+        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g-ph1)"/>
+    </svg>
+
+    <!-- Decorative diagonal geometry — craft library §1.1 -->
+    <div class="page-header-deco" aria-hidden="true">
+      <svg viewBox="0 0 800 600" fill="none" preserveAspectRatio="xMaxYMax slice">
+        <!-- Vertical gold rule extended — oversized decorative line -->
+        <line x1="680" y1="0" x2="480" y2="600" stroke="#C9A962" stroke-width="1" opacity="0.6"/>
+        <line x1="720" y1="0" x2="520" y2="600" stroke="#C9A962" stroke-width="0.5" opacity="0.4"/>
+        <line x1="760" y1="0" x2="560" y2="600" stroke="#C9A962" stroke-width="0.5" opacity="0.25"/>
+        <!-- Cross marks — artisanal precision detail -->
+        <g opacity="0.35">
+          <line x1="595" y1="200" x2="605" y2="200" stroke="#C9A962" stroke-width="1"/>
+          <line x1="600" y1="195" x2="600" y2="205" stroke="#C9A962" stroke-width="1"/>
+        </g>
+        <g opacity="0.2">
+          <line x1="655" y1="340" x2="665" y2="340" stroke="#C9A962" stroke-width="1"/>
+          <line x1="660" y1="335" x2="660" y2="345" stroke="#C9A962" stroke-width="1"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="page-header-content reveal">
+      <span class="gold-rule" aria-hidden="true"></span>
+      <p class="overline">Alle projecten</p>
+      <h1 class="page-header-h1 gold-dot">Onze projecten</h1>
+      <p class="page-header-sub">Vijf landen. Vijf verhalen. Één vakmanschap.</p>
+    </div>
+
+  </header>
+
+  <!-- ── PORTFOLIO MASONRY OVERVIEW ──────────────────────────────────── -->
+  <section class="portfolio-overview" aria-labelledby="portfolio-overview-h">
+    <div class="portfolio-overview-inner">
+
+      <header class="portfolio-overview-header reveal">
+        <div>
+          <p class="overline">Geselecteerde realisaties</p>
+          <h2 class="portfolio-overview-h2 gold-dot" id="portfolio-overview-h">Elk ruimte, een eigen verhaal</h2>
+        </div>
+        <p class="portfolio-overview-count" aria-label="Vijf projecten">5 projecten</p>
+      </header>
+
+      <!-- CSS columns masonry grid — 3-col desktop / 2-col tablet / 1-col mobile -->
+      <div class="masonry-grid" id="masonry-grid">
+
+        <!-- CARD 1: Villa Mansion Netherlands — aspect-ratio 2/3 (featured, tallest) -->
+        <article class="mcard reveal" data-tilt aria-label="Project: Villa Mansion, Gelderland">
+          <div class="mcard-img">
+            <div class="img-placeholder" style="background: linear-gradient(155deg, #3D2B1E 0%, #2C1F17 60%, #1E1308 100%);">
+              <span class="img-placeholder-label" style="color: rgba(240,232,220,0.16);">[Villa Mansion Netherlands<br>Gelderland · 2022<br>media/projects/villa-mansion-netherlands/]</span>
+            </div>
+          </div>
+          <div class="mcard-overlay">
+            <div>
+              <span class="mcard-location">Gelderland, Nederland</span>
+              <span class="mcard-name">Villa Mansion Netherlands</span>
+            </div>
+          </div>
+          <div class="mcard-arrow" aria-hidden="true"></div>
+        </article>
+
+        <!-- CARD 2: Duplex Penthouse Barcelona — aspect-ratio 4/5 -->
+        <article class="mcard reveal d1" data-tilt aria-label="Project: Duplex Penthouse, Barcelona">
+          <div class="mcard-img">
+            <div class="img-placeholder" style="background: linear-gradient(160deg, #3B2516 0%, #28180D 55%, #1E120A 100%);">
+              <span class="img-placeholder-label" style="color: rgba(240,232,220,0.16);">[Duplex Penthouse<br>Barcelona · 2023<br>media/projects/duplex-barcelona/]</span>
+            </div>
+          </div>
+          <div class="mcard-overlay">
+            <div>
+              <span class="mcard-location">Barcelona, Spanje</span>
+              <span class="mcard-name">Duplex Penthouse</span>
+            </div>
+          </div>
+          <div class="mcard-arrow" aria-hidden="true"></div>
+        </article>
+
+        <!-- CARD 3: Penthouse Dubai Marina — aspect-ratio 4/5 -->
+        <article class="mcard reveal d2" data-tilt aria-label="Project: Penthouse Dubai Marina">
+          <a href="/projects/penthouse-dubai-marina/" style="position:absolute;inset:0;z-index:5;" aria-label="Bekijk project Penthouse Dubai Marina"><!-- full card link --></a>
+          <div class="mcard-img">
+            <div class="img-placeholder" style="background: linear-gradient(148deg, #3C2E18 0%, #2A200E 50%, #1C1508 100%);">
+              <span class="img-placeholder-label" style="color: rgba(240,232,220,0.16);">[Penthouse Dubai Marina<br>Dubai · 2024<br>media/projects/penthouse-dubai-marina/]</span>
+            </div>
+          </div>
+          <div class="mcard-overlay">
+            <div>
+              <span class="mcard-location">Dubai Marina, UAE</span>
+              <span class="mcard-name">Penthouse Dubai Marina</span>
+            </div>
+          </div>
+          <div class="mcard-arrow" aria-hidden="true"></div>
+        </article>
+
+        <!-- CARD 4: Country Estate Antwerpen — aspect-ratio 4/5 -->
+        <article class="mcard reveal d3" data-tilt aria-label="Project: Country Estate, Antwerpen">
+          <div class="mcard-img">
+            <div class="img-placeholder" style="background: linear-gradient(152deg, #2D2219 0%, #201812 55%, #181210 100%);">
+              <span class="img-placeholder-label" style="color: rgba(240,232,220,0.16);">[Country Estate<br>Antwerpen · 2023<br>media/projects/country-estate-antwerpen/]</span>
+            </div>
+          </div>
+          <div class="mcard-overlay">
+            <div>
+              <span class="mcard-location">Antwerpen, België</span>
+              <span class="mcard-name">Country Estate</span>
+            </div>
+          </div>
+          <div class="mcard-arrow" aria-hidden="true"></div>
+        </article>
+
+        <!-- CARD 5: Beach House Malaga — aspect-ratio 3/4 -->
+        <article class="mcard reveal d4" data-tilt aria-label="Project: Beach House, Malaga">
+          <div class="mcard-img">
+            <div class="img-placeholder" style="background: linear-gradient(145deg, #3E2E1D 0%, #2C1F14 50%, #1E140B 100%);">
+              <span class="img-placeholder-label" style="color: rgba(240,232,220,0.16);">[Beach House Malaga<br>Málaga · 2024<br>media/projects/beach-house-malaga/]</span>
+            </div>
+          </div>
+          <div class="mcard-overlay">
+            <div>
+              <span class="mcard-location">Málaga, Spanje</span>
+              <span class="mcard-name">Beach House Malaga</span>
+            </div>
+          </div>
+          <div class="mcard-arrow" aria-hidden="true"></div>
+        </article>
+
+      </div><!-- /masonry-grid -->
+
+      <!-- Footer: contact note + CTA -->
+      <div class="portfolio-overview-footer reveal">
+        <a href="/contact/" class="link-cta">Een project bespreken</a>
+        <p class="portfolio-contact-note">
+          Nieuw project? We gaan graag het gesprek aan. Elk interieur begint met een kennismaking — vrijblijvend en persoonlijk.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+        <span class="footer-tagline">Luxury Interiors</span>
+        <address class="footer-address">
+          Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+          Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+        </address>
+        <p class="footer-legal">
+          KvK: ______
+          &nbsp;·&nbsp;
+          <a href="/privacy/">Privacyverklaring</a>
+          &nbsp;·&nbsp;
+          © 2025 By Shakir
+        </p>
+      </div>
+      <div>
+        <nav aria-label="Sitenavigatie">
+          <ul class="footer-nav" role="list">
+            <li><a href="/projects/">Projecten</a></li>
+            <li><a href="/services/">Diensten</a></li>
+            <li><a href="/about/">Over ons</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+          </ul>
+        </nav>
+        <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+          App ons direct
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /template-1 -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     TEMPLATE DIVIDER — visible in browser for reference orientation
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="template-divider" role="separator" aria-label="Scheidingslijn tussen templates">
+  <div>
+    <p class="template-divider-label">Template 2 van 2</p>
+    <p class="template-divider-title">Projectpagina detail</p>
+  </div>
+  <p class="template-divider-path">/projects/penthouse-dubai-marina/</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ▓▓▓  TEMPLATE 2 — /projects/penthouse-dubai-marina/  ▓▓▓
+     Individuele projectpagina
+     ══════════════════════════════════════════════════════════════════════ -->
+<div id="template-2">
+
+  <!-- ── PROJECT HERO ─────────────────────────────────────────────────── -->
+  <section class="project-hero" aria-label="Penthouse Dubai Marina — projecthero">
+
+    <!-- Placeholder: production replace with full-bleed project image -->
+    <div class="project-hero-bg" aria-hidden="true">
+      <div class="img-placeholder" style="background: linear-gradient(145deg, #2A1E14 0%, #1C1209 50%, #3C2E18 100%);">
+        <span class="img-placeholder-label" style="color: rgba(240,232,220,0.1);">[Penthouse Dubai Marina — woonkamer overzicht<br>media/projects/penthouse-dubai-marina/hero.webp]</span>
+      </div>
+    </div>
+    <div class="project-hero-overlay" aria-hidden="true"></div>
+
+    <!-- Grain texture — unique ID: g-ph2 -->
+    <svg class="grain" aria-hidden="true" style="opacity: 0.18;">
+      <filter id="g-ph2">
+        <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g-ph2)"/>
+    </svg>
+
+    <div class="project-hero-content">
+      <span class="gold-rule" aria-hidden="true"></span>
+      <span class="project-hero-location">Dubai Marina, UAE</span>
+      <h1 class="project-hero-h1">Penthouse Dubai Marina</h1>
+      <span class="project-hero-year">2024</span>
+    </div>
+
+  </section>
+
+  <!-- ── PROJECT META STRIP ─────────────────────────────────────────── -->
+  <div class="project-meta" role="list" aria-label="Projectgegevens">
+
+    <div class="project-meta-item" role="listitem">
+      <span class="project-meta-label">Locatie</span>
+      <span class="project-meta-value">Dubai Marina, UAE</span>
+    </div>
+
+    <div class="project-meta-item" role="listitem">
+      <span class="project-meta-label">Type</span>
+      <span class="project-meta-value">Volledig interieur</span>
+    </div>
+
+    <div class="project-meta-item" role="listitem">
+      <span class="project-meta-label">Jaar</span>
+      <span class="project-meta-value">2024</span>
+    </div>
+
+    <div class="project-meta-item" role="listitem">
+      <span class="project-meta-label">Oppervlakte</span>
+      <span class="project-meta-value">280 m²</span>
+    </div>
+
+  </div>
+
+  <!-- ── CASE STUDY NARRATIVE ─────────────────────────────────────────── -->
+  <section class="project-narrative" aria-labelledby="narrative-h">
+    <div class="project-narrative-inner">
+
+      <!-- Main text column — 65% -->
+      <div class="narrative-main">
+
+        <header class="reveal">
+          <p class="overline">Caseomschrijving</p>
+          <h2 class="narrative-h2 gold-dot" id="narrative-h">Leven boven de skyline</h2>
+        </header>
+
+        <p class="narrative-body reveal">
+          Het project begon met een vraag die we vaker krijgen: hoe maak je een ruimte die weelderig voelt zonder overweldigend te zijn? De opdrachtgevers, een Nederlands echtpaar dat een deel van het jaar in Dubai verblijft, zochten een thuis dat de intensiteit van de stad buiten wist te houden. Het penthouse op de veertigste verdieping van een toren in Dubai Marina bood een uitzonderlijk uitgangspunt: raampartijen van vloer tot plafond, 280 vierkante meter en een panorama over het kanaal en de Perzische Golf.
+        </p>
+
+        <blockquote class="narrative-pull reveal">
+          Weelderig zonder overweldigend — dat was het kompas voor elke keuze in dit project.
+        </blockquote>
+
+        <p class="narrative-body reveal">
+          De eerste schetsen kozen bewust voor een warm palet. Waar Dubai-interieurs vaak neigen naar koele, glanzende oppervlakken, kozen wij voor het tegenovergestelde: natuursteen in een diepe walnootkleur, gepolijst stucco op de wanden, en handgeweven wol voor de tapijten. Het doel was een interieur dat evenzeer aanvoelt als thuiskomen in Nederland als in de Golfregio. Alle maatwerk — van de keukendeuren tot de slaapkameropbergruimte — werd vervaardigd in onze eigen ateliers in Tiel en per luchtvracht verscheept.
+        </p>
+
+        <p class="narrative-body reveal">
+          De grootste uitdaging was de overgang tussen de open woon-eetzone en het meer besloten thuiskantoor. We losten dit op met een doorlopende vide van lichtgeel albast, verlicht van binnenuit, die visueel scheidt zonder te verdelen. Het resultaat is een ruimte die op elk moment van de dag anders aanvoelt — van het ochtendlicht dat door het albast filtert tot de avondgloed van de stad. De opdrachtgevers ontvangen hun sleutel in een interieur dat precies aanvoelt zoals zij het beschreven in ons eerste gesprek.
+        </p>
+
+      </div><!-- /narrative-main -->
+
+      <!-- Sidebar — 35% -->
+      <aside class="narrative-sidebar reveal d1" aria-label="Projectdetails">
+
+        <div class="sidebar-block">
+          <p class="sidebar-label">Gebruikte materialen</p>
+          <ul class="sidebar-list" role="list">
+            <li>Albast (lichtgeel, doorschijnend)</li>
+            <li>Gepolijst stucco veneziano</li>
+            <li>Massief walnoot (maatwerk)</li>
+            <li>Handgeweven wollen tapijten</li>
+            <li>Travertijn (vloer + badkamer)</li>
+            <li>Geoxideerd koper (sanitairbeslag)</li>
+            <li>Naturel linnen (bekleding)</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-label">Bijzonderheden</p>
+          <ul class="sidebar-list" role="list">
+            <li>Albasten scheidingswand met indirecte verlichting</li>
+            <li>Volledig maatwerk keukenbloei uit eigen atelier</li>
+            <li>Luchtvracht vanuit Tiel naar Dubai</li>
+            <li>Geluidswerend raamkozijn op maat</li>
+            <li>Geïntegreerd thuiskantoor met geheime opbergruimte</li>
+            <li>Buitenterras 40 m² — teakdek en windscherm</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-label">Betrokken disciplines</p>
+          <ul class="sidebar-list" role="list">
+            <li>Interieurarchitectuur</li>
+            <li>Meubelmaatwerk</li>
+            <li>Verlichting­ontwerp</li>
+            <li>Vloerafwerking</li>
+            <li>Textielselectie</li>
+            <li>Projectcoördinatie ter plaatse</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ── IMAGE GALLERY ──────────────────────────────────────────────── -->
+  <section class="project-gallery" aria-labelledby="gallery-h">
+    <div class="project-gallery-inner">
+
+      <header class="gallery-header reveal">
+        <span class="gold-rule" aria-hidden="true"></span>
+        <p class="overline" id="gallery-h">Impressie</p>
+      </header>
+
+      <div class="gallery-grid">
+
+        <!-- Item 1 — spans 2 rows: tall format, woonkamer -->
+        <div class="gallery-item reveal">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(155deg, #2A1E14, #1A1008);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Woonkamer panorama<br>media/projects/penthouse-dubai-marina/01-woonkamer.webp]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 — eetkamer detail -->
+        <div class="gallery-item reveal d1">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(148deg, #3C2E18, #201608);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Eetkamer detail<br>media/projects/penthouse-dubai-marina/02-eetkamer.webp]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 — albasten scheidingswand -->
+        <div class="gallery-item reveal d2">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(152deg, #3E3020, #241808);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Albasten scheidingswand<br>media/projects/penthouse-dubai-marina/03-albast.webp]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 — spans 2 rows: master slaapkamer -->
+        <div class="gallery-item reveal d1">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(160deg, #281C12, #1C1209);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Master slaapkamer<br>media/projects/penthouse-dubai-marina/04-slaapkamer.webp]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 — badkamer -->
+        <div class="gallery-item reveal d2">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(145deg, #302418, #1E1610);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Badkamer travertijn<br>media/projects/penthouse-dubai-marina/05-badkamer.webp]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 — terras -->
+        <div class="gallery-item reveal d3">
+          <div class="gallery-img">
+            <div class="img-placeholder" style="background: linear-gradient(140deg, #3A2C1A, #261A0C);">
+              <span class="img-placeholder-label" style="color:rgba(240,232,220,0.15);">[Buitenterras · skyline Dubai<br>media/projects/penthouse-dubai-marina/06-terras.webp]</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /gallery-grid -->
+
+    </div>
+  </section>
+
+  <!-- ── CLIENT QUOTE ─────────────────────────────────────────────────── -->
+  <section class="project-quote" aria-label="Opdrachtgever aan het woord">
+
+    <!-- Grain texture — unique ID: g-quote2 -->
+    <svg class="grain" aria-hidden="true" style="opacity: 0.2;">
+      <filter id="g-quote2">
+        <feTurbulence type="fractalNoise" baseFrequency="0.74" numOctaves="4" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g-quote2)"/>
+    </svg>
+
+    <!-- Subtle topographic accent lines — echoes homepage CTA -->
+    <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.035;" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none">
+      <path d="M0,180 C280,240 560,120 840,200 C1120,280 1300,160 1440,220" stroke="#C9A962" stroke-width="1.5" fill="none"/>
+      <path d="M0,220 C340,150 680,290 1020,190 C1240,130 1360,230 1440,190" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.6"/>
+    </svg>
+
+    <div class="project-quote-inner reveal">
+      <span class="project-quote-mark" aria-hidden="true">"</span>
+      <blockquote class="project-blockquote">
+        We kwamen thuis en het voelde meteen vertrouwd — alsof de ruimte altijd al zo had moeten zijn. Dat is het mooiste compliment dat we kunnen geven.
+      </blockquote>
+      <p class="project-quote-attribution">
+        Opdrachtgevers
+        <span>Penthouse Dubai Marina · 2024</span>
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ── PROJECT NAVIGATION — vorig / volgend ──────────────────────── -->
+  <nav class="project-nav" aria-label="Overige projecten">
+    <div class="project-nav-inner">
+
+      <!-- Previous project -->
+      <a href="/projects/duplex-barcelona/" class="project-nav-link">
+        <span class="project-nav-dir">← Vorig project</span>
+        <span class="project-nav-title">
+          <span class="arrow">←</span>
+          Duplex Penthouse
+        </span>
+        <span class="project-nav-location">Barcelona, Spanje &nbsp;·&nbsp; 2023</span>
+      </a>
+
+      <!-- Next project -->
+      <a href="/projects/country-estate-antwerpen/" class="project-nav-link project-nav-link--next">
+        <span class="project-nav-dir">Volgend project →</span>
+        <span class="project-nav-title">
+          Country Estate
+          <span class="arrow">→</span>
+        </span>
+        <span class="project-nav-location">Antwerpen, België &nbsp;·&nbsp; 2023</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- ── FOOTER ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+        <span class="footer-tagline">Luxury Interiors</span>
+        <address class="footer-address">
+          Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+          Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+        </address>
+        <p class="footer-legal">
+          KvK: ______
+          &nbsp;·&nbsp;
+          <a href="/privacy/">Privacyverklaring</a>
+          &nbsp;·&nbsp;
+          © 2025 By Shakir
+        </p>
+      </div>
+      <div>
+        <nav aria-label="Sitenavigatie">
+          <ul class="footer-nav" role="list">
+            <li><a href="/projects/">Projecten</a></li>
+            <li><a href="/services/">Diensten</a></li>
+            <li><a href="/about/">Over ons</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+          </ul>
+        </nav>
+        <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+          App ons direct
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /template-2 -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Inline, minimal
+     1. Nav scroll → glassmorphism
+     2. Mobile menu toggle
+     3. Scroll reveals via IntersectionObserver
+     4. 3D image tilt (data-tilt) — masonry cards
+     ══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1 — Nav scroll state → glassmorphism ─────────────────────────────── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 55);
+  }, { passive: true });
+
+  /* 2 — Mobile menu ──────────────────────────────────────────────────── */
+  var burger    = document.getElementById('burger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var navClose  = document.getElementById('nav-close');
+
+  function openMenu() {
+    mobileNav.classList.add('is-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', openMenu);
+  navClose.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* 3 — Scroll reveals (IntersectionObserver) ─────────────────────────
+     threshold 0.10 — slightly lower than homepage to account for masonry
+     cards being taller (may enter viewport partially) */
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }
+
+  /* 4 — 3D image tilt — masonry cards ─────────────────────────────────
+     Same parameters as homepage: perspective 1000px, ±6°, scale 1.02
+     Only on hover-capable, non-reduced-motion devices */
+  if (
+    window.matchMedia('(hover: hover)').matches &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  ) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        card.style.transition = 'none';
+      });
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left)  / r.width  - 0.5;
+        var y = (e.clientY - r.top)   / r.height - 0.5;
+        card.style.transform =
+          'perspective(1000px) rotateX(' + (y * -6) + 'deg) rotateY(' + (x * 6) + 'deg) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'transform 0.6s cubic-bezier(0.83, 0, 0.17, 1)';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
+  }
+
+}());
+</script>
+
+</body>
+</html>

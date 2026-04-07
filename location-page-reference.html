@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interieurontwerper Dubai — By Shakir · Luxe Interieurs Dubai</title>
+<!-- Meta: By Shakir · interieurontwerper Dubai · luxe interieurs Dubai -->
+<meta name="description" content="By Shakir realiseert exclusieve interieurprojecten in Dubai. Van penthouse tot villa — luxe interieurs ontworpen vanuit Nederland, uitgevoerd met lokale vakmannen.">
+
+<!-- ── CANONICAL / HREFLANG — template note ─────────────────────────────────
+     Production Astro: <link rel="canonical" href="https://byshakir.nl/projects/dubai/" />
+     Repeat template for: /projects/netherlands/ · /projects/spain/ · /projects/morocco/
+     ─────────────────────────────────────────────────────────────────────── -->
+
+<!-- ── FONTS ─── Cormorant Garamond + DM Sans (variable, with opsz) ──────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap" rel="stylesheet">
+
+<style>
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — exact match with homepage-reference.html
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --c-gold:             #C9A962;
+  --c-gold-light:       #E8C26C;
+  --c-gold-dark:        #745B16;
+  --c-dark:             #2C1F17;
+  --c-dark-alt:         #1E150D;
+  --c-bg:               #F0E8DC;
+  --c-surface:          #E8DDD0;
+  --c-surface-elevated: #FAF7F3;
+  --c-terracotta:       #8B5230;
+  --c-terracotta-warm:  #B87856;
+  --c-text:             #2C1F17;
+  --c-text-muted:       #7A756E;
+  --c-text-on-dark:     #F0E8DC;
+  --c-text-muted-dark:  #CEC4B6;
+  --c-border:           #CEC4B6;
+
+  --f-heading: 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  --t-sm:      0.7502rem;
+  --t-base:    1rem;
+  --t-lg:      1.333rem;
+  --t-xl:      1.7769rem;
+  --t-2xl:     2.3686rem;
+  --t-3xl:     3.1573rem;
+  --t-display: clamp(3rem, 2rem + 5vw, 7rem);
+
+  --ease:        cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-reveal:  1.4s;
+  --dur-hover:   0.7s;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+ul, ol { list-style: none; }
+
+/* ── SCROLL REVEALS ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: scale(1) translateY(0); }
+  .reveal.d1 { transition-delay: 0.10s; }
+  .reveal.d2 { transition-delay: 0.20s; }
+  .reveal.d3 { transition-delay: 0.30s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ── SHARED COMPONENTS ──────────────────────────────────────────────────── */
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.gold-rule--center { margin-inline: auto; }
+
+.overline {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.gold-dot::after { content: '.'; color: var(--c-gold); }
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px;
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn-gold {
+  background: var(--c-gold);
+  color: var(--c-dark);
+}
+.btn-gold:hover { background: var(--c-gold-light); }
+
+.microcopy {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  color: rgba(206, 196, 182, 0.75);
+  margin-top: 0.875rem;
+}
+
+.link-cta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--c-gold);
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.link-cta:hover { opacity: 0.65; }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
+}
+
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0.22;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NAV — Fixed, transparent → glass on scroll
+   "Projecten" link visually highlighted as the active back-path
+   ══════════════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vh, 1.75rem) clamp(1.5rem, 5vw, 5rem);
+  transition:
+    background 0.6s var(--ease),
+    backdrop-filter 0.6s;
+}
+.nav.is-scrolled {
+  background: rgba(44, 31, 23, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.nav-logo sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--c-text-on-dark); }
+/* Back-path highlight — "Projecten" link shows golden underline as location context */
+.nav-links a.nav-link--active {
+  color: var(--c-gold);
+  border-bottom: 1px solid rgba(201, 169, 98, 0.45);
+  padding-bottom: 1px;
+}
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--c-text-muted-dark);
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--c-dark);
+  z-index: 99;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+}
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2.75rem; }
+.mobile-nav-links a {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.mobile-nav-links a:hover { color: var(--c-gold); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 1 — LOCATION HERO (~65vh)
+   Background: #2C1F17 dark espresso
+   4 layers: establishing shot placeholder · gradient · grain · content
+   Content: bottom-left anchored (matches homepage hero convention)
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-hero {
+  position: relative;
+  height: 65vh;
+  min-height: 480px;
+  overflow: hidden;
+  background: var(--c-dark);
+}
+
+/* Layer 1 — Establishing shot placeholder */
+.loc-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1A100A 0%, #2C1F17 45%, #3D2420 100%);
+}
+.loc-hero-bg-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 220, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: max-content;
+  max-width: 90vw;
+}
+
+/* Layer 2 — Gradient overlay bottom-to-top */
+.loc-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 31, 23, 0.95) 0%,
+    rgba(44, 31, 23, 0.55) 35%,
+    rgba(44, 31, 23, 0.18) 65%,
+    rgba(44, 31, 23, 0.06) 100%
+  );
+  pointer-events: none;
+}
+
+/* Layer 3 — Grain (unique filter ID: g-loc-hero) */
+.loc-hero-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+/* Layer 4 — Content: bottom-left anchored
+   CSS @keyframes (not .reveal) — in-viewport on load */
+.loc-hero-content {
+  position: absolute;
+  bottom: clamp(3rem, 7vh, 5rem);
+  left: 0;
+  padding-inline-start: clamp(1.5rem, 5vw, 6rem);
+  padding-inline-end: clamp(1.5rem, 5vw, 6rem);
+  max-width: 720px;
+  z-index: 2;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .loc-hero-content {
+    animation: hero-enter 1.6s cubic-bezier(0.83, 0, 0.17, 1) 0.35s both;
+  }
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+.loc-hero-overline { color: var(--c-text-muted-dark); margin-bottom: 1.5rem; opacity: 0.8; }
+.loc-hero-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.75rem, 1.5rem + 5.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.loc-hero-body {
+  font-family: var(--f-body);
+  font-size: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  max-width: 440px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 2 — BREADCRUMB NAV
+   Background: #E8DDD0 — surface, thin, SEO utility strip
+   ══════════════════════════════════════════════════════════════════════════ */
+.breadcrumb-bar {
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  padding-block: 0.875rem;
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--c-text-muted);
+}
+.breadcrumb a {
+  color: var(--c-text-muted);
+  transition: color 0.3s;
+}
+.breadcrumb a:hover { color: var(--c-text); }
+.breadcrumb-sep {
+  color: var(--c-border);
+  font-size: 0.5rem;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.breadcrumb-current {
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 3 — LOCATION INTRO
+   Background: #F0E8DC warm sand
+   2-col asymmetric: intro prose (45%) + facts sidebar (55%)
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-intro {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 5vw + 2.5rem, 9rem);
+}
+.loc-intro-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+.loc-intro-text .overline {
+  color: var(--c-terracotta);
+  margin-bottom: 0.875rem;
+}
+.loc-intro-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+  margin-bottom: 1.75rem;
+}
+.loc-intro-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--c-text);
+  max-width: 55ch;
+  margin-bottom: 1.25em;
+}
+.loc-intro-body:last-of-type { margin-bottom: 0; }
+
+/* Facts sidebar — clean, no icons */
+.loc-facts {
+  border-top: 1px solid var(--c-border);
+  padding-top: clamp(2rem, 3vw, 2.75rem);
+  /* Slight top-offset to optically align baseline with intro text at large screens */
+  margin-top: clamp(0rem, 1.5vw, 2rem);
+}
+.loc-facts-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-bottom: 1.75rem;
+}
+.loc-fact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--c-border);
+}
+.loc-fact:first-of-type { border-top: 1px solid var(--c-border); }
+.loc-fact-key {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--c-text-muted);
+  line-height: 1.55;
+}
+.loc-fact-value {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--c-text);
+  line-height: 1.55;
+  text-align: right;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 4 — DUBAI PROJECTS
+   Background: #E8DDD0 surface
+   1 featured project card (large, 3:2, with overlay)
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-projects {
+  background: var(--c-surface);
+  padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+}
+.loc-projects-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+.loc-projects-header {
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+.loc-projects-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.loc-projects-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+}
+
+/* Single featured project card — 3:2 aspect, large */
+.loc-pcard {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  display: block;
+  max-width: 860px; /* intentionally not full-width — anti-max-width note: this constrains a card, not a text container */
+}
+.loc-pcard-img {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.loc-pcard:hover .loc-pcard-img { transform: scale(1.03); }
+.loc-pcard-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: linear-gradient(to top, rgba(44,31,23,0.9) 0%, rgba(44,31,23,0.3) 50%, transparent 100%);
+}
+.loc-pcard-location {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 0.35rem;
+}
+.loc-pcard-title {
+  font-family: var(--f-heading);
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--c-text-on-dark);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.loc-pcard-link {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-on-dark);
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(201, 169, 98, 0.6);
+  display: inline-block;
+  align-self: flex-start;
+  transition: border-color 0.3s, color 0.3s;
+}
+.loc-pcard:hover .loc-pcard-link {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 5 — WHY BY SHAKIR
+   Background: #F0E8DC warm sand
+   Asymmetric: large display text left, 3 numbered points right
+   NO icons — oversized gold numerals 01/02/03 as decoration
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-why {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 6vw + 2rem, 10rem);
+}
+.loc-why-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+.loc-why-display {
+  /* Oversized decorative heading — left column */
+  font-family: var(--f-heading);
+  font-size: clamp(2.5rem, 2rem + 4vw, 6rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--c-text);
+  position: relative;
+}
+.loc-why-display em {
+  font-style: italic;
+  color: var(--c-terracotta);
+}
+/* Thin gold rule as decorative element below display text */
+.loc-why-display::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-top: 2rem;
+}
+
+/* Right column — 3 numbered points */
+.loc-why-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: clamp(0.5rem, 1.5vw, 2rem); /* optical alignment with display heading cap-height */
+}
+.loc-why-point {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  padding-block: clamp(1.75rem, 2.5vw, 2.5rem);
+  border-bottom: 1px solid var(--c-border);
+}
+.loc-why-point:first-child { border-top: 1px solid var(--c-border); }
+/* Oversized gold numeral — typography as decoration */
+.loc-why-num {
+  font-family: var(--f-heading);
+  font-size: var(--t-3xl);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--c-gold);
+  opacity: 0.55;
+  user-select: none;
+  width: 3.5rem; /* fixed width so text column stays stable */
+}
+.loc-why-point-title {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  margin-bottom: 0.5rem;
+}
+.loc-why-point-text {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 6 — CTA
+   Background: #2C1F17 dark espresso
+   Grain texture + topographic gold lines (same as homepage CTA, opacity 4%)
+   Centered — editorial CTA exception
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-cta {
+  background: var(--c-dark);
+  padding-block: clamp(6rem, 7vw + 2rem, 10rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.loc-cta-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  max-width: 680px;
+  margin-inline: auto;
+}
+.loc-cta-inner .overline { color: var(--c-text-muted-dark); margin-bottom: 0.875rem; }
+.loc-cta-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.5rem, 2rem + 3vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.loc-cta-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  margin-bottom: 2.5rem;
+  max-width: 42ch;
+  margin-inline: auto;
+}
+.loc-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 7 — RELATED LOCATIONS
+   Background: #E8DDD0 surface
+   3-col text link row — DM Sans 500, uppercase, gold underline on hover
+   ══════════════════════════════════════════════════════════════════════════ */
+.loc-related {
+  background: var(--c-surface);
+  padding-block: clamp(3.5rem, 4vw + 1rem, 6rem);
+}
+.loc-related-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+.loc-related-label {
+  color: var(--c-text-muted);
+  margin-bottom: 1.75rem;
+}
+.loc-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--c-border);
+  border: 1px solid var(--c-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loc-related-link {
+  display: block;
+  background: var(--c-surface);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.25rem, 2vw, 2rem);
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  transition: background 0.4s var(--ease), color 0.4s;
+  position: relative;
+}
+.loc-related-link:hover {
+  background: var(--c-bg);
+  color: var(--c-dark);
+}
+.loc-related-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: clamp(1.25rem, 2vw, 2rem);
+  right: clamp(1.25rem, 2vw, 2rem);
+  height: 1px;
+  background: var(--c-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.loc-related-link:hover::after { transform: scaleX(1); }
+.loc-related-sub {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--c-text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOOTER — exact match with homepage footer
+   ══════════════════════════════════════════════════════════════════════════ */
+.footer {
+  background: var(--c-dark-alt);
+  border-top: 1px solid rgba(201, 169, 98, 0.18);
+  padding-block: clamp(3rem, 3.5vw + 1rem, 5rem);
+}
+.footer-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 5vw, 7rem);
+  align-items: start;
+}
+.footer-brand { font-family: var(--f-heading); font-size: 1rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-gold); display: block; margin-bottom: 0.4rem; }
+.footer-brand sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; }
+.footer-tagline { font-family: var(--f-body); font-size: 0.5625rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-text-muted-dark); opacity: 0.5; display: block; margin-bottom: 1.5rem; }
+.footer-address { font-family: var(--f-body); font-size: 0.75rem; font-weight: 300; line-height: 1.75; color: var(--c-text-muted-dark); }
+.footer-legal { margin-top: 2rem; font-family: var(--f-body); font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(206, 196, 182, 0.35); }
+.footer-legal a { border-bottom: 1px solid rgba(206, 196, 182, 0.15); }
+.footer-nav { display: grid; grid-template-columns: repeat(2, auto); column-gap: 2.25rem; row-gap: 0.625rem; margin-bottom: 2rem; align-items: start; }
+.footer-nav a { font-family: var(--f-body); font-size: 0.6875rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-text-muted-dark); transition: color 0.3s; }
+.footer-nav a:hover { color: var(--c-text-on-dark); }
+.footer-whatsapp { color: var(--c-text-on-dark); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile-first (375 → 768 → 1024 → 1440)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .loc-intro-inner {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .loc-facts { margin-top: 0; }
+  .loc-why-inner {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .loc-why-display::after { margin-top: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  .loc-hero { height: 70vh; }
+  .loc-hero-h1 { font-size: clamp(2.25rem, 9vw, 3.75rem); }
+  .loc-hero-body { max-width: 100%; }
+
+  .loc-pcard { max-width: 100%; }
+
+  .loc-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+@media (max-width: 480px) {
+  .loc-why-inner { gap: 2rem; }
+  .loc-why-num { font-size: var(--t-2xl); width: 2.75rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Skip to content — WCAG 2.4.1 -->
+<a href="#loc-main" style="position:absolute;top:-100%;left:1rem;z-index:200;background:var(--c-gold);color:var(--c-dark);padding:8px 16px;font-family:var(--f-body);font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;" onfocus="this.style.top='1rem'" onblur="this.style.top='-100%'">
+  Ga naar inhoud
+</a>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAVIGATION
+     "Projecten" link is visually highlighted — communicates location within site
+     (these pages are reached via Google, not nav; the highlighted link is the
+     clear back-path for visitors who want to explore further)
+     ══════════════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — naar startpagina">By Shakir<sup>®</sup></a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/projects/" class="nav-link--active" aria-current="false">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+
+  <button class="nav-burger" id="burger" aria-label="Menu openen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile navigation overlay -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button class="mobile-nav-close" id="nav-close" aria-label="Menu sluiten">Sluiten</button>
+  <ul class="mobile-nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+
+<main id="loc-main">
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 1: LOCATION HERO (~65vh)
+     Full-bleed establishing shot of Dubai skyline/interior
+     Bottom-left anchored content — consistent with homepage hero convention
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-hero" aria-label="Projecten in Dubai — By Shakir">
+
+  <!-- Layer 1: Establishing shot placeholder
+       Production: replace with <img> or <video> of Dubai establishing shot -->
+  <div class="loc-hero-bg" aria-hidden="true">
+    <span class="loc-hero-bg-label">[Dubai establishing shot]</span>
+  </div>
+
+  <!-- Layer 2: Gradient overlay bottom-to-top -->
+  <div class="loc-hero-overlay" aria-hidden="true"></div>
+
+  <!-- Layer 3: Grain (unique filter ID: g-loc-hero) -->
+  <svg class="loc-hero-grain" aria-hidden="true">
+    <filter id="g-loc-hero">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-loc-hero)"/>
+  </svg>
+
+  <!-- Layer 4: Content — bottom-left, page-load animation -->
+  <div class="loc-hero-content">
+    <span class="gold-rule" aria-hidden="true"></span>
+    <p class="overline loc-hero-overline">Interieurprojecten &nbsp;·&nbsp; Dubai</p>
+    <h1 class="loc-hero-h1 gold-dot">Luxe interieurs in Dubai</h1>
+    <p class="loc-hero-body">
+      By Shakir realiseert exclusieve woonprojecten in Dubai — met dezelfde warmte en vakmanschap als in Nederland.
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 2: BREADCRUMB NAV
+     SEO signal + secondary navigation for visitors arriving from Google
+     ══════════════════════════════════════════════════════════════════════ -->
+<nav class="breadcrumb-bar" aria-label="Paginapad">
+  <ol class="breadcrumb" vocab="https://schema.org/" typeof="BreadcrumbList">
+    <li property="itemListElement" typeof="ListItem">
+      <a href="/" property="item" typeof="WebPage">
+        <span property="name">Home</span>
+      </a>
+      <meta property="position" content="1">
+    </li>
+    <li class="breadcrumb-sep" aria-hidden="true">&#8212;</li>
+    <li property="itemListElement" typeof="ListItem">
+      <a href="/projects/" property="item" typeof="WebPage">
+        <span property="name">Projecten</span>
+      </a>
+      <meta property="position" content="2">
+    </li>
+    <li class="breadcrumb-sep" aria-hidden="true">&#8212;</li>
+    <li property="itemListElement" typeof="ListItem">
+      <span class="breadcrumb-current" property="name">Dubai</span>
+      <meta property="position" content="3">
+    </li>
+  </ol>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 3: LOCATION INTRO
+     2-col: SEO prose left, facts sidebar right
+     Realistic Dutch copy — no lorem ipsum
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-intro" aria-labelledby="loc-intro-h">
+  <div class="loc-intro-inner">
+
+    <!-- Prose column -->
+    <div class="loc-intro-text reveal">
+      <p class="overline">Interieurontwerper Dubai</p>
+      <h2 class="loc-intro-h2 gold-dot" id="loc-intro-h">Complete interieurprojecten in Dubai</h2>
+
+      <p class="loc-intro-body">
+        Dubai trekt internationale opdrachtgevers die hoge eisen stellen aan kwaliteit, esthetiek en betrouwbaarheid. By Shakir werkt al jaren voor Nederlandse en internationale klanten die in Dubai wonen of een woning laten realiseren. Met ons meest recente project — een volledig ingerichte penthouse in Dubai Marina — hebben wij bewezen dat exclusief interieurvakmanschap geen grenzen kent.
+      </p>
+      <p class="loc-intro-body">
+        Wij verzorgen het volledige interieurtraject vanuit Nederland: van het eerste schetsontwerp en de 3D-visualisaties tot de inkoop, logistiek en oplevering ter plaatse. Onze samenwerking met een vast netwerk van lokale aannemers en leveranciers in de UAE garandeert dat elke uitvoering voldoet aan dezelfde standaard als onze projecten in Nederland — ongeacht de afstand.
+      </p>
+    </div>
+
+    <!-- Facts sidebar -->
+    <aside class="loc-facts reveal d1" aria-label="Projectgegevens Dubai">
+      <p class="loc-facts-label">Projectgegevens</p>
+
+      <dl>
+        <div class="loc-fact">
+          <dt class="loc-fact-key">Afgeleverde projecten in Dubai</dt>
+          <dd class="loc-fact-value">1</dd>
+        </div>
+        <div class="loc-fact">
+          <dt class="loc-fact-key">Meest recent</dt>
+          <dd class="loc-fact-value">Penthouse Dubai Marina (2024)</dd>
+        </div>
+        <div class="loc-fact">
+          <dt class="loc-fact-key">Service</dt>
+          <dd class="loc-fact-value">Complete interieurinrichting</dd>
+        </div>
+        <div class="loc-fact">
+          <dt class="loc-fact-key">Samenwerking</dt>
+          <dd class="loc-fact-value">Lokale aannemers + eigen ontwerp</dd>
+        </div>
+      </dl>
+    </aside>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 4: DUBAI PROJECTS
+     1 featured project card — large, 3:2 aspect ratio
+     Only 1 Dubai project exists; card is not artificially padded to a grid
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-projects" aria-labelledby="loc-projects-h">
+  <div class="loc-projects-inner">
+
+    <header class="loc-projects-header reveal">
+      <p class="overline">Gerealiseerd</p>
+      <h2 class="loc-projects-h2 gold-dot" id="loc-projects-h">Projecten in Dubai</h2>
+    </header>
+
+    <!-- Featured project card -->
+    <a
+      href="/projects/penthouse-dubai-marina/"
+      class="loc-pcard reveal"
+      aria-label="Bekijk project: Penthouse Dubai Marina"
+      data-tilt
+    >
+      <!-- Image placeholder: production → <img src="/media/projects/penthouse-dubai-marina/cover.webp" alt="Penthouse Dubai Marina — interieur door By Shakir"> -->
+      <div class="loc-pcard-img">
+        <div class="img-placeholder" style="background: linear-gradient(155deg, #3B2510 0%, #2C1F17 55%, #1E2A35 100%);">
+          <span class="img-placeholder-label" style="color: rgba(240,232,220,0.15);">[Penthouse Dubai Marina · Bekijk project]</span>
+        </div>
+      </div>
+
+      <div class="loc-pcard-overlay">
+        <span class="loc-pcard-location">Dubai Marina, UAE</span>
+        <h3 class="loc-pcard-title">Penthouse Dubai Marina</h3>
+        <span class="loc-pcard-link">Bekijk project</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 5: WHY BY SHAKIR IN DUBAI
+     Asymmetric: display text left, 3 numbered points right
+     No icons — oversized gold numerals only
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-why" aria-labelledby="loc-why-h">
+  <div class="loc-why-inner">
+
+    <!-- Left: display heading -->
+    <div class="reveal">
+      <p class="overline" style="color: var(--c-terracotta); margin-bottom: 1.25rem;">Onze aanpak</p>
+      <h2 class="loc-why-display" id="loc-why-h">
+        Waarom<br>
+        By <em>Shakir</em>?
+      </h2>
+    </div>
+
+    <!-- Right: 3 numbered text points -->
+    <div class="loc-why-points">
+
+      <div class="loc-why-point reveal">
+        <span class="loc-why-num" aria-hidden="true">01</span>
+        <div>
+          <p class="loc-why-point-title">Vijftien jaar vakmanschap</p>
+          <p class="loc-why-point-text">Met ruim vijftien jaar ervaring in complete interieurprojecten begrijpen wij hoe hoge kwaliteit tot stand komt — ongeacht de complexiteit of locatie van het project.</p>
+        </div>
+      </div>
+
+      <div class="loc-why-point reveal d1">
+        <span class="loc-why-num" aria-hidden="true">02</span>
+        <div>
+          <p class="loc-why-point-title">Sterk lokaal netwerk</p>
+          <p class="loc-why-point-text">Wij werken samen met een zorgvuldig geselecteerd netwerk van lokale aannemers en leveranciers in de UAE. Zo is de uitvoering altijd in betrouwbare handen, ook op afstand.</p>
+        </div>
+      </div>
+
+      <div class="loc-why-point reveal d2">
+        <span class="loc-why-num" aria-hidden="true">03</span>
+        <div>
+          <p class="loc-why-point-title">Persoonlijke begeleiding</p>
+          <p class="loc-why-point-text">Van het eerste gesprek tot de sleuteloverdracht houdt u één aanspreekpunt. Wij begeleiden u persoonlijk door elk stadium van het ontwerp- en realisatieproces.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 6: CTA
+     Background: #2C1F17 dark espresso
+     Grain texture + topographic gold lines (opacity 4%, same as homepage)
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-cta" aria-labelledby="loc-cta-h">
+
+  <!-- Grain (unique filter ID: g-loc-cta) -->
+  <svg class="grain" aria-hidden="true" style="opacity: 0.25;">
+    <filter id="g-loc-cta">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-loc-cta)"/>
+  </svg>
+
+  <!-- Topographic gold line accent (craft library §1.1) — identical to homepage CTA -->
+  <svg
+    aria-hidden="true"
+    style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.04;"
+    viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none"
+  >
+    <path d="M0,160 C320,220 640,100 960,180 C1120,220 1280,140 1440,200" stroke="#C9A962" stroke-width="1.5" fill="none"/>
+    <path d="M0,200 C360,130 720,270 1080,170 C1260,130 1360,210 1440,180" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M0,240 C280,300 560,180 840,260 C1120,340 1300,220 1440,260" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.35"/>
+  </svg>
+
+  <div class="loc-cta-inner reveal">
+    <span class="gold-rule gold-rule--center" aria-hidden="true"></span>
+    <p class="overline">Start uw project in Dubai</p>
+
+    <h2 class="loc-cta-h2 gold-dot" id="loc-cta-h">Klaar voor een exclusief interieur in Dubai</h2>
+
+    <p class="loc-cta-body">
+      Neem contact op voor een vrijblijvend gesprek over uw project.
+    </p>
+
+    <div class="loc-cta-group">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 7: RELATED LOCATIONS
+     Background: #E8DDD0 surface
+     3-col text links to other location pages
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="loc-related" aria-label="Andere locaties">
+  <div class="loc-related-inner">
+
+    <p class="overline loc-related-label">Andere locaties</p>
+
+    <nav aria-label="Overige locatiepagina's">
+      <ul class="loc-related-grid reveal" role="list">
+        <li>
+          <a href="/projects/netherlands/" class="loc-related-link">
+            Projecten in Nederland
+            <span class="loc-related-sub">Villa's · Penthouses · Apartementen</span>
+          </a>
+        </li>
+        <li>
+          <a href="/projects/spain/" class="loc-related-link">
+            Projecten in Spanje
+            <span class="loc-related-sub">Barcelona · Costa Brava</span>
+          </a>
+        </li>
+        <li>
+          <a href="/projects/morocco/" class="loc-related-link">
+            Projecten in Marokko
+            <span class="loc-related-sub">Marrakech · Riad interieurs</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</section>
+
+</main><!-- /loc-main -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FOOTER — identical to homepage footer
+     ══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">
+        By Shakir<sup>®</sup>
+      </a>
+      <span class="footer-tagline">Luxury Interiors</span>
+
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        © 2025 By Shakir
+      </p>
+    </div>
+
+    <div>
+      <nav aria-label="Sitenavigatie">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Inline, minimal
+     1. Nav scroll → glassmorphism
+     2. Mobile menu toggle
+     3. Scroll reveals (IntersectionObserver)
+     4. 3D image tilt on featured project card
+     ══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1 — Nav scroll state → glassmorphism ─────────────────────────────── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 55);
+  }, { passive: true });
+
+  /* 2 — Mobile menu ──────────────────────────────────────────────────── */
+  var burger    = document.getElementById('burger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var navClose  = document.getElementById('nav-close');
+
+  function openMenu() {
+    mobileNav.classList.add('is-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', openMenu);
+  navClose.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* 3 — Scroll reveals (IntersectionObserver) ─────────────────────────
+     Matches homepage: scale 0.96→1 + translateY 10→0, 1.4s, --ease */
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }
+
+  /* 4 — 3D image tilt — signature interaction ─────────────────────────
+     Applied to [data-tilt] elements (featured project card)
+     Perspective: 1000px, max rotation ±6°, scale 1.02 on hover
+     Disabled on touch + prefers-reduced-motion */
+  if (
+    window.matchMedia('(hover: hover)').matches &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  ) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        card.style.transition = 'none';
+      });
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left)  / r.width  - 0.5;
+        var y = (e.clientY - r.top)   / r.height - 0.5;
+        card.style.transform =
+          'perspective(1000px) rotateX(' + (y * -6) + 'deg) rotateY(' + (x * 6) + 'deg) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'transform 0.6s cubic-bezier(0.83, 0, 0.17, 1)';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
+  }
+
+}());
+</script>
+
+</body>
+</html>

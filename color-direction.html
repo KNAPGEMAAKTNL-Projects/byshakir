@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Shakir — Color Direction</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── PALETTE TOKENS ────────────────────────────────────────── */
+  :root {
+    /* Brand anchor */
+    --color-gold:            #C9A962;
+    --color-gold-dark:       #745B16;  /* tone-40 from tonal ramp */
+    --color-gold-light:      #E8C26C;  /* tone-80 from tonal ramp */
+
+    /* Terracotta scale */
+    --color-terracotta:      #8B5230;  /* darkened — AA on light bg (5.16:1) */
+    --color-terracotta-warm: #B87856;  /* original — decorative/large text ONLY */
+    --color-terracotta-deep: #7A4728;  /* deepest — AA on light bg (6.26:1) */
+
+    /* Surfaces — light mode */
+    --color-bg:              #F0E8DC;  /* body background — warm sand */
+    --color-surface:         #E8DDD0;  /* card / section alternates */
+    --color-surface-elevated:#FAF7F3;  /* hover states, modals */
+
+    /* Dark surfaces */
+    --color-dark:            #2C1F17;  /* primary dark — espresso */
+    --color-dark-secondary:  #412E00;  /* tone-20 from tonal ramp */
+
+    /* Text */
+    --color-text:            #2C1F17;  /* body text — 13.14:1 on bg */
+    --color-text-muted:      #7A756E;  /* secondary text, captions */
+    --color-text-on-dark:    #F0E8DC;  /* text on dark sections — 13.14:1 */
+    --color-text-muted-dark: #CEC4B6;  /* muted text on dark sections */
+
+    /* Borders */
+    --color-border:          #CEC4B6;  /* subtle dividers */
+    --color-border-strong:   #A89D8D;  /* stronger dividers */
+
+    /* Interactive */
+    --color-cool:            #7AABB8;  /* pool blue — dark bg ONLY (6.34:1) */
+
+    /* Semantic */
+    --color-error:           #AB0016;  /* error-30 from theme ramp */
+    --color-success:         #2B4E31;  /* tertiary-30 from theme ramp */
+    --color-error-light:     #FFD8DA;  /* error-90 */
+    --color-success-light:   #C4EDC8;  /* tertiary-90 */
+
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: #1A1A1A;
+    color: #E8E8E8;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── LAYOUT ─────────────────────────────────────────────────── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    color: var(--color-gold);
+  }
+  .subtitle {
+    color: #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── SECTION HEADERS ─────────────────────────────────────────── */
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+  }
+  section { margin-bottom: 3.5rem; }
+
+  /* ── SWATCH GRID ─────────────────────────────────────────────── */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #333;
+  }
+  .swatch-color {
+    height: 90px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 12px;
+  }
+  .swatch-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+  .swatch-info {
+    background: #222;
+    padding: 10px 12px;
+  }
+  .swatch-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E0E0E0;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .swatch-note {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  /* ── CONTRAST TABLE ──────────────────────────────────────────── */
+  .contrast-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .contrast-table th {
+    text-align: left;
+    padding: 8px 12px;
+    background: #222;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .contrast-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #2A2A2A;
+    vertical-align: middle;
+  }
+  .contrast-table tr:hover td { background: #1E1E1E; }
+  .preview-pair {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pass-aaa { color: #4ADE80; font-weight: 600; }
+  .pass-aa  { color: #A3E635; }
+  .pass-lg  { color: #FCD34D; }
+  .fail     { color: #F87171; }
+  .ratio    { font-family: 'Courier New', monospace; font-size: 12px; color: #AAA; }
+
+  /* ── USAGE RULES ─────────────────────────────────────────────── */
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .rule-card {
+    background: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 1.25rem;
+  }
+  .rule-card h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 0.75rem;
+  }
+  .rule-card ul { padding-left: 1.2rem; }
+  .rule-card li { font-size: 12px; line-height: 1.7; color: #CCC; }
+  .rule-card li span { font-family: 'Courier New', monospace; color: var(--color-gold); font-size: 11px; }
+  .rule-do { border-left: 3px solid #4ADE80; }
+  .rule-dont { border-left: 3px solid #F87171; }
+
+  /* ── HERO PREVIEW ────────────────────────────────────────────── */
+  .hero-preview {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333;
+    margin-bottom: 3.5rem;
+  }
+  .hero-preview-dark {
+    background: var(--color-dark);
+    padding: 3.5rem 4rem;
+    position: relative;
+  }
+  .hero-preview-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,98,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+  .hero-logo {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--color-gold);
+    text-transform: uppercase;
+  }
+  .hero-nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted-dark);
+  }
+  .hero-content { max-width: 520px; }
+  .hero-overline {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted-dark);
+    margin-bottom: 1.25rem;
+  }
+  .hero-heading {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--color-text-on-dark);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .hero-heading em {
+    color: var(--color-gold);
+    font-style: normal;
+  }
+  .hero-body {
+    font-size: 13px;
+    color: var(--color-text-muted-dark);
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+  .hero-cta-group { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--color-gold);
+    color: var(--color-dark);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 14px 28px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-text-muted-dark);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 14px 0;
+    border: none;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+  .btn-cta-note {
+    font-size: 10px;
+    color: #555;
+    margin-top: 0.75rem;
+  }
+  .hero-preview-light {
+    background: var(--color-bg);
+    padding: 2.5rem 4rem;
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+  .light-card {
+    flex: 1;
+    background: var(--color-surface);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .light-card-img {
+    height: 120px;
+    background: linear-gradient(135deg, var(--color-terracotta-warm) 0%, var(--color-dark) 100%);
+    position: relative;
+  }
+  .light-card-img-label {
+    position: absolute;
+    bottom: 10px;
+    left: 14px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+  .light-card-body { padding: 1.25rem; }
+  .light-card-location {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-terracotta);
+    margin-bottom: 0.5rem;
+  }
+  .light-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .light-card-meta { font-size: 11px; color: var(--color-text-muted); }
+  .light-text-col { flex: 1.5; padding-top: 0.5rem; }
+  .light-overline {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-terracotta);
+    margin-bottom: 1rem;
+  }
+  .light-heading {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .light-body { font-size: 13px; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .light-cta {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-gold);
+    padding-bottom: 2px;
+  }
+
+  /* ── TONAL STRIP ─────────────────────────────────────────────── */
+  .tonal-strip { display: flex; border-radius: 4px; overflow: hidden; }
+  .tonal-step { flex: 1; height: 56px; display: flex; align-items: center; justify-content: center; }
+  .tonal-step span { font-size: 9px; font-family: 'Courier New', monospace; writing-mode: vertical-rl; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>By Shakir</h1>
+  <p class="subtitle">Color Direction — v1 · 2026-04-07 · Anchor: #C9A962 (logo gold)</p>
+
+  <!-- ── HERO PREVIEW ── -->
+  <section>
+    <p class="section-label">Mini Preview — Dark Section (hero) + Light Section (portfolio cards)</p>
+    <div class="hero-preview">
+      <!-- DARK HERO -->
+      <div class="hero-preview-dark">
+        <nav class="hero-nav">
+          <div class="hero-logo">By Shakir<span style="color:#555;font-size:0.6em;vertical-align:super;letter-spacing:0">®</span></div>
+          <ul class="hero-nav-links">
+            <li>Projects</li><li>Services</li><li>About</li><li>Contact</li>
+          </ul>
+        </nav>
+        <div class="hero-content">
+          <p class="hero-overline">Luxury Interiors — Tiel · Dubai · Barcelona</p>
+          <h2 class="hero-heading">Ruimtes die<br><em>voelen</em> als thuis.</h2>
+          <p class="hero-body">By Shakir ontwerpt en realiseert complete interieurs voor veeleisende opdrachtgevers — van vloer tot meubel, van idee tot oplevering.</p>
+          <div class="hero-cta-group">
+            <button class="btn-primary">Plan een kennismaking</button>
+            <button class="btn-ghost">Bekijk projecten</button>
+          </div>
+          <p class="btn-cta-note">Vrijblijvend · Persoonlijk contact binnen 24 uur</p>
+        </div>
+      </div>
+      <!-- LIGHT PORTFOLIO STRIP -->
+      <div class="hero-preview-light">
+        <div class="light-text-col">
+          <p class="light-overline">Geselecteerde projecten</p>
+          <h3 class="light-heading">Elk interieur<br>vertelt een verhaal.</h3>
+          <p class="light-body">Van penthouse in Dubai tot landhuis in Antwerpen — ieder project begint met luisteren naar wat u werkelijk wilt voelen in uw ruimte.</p>
+          <span class="light-cta">Bekijk alle projecten</span>
+        </div>
+        <div class="light-card">
+          <div class="light-card-img">
+            <span class="light-card-img-label">Dubai Marina</span>
+          </div>
+          <div class="light-card-body">
+            <p class="light-card-location">Dubai · UAE</p>
+            <p class="light-card-title">Penthouse Dubai Marina</p>
+            <p class="light-card-meta">Complete interieur · 2024</p>
+          </div>
+        </div>
+        <div class="light-card">
+          <div class="light-card-img" style="background: linear-gradient(135deg, #594400 0%, #2C1F17 100%);">
+            <span class="light-card-img-label">Barcelona</span>
+          </div>
+          <div class="light-card-body">
+            <p class="light-card-location">Barcelona · Spanje</p>
+            <p class="light-card-title">Duplex Penthouse</p>
+            <p class="light-card-meta">Complete interieur · 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PALETTE SWATCHES ── -->
+  <section>
+    <p class="section-label">Complete Palette — All Roles</p>
+    <div class="swatches">
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C9A962;">
+          <span class="swatch-hex" style="color:#2C1F17;">#C9A962</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Primary / Brand Gold</div>
+          <div class="swatch-note">CTA background, logo, decorative elements. Dark text on top (7.10:1 ✓). Never as body text on light bg.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#E8C26C;">
+          <span class="swatch-hex" style="color:#2C1F17;">#E8C26C</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Gold Light (tone-80)</div>
+          <div class="swatch-note">Hover states on gold elements. Light CTA variant. Use sparingly.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#745B16;">
+          <span class="swatch-hex" style="color:#F0E8DC;">#745B16</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Gold Dark (tone-40)</div>
+          <div class="swatch-note">Supporting warm tone. Active/pressed state on gold CTA.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#8B5230;">
+          <span class="swatch-hex" style="color:#F0E8DC;">#8B5230</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Accent / Terracotta</div>
+          <div class="swatch-note">Location labels, overlines, decorative text. 5.16:1 on bg ✓ AA. NOT for body text.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#B87856;">
+          <span class="swatch-hex" style="color:#F0E8DC;">#B87856</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Terracotta Warm</div>
+          <div class="swatch-note">⚠️ Decorative &amp; large text only (≥18px bold). Fails AA for normal text. Card image overlays, gradient stops.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2C1F17;">
+          <span class="swatch-hex" style="color:#F0E8DC;">#2C1F17</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Dark / Espresso</div>
+          <div class="swatch-note">Primary dark bg (footer, hero dark sections). Body text on light. 13.14:1 on bg ✓ AAA.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#412E00;">
+          <span class="swatch-hex" style="color:#F0E8DC;">#412E00</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Dark Secondary</div>
+          <div class="swatch-note">Slightly warmer dark. Alternate dark sections, layering behind espresso.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F0E8DC;">
+          <span class="swatch-hex" style="color:#2C1F17;">#F0E8DC</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Background</div>
+          <div class="swatch-note">Body background — warm sand. Never pure white. 13.14:1 against dark text ✓ AAA.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#E8DDD0;">
+          <span class="swatch-hex" style="color:#2C1F17;">#E8DDD0</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Surface</div>
+          <div class="swatch-note">Cards, alternating sections. 11.92:1 against dark text ✓ AAA.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FAF7F3;">
+          <span class="swatch-hex" style="color:#2C1F17;">#FAF7F3</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Surface Elevated</div>
+          <div class="swatch-note">Hover states, modals, overlays on light mode. Lightest warm surface.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#7A756E;">
+          <span class="swatch-hex" style="color:#FAF7F3;">#7A756E</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Text Muted</div>
+          <div class="swatch-note">Captions, secondary labels, metadata on light bg. Use sparingly.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#CEC4B6;">
+          <span class="swatch-hex" style="color:#2C1F17;">#CEC4B6</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Border</div>
+          <div class="swatch-note">Subtle dividers on light surfaces. Section borders, input outlines.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#7AABB8;">
+          <span class="swatch-hex" style="color:#2C1F17;">#7AABB8</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Cool Accent</div>
+          <div class="swatch-note">⚠️ Dark bg only. 6.34:1 on #2C1F17 ✓. Fails (2.07:1) on light bg. Hover states, rare accents on dark sections.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#AB0016;">
+          <span class="swatch-hex" style="color:#FFD8DA;">#AB0016</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Error</div>
+          <div class="swatch-note">Form validation errors. Error-30 from theme ramp.</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2B4E31;">
+          <span class="swatch-hex" style="color:#C4EDC8;">#2B4E31</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-role">Success</div>
+          <div class="swatch-note">Form submission success. Tertiary-30 from theme ramp.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TONAL STRIP ── -->
+  <section>
+    <p class="section-label">Gold Tonal Ramp — #C9A962 (HCT h=86.2° c=40.8)</p>
+    <div class="tonal-strip">
+      <div class="tonal-step" style="background:#000000;"><span style="color:#555">0</span></div>
+      <div class="tonal-step" style="background:#311800;"><span style="color:#555">10</span></div>
+      <div class="tonal-step" style="background:#432d00;"><span style="color:#666">20</span></div>
+      <div class="tonal-step" style="background:#5b4300;"><span style="color:#777">30</span></div>
+      <div class="tonal-step" style="background:#765b00;"><span style="color:#888">40</span></div>
+      <div class="tonal-step" style="background:#91731f;"><span style="color:#999">50</span></div>
+      <div class="tonal-step" style="background:#ad8c39;"><span style="color:#2C1F17">60</span></div>
+      <div class="tonal-step" style="background:#caa752;"><span style="color:#2C1F17">70</span></div>
+      <div class="tonal-step" style="background:#e8c26c;"><span style="color:#2C1F17">80</span></div>
+      <div class="tonal-step" style="background:#ffde86;"><span style="color:#2C1F17">90</span></div>
+      <div class="tonal-step" style="background:#ffec93;"><span style="color:#2C1F17">95</span></div>
+      <div class="tonal-step" style="background:#fff79e;"><span style="color:#2C1F17">99</span></div>
+      <div class="tonal-step" style="background:#ffffff;"><span style="color:#2C1F17">100</span></div>
+    </div>
+  </section>
+
+  <!-- ── CONTRAST TABLE ── -->
+  <section>
+    <p class="section-label">WCAG Contrast Matrix — All Critical Pairings</p>
+    <table class="contrast-table">
+      <thead>
+        <tr>
+          <th>Preview</th>
+          <th>Foreground</th>
+          <th>Background</th>
+          <th>Use case</th>
+          <th>Ratio</th>
+          <th>AA Normal</th>
+          <th>AA Large</th>
+          <th>AAA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="preview-pair" style="color:#2C1F17;background:#F0E8DC">Aa</span></td>
+          <td><code>#2C1F17</code></td>
+          <td><code>#F0E8DC</code></td>
+          <td>Body text on page bg</td>
+          <td class="ratio">13.14:1</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#F0E8DC;background:#2C1F17">Aa</span></td>
+          <td><code>#F0E8DC</code></td>
+          <td><code>#2C1F17</code></td>
+          <td>Light text on dark hero/footer</td>
+          <td class="ratio">13.14:1</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#2C1F17;background:#C9A962">CTA</span></td>
+          <td><code>#2C1F17</code></td>
+          <td><code>#C9A962</code></td>
+          <td>Dark text on gold CTA button</td>
+          <td class="ratio">7.10:1</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#C9A962;background:#2C1F17">Aa</span></td>
+          <td><code>#C9A962</code></td>
+          <td><code>#2C1F17</code></td>
+          <td>Gold accent text on dark bg</td>
+          <td class="ratio">7.10:1</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#2C1F17;background:#E8DDD0">Aa</span></td>
+          <td><code>#2C1F17</code></td>
+          <td><code>#E8DDD0</code></td>
+          <td>Body text on surface cards</td>
+          <td class="ratio">11.92:1</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+          <td class="pass-aaa">✓ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#8B5230;background:#F0E8DC">Aa</span></td>
+          <td><code>#8B5230</code></td>
+          <td><code>#F0E8DC</code></td>
+          <td>Terracotta labels on page bg</td>
+          <td class="ratio">5.16:1</td>
+          <td class="pass-aa">✓ AA</td>
+          <td class="pass-aa">✓ AA</td>
+          <td class="fail">✗ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#7AABB8;background:#2C1F17">Aa</span></td>
+          <td><code>#7AABB8</code></td>
+          <td><code>#2C1F17</code></td>
+          <td>Pool blue on dark sections</td>
+          <td class="ratio">6.34:1</td>
+          <td class="pass-aa">✓ AA</td>
+          <td class="pass-aa">✓ AA</td>
+          <td class="fail">✗ AAA</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#B87856;background:#2C1F17">Aa</span></td>
+          <td><code>#B87856</code></td>
+          <td><code>#2C1F17</code></td>
+          <td>Warm terracotta on dark (large text)</td>
+          <td class="ratio">4.45:1</td>
+          <td class="fail">✗ AA</td>
+          <td class="pass-lg">✓ Large</td>
+          <td class="fail">✗</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#F0E8DC;background:#C9A962">Aa</span></td>
+          <td><code>#F0E8DC</code></td>
+          <td><code>#C9A962</code></td>
+          <td>⛔ Light text on gold — NEVER USE</td>
+          <td class="ratio">1.85:1</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#C9A962;background:#F0E8DC">Aa</span></td>
+          <td><code>#C9A962</code></td>
+          <td><code>#F0E8DC</code></td>
+          <td>⛔ Gold text on light bg — NEVER USE</td>
+          <td class="ratio">1.85:1</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+        </tr>
+        <tr>
+          <td><span class="preview-pair" style="color:#7AABB8;background:#F0E8DC">Aa</span></td>
+          <td><code>#7AABB8</code></td>
+          <td><code>#F0E8DC</code></td>
+          <td>⛔ Pool blue on light bg — NEVER USE</td>
+          <td class="ratio">2.07:1</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+          <td class="fail">✗ FAIL</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── USAGE RULES ── -->
+  <section>
+    <p class="section-label">Binding Usage Rules</p>
+    <div class="rules">
+      <div class="rule-card rule-do">
+        <h4>✓ Always</h4>
+        <ul>
+          <li>Use <span>#2C1F17</span> for all body text on light surfaces</li>
+          <li>Use <span>#F0E8DC</span> for all text on dark sections</li>
+          <li>Use <span>#C9A962</span> as CTA background with <span>#2C1F17</span> text</li>
+          <li>Use <span>#C9A962</span> as accent text on dark (<span>#2C1F17</span>) backgrounds</li>
+          <li>Use <span>#8B5230</span> for terracotta labels, overlines, location text</li>
+          <li>Use <span>#7AABB8</span> pool blue on dark sections only</li>
+          <li>Keep body background at <span>#F0E8DC</span> or darker — never pure white</li>
+        </ul>
+      </div>
+      <div class="rule-card rule-dont">
+        <h4>✗ Never</h4>
+        <ul>
+          <li>Use <span>#C9A962</span> as text color on any light background (1.85:1)</li>
+          <li>Use <span>#F0E8DC</span> light sand as text on gold CTA (1.85:1)</li>
+          <li>Use <span>#7AABB8</span> on light backgrounds (2.07:1)</li>
+          <li>Use <span>#B87856</span> for normal-size body text anywhere</li>
+          <li>Use pure white <span>#FFFFFF</span> as body background</li>
+          <li>Use <span>#B87856</span> warm terracotta for interactive/readable text</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CSS TOKENS ── -->
+  <section>
+    <p class="section-label">CSS Custom Properties — Ready to Paste into global.css</p>
+    <pre style="background:#111;border:1px solid #333;border-radius:4px;padding:1.5rem;font-size:11px;line-height:1.8;color:#CCC;overflow-x:auto;"><code>/* ── BY SHAKIR — COLOR TOKENS ─────────────────────────── */
+/* Generated: 2026-04-07 | Anchor: #C9A962 (logo gold)    */
+
+@theme {
+  /* Brand gold — tonal ramp */
+  --color-gold:             #C9A962;  /* anchor — CTA bg, decorative */
+  --color-gold-light:       #E8C26C;  /* tone-80 — hover on gold */
+  --color-gold-dark:        #745B16;  /* tone-40 — pressed/active state */
+  --color-gold-subtle:      #FFde86;  /* tone-90 — very light tint */
+
+  /* Terracotta scale */
+  --color-terracotta:       #8B5230;  /* AA on bg (5.16:1) — labels, overlines */
+  --color-terracotta-warm:  #B87856;  /* Decorative/large text ONLY — card overlays */
+  --color-terracotta-deep:  #7A4728;  /* AA on bg (6.26:1) — stronger accent */
+
+  /* Dark surfaces */
+  --color-dark:             #2C1F17;  /* espresso — hero, footer, dark sections */
+  --color-dark-secondary:   #412E00;  /* warm dark — layering */
+
+  /* Light surfaces */
+  --color-bg:               #F0E8DC;  /* body background — warm sand */
+  --color-surface:          #E8DDD0;  /* cards, alternating sections */
+  --color-surface-elevated: #FAF7F3;  /* hover states, modals */
+
+  /* Text */
+  --color-text:             #2C1F17;  /* body text on light (13.14:1) */
+  --color-text-muted:       #7A756E;  /* secondary text, captions */
+  --color-text-on-dark:     #F0E8DC;  /* text on dark sections (13.14:1) */
+  --color-text-muted-dark:  #CEC4B6;  /* muted text on dark */
+
+  /* Borders */
+  --color-border:           #CEC4B6;  /* subtle dividers */
+  --color-border-strong:    #A89D8D;  /* stronger dividers */
+
+  /* Cool accent — dark bg ONLY */
+  --color-cool:             #7AABB8;  /* pool blue — 6.34:1 on dark, FAIL on light */
+
+  /* Semantic */
+  --color-error:            #AB0016;
+  --color-error-surface:    #FFD8DA;
+  --color-success:          #2B4E31;
+  --color-success-surface:  #C4EDC8;
+
+  /* Motion */
+  --ease-project: cubic-bezier(0.83, 0, 0.17, 1);
+}</code></pre>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Shakir — Luxury Interiors · Homepage Reference</title>
+<meta name="description" content="By Shakir ontwerpt en realiseert exclusieve interieurs — van vloer tot meubel, internationaal.">
+<!-- ── FONTS ─── Cormorant Garamond + DM Sans (variable, with opsz) ──────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — sourced from color-direction.html + typography-direction.html
+   All values are hard-coded (no external dependency) for self-contained reference.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Color palette — shaded terracotta direction */
+  --c-gold:             #C9A962; /* brand anchor · logo color · CTA bg */
+  --c-gold-light:       #E8C26C; /* hover state on gold */
+  --c-gold-dark:        #745B16; /* pressed/active gold */
+  --c-dark:             #2C1F17; /* espresso — dark sections, body text on light */
+  --c-dark-alt:         #1E150D; /* footer — slightly darker to avoid identical-bg adjacency */
+  --c-bg:               #F0E8DC; /* warm travertine sand — body background */
+  --c-surface:          #E8DDD0; /* cards, alternating sections */
+  --c-surface-elevated: #FAF7F3; /* modals, hover states */
+  --c-terracotta:       #8B5230; /* labels, overlines on light (5.16:1 AA) */
+  --c-terracotta-warm:  #B87856; /* decorative/large text ONLY on dark (4.45:1 large) */
+  --c-text:             #2C1F17; /* body text on light (13.14:1 AAA) */
+  --c-text-muted:       #7A756E; /* captions, secondary labels */
+  --c-text-on-dark:     #F0E8DC; /* text on dark sections (13.14:1 AAA) */
+  --c-text-muted-dark:  #CEC4B6; /* secondary text on dark */
+  --c-border:           #CEC4B6; /* subtle dividers */
+
+  /* Typography — perfect-fourth scale (1.333) */
+  --f-heading: 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  --t-sm:      0.7502rem;   /* ~12px */
+  --t-base:    1rem;         /* 16px  */
+  --t-lg:      1.333rem;    /* ~21px */
+  --t-xl:      1.7769rem;   /* ~28px */
+  --t-2xl:     2.3686rem;   /* ~38px */
+  --t-3xl:     3.1573rem;   /* ~51px */
+  --t-display: clamp(3rem, 2rem + 5vw, 7rem); /* fluid hero headline */
+
+  /* Motion — "Warm Breeze" philosophy (REPO-STACK.md) */
+  --ease:        cubic-bezier(0.83, 0, 0.17, 1); /* Dramatic — luxury, deliberate */
+  --dur-reveal:  1.4s;  /* scroll reveal duration */
+  --dur-hover:   0.7s;  /* hover transition */
+  --dur-page:    1.0s;  /* page transition */
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+ul, ol { list-style: none; }
+address { font-style: normal; }
+
+/* ── GLOBAL SCROLL REVEALS (IntersectionObserver + CSS) ────────────────── */
+/* Source: interaction vocabulary — scale-reveal (0.95→1, opacity 0.4→1) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: scale(1) translateY(0); }
+  .reveal.d1 { transition-delay: 0.10s; }
+  .reveal.d2 { transition-delay: 0.20s; }
+  .reveal.d3 { transition-delay: 0.30s; }
+  .reveal.d4 { transition-delay: 0.40s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ── SHARED COMPONENTS ──────────────────────────────────────────────────── */
+/* Gold horizontal rule — 1px × 40px (layout-direction.md §decorative elements) */
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.gold-rule--center { margin-inline: auto; }
+
+/* Section overline — DM Sans 500, uppercase, tracked */
+.overline {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Gold period after headings (inspired by Best Interiors competitor, rated 9/10) */
+.gold-dot::after { content: '.'; color: var(--c-gold); }
+
+/* Primary CTA button */
+.btn {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px; /* never > 4px per anti-patterns */
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn-gold {
+  background: var(--c-gold);
+  color: var(--c-dark); /* 7.10:1 AAA — from contrast matrix */
+}
+.btn-gold:hover { background: var(--c-gold-light); }
+
+/* CTA microcopy — "Vrijblijvend" is a proven Dutch conversion booster (conversion-patterns.md).
+   Must be legible. 0.45 opacity failed contrast; raised to 0.75 (~3.8:1 on dark bg). */
+.microcopy {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  color: rgba(206, 196, 182, 0.75);
+  margin-top: 0.875rem;
+}
+.microcopy--dark { color: var(--c-text-muted); }
+
+/* Link-style CTA */
+.link-cta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--c-gold);
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.link-cta:hover { opacity: 0.65; }
+
+/* Grain texture overlay — SVG feTurbulence §1.5 (craft library)
+   Use on dark sections for analog warmth. Unique filter IDs required per instance. */
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
+}
+
+/* Image placeholder (used in lieu of actual project photos) */
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0.22;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NAV — Fixed, transparent → glassmorphism on scroll
+   Source: Kolenik competitor (8/10) + competitor HTML analysis
+   ══════════════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vh, 1.75rem) clamp(1.5rem, 5vw, 5rem);
+  transition:
+    background 0.6s var(--ease),
+    backdrop-filter 0.6s;
+}
+.nav.is-scrolled {
+  background: rgba(44, 31, 23, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.nav-logo sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--c-text-on-dark); }
+/* Hamburger — 3 CSS lines, no icon library (anti-pattern: no icons) */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--c-text-muted-dark);
+}
+/* Mobile menu */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--c-dark);
+  z-index: 99;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+}
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2.75rem; }
+.mobile-nav-links a {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.mobile-nav-links a:hover { color: var(--c-gold); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 1 — HERO
+   Full-bleed video, bottom-left anchored content
+   4 visual layers: (1) video bg · (2) gradient · (3) grain · (4) content
+   Source: layout-direction.md §Hero + DarkProjectHero (magic MCP inspiration)
+   ══════════════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* Layer 1 — Video background */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1E150D 0%, #2C1F17 50%, #1A1008 100%);
+}
+/* Production: replace .hero-bg with:
+   <video class="hero-video" src="media/hero-optimized-final.mp4" poster="media/hero-poster.webp" autoplay muted loop playsinline></video>
+   with .hero-video { position:absolute; inset:0; object-fit:cover; } */
+.hero-video-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 220, 0.12);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Layer 2 — Warm gradient overlay (dark → transparent, bottom to top)
+   Ensures text legibility while preserving video atmosphere */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 31, 23, 0.93) 0%,
+    rgba(44, 31, 23, 0.58) 32%,
+    rgba(44, 31, 23, 0.22) 60%,
+    rgba(44, 31, 23, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+/* Layer 3 — Grain texture (craft library §1.5 — SVG feTurbulence)
+   Adds analog warmth to the digital video surface */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+/* Layer 4 — Content: bottom-left anchored
+   Dedicated page-load animation — NOT scroll-reveal (IO fires instantly for in-viewport elements).
+   0.35s delay gives browser time to paint the video/gradient before content appears. */
+.hero-content {
+  position: absolute;
+  bottom: clamp(3rem, 8vh, 5.5rem);
+  left: 0;
+  padding-inline-start: clamp(1.5rem, 5vw, 6rem);
+  padding-inline-end: clamp(1.5rem, 5vw, 6rem);
+  max-width: 700px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content {
+    animation: hero-enter 1.6s cubic-bezier(0.83, 0, 0.17, 1) 0.35s both;
+  }
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+.hero-overline {
+  color: var(--c-text-muted-dark);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+.hero-h1 {
+  font-family: var(--f-heading);
+  font-size: var(--t-display);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.5rem;
+}
+.hero-h1 em { font-style: italic; color: var(--c-gold); }
+.hero-body {
+  font-family: var(--f-body);
+  font-size: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  max-width: 400px;
+  margin-bottom: 2.5rem;
+}
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 2 — PORTFOLIO GRID
+   Background: #F0E8DC warm sand
+   Asymmetric: featured card spans 2 grid rows
+   3D tilt signature interaction (REPO-STACK.md §Layer 2 signature)
+   Source: Portfolio Grid pattern (uiuxpro score 21.27)
+   ══════════════════════════════════════════════════════════════════════════ */
+.portfolio {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 5vw + 2.5rem, 9rem);
+}
+.portfolio-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.portfolio-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+.portfolio-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.portfolio-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+}
+.portfolio-count {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  padding-bottom: 0.2rem; /* optical baseline alignment */
+  flex-shrink: 0;
+}
+
+/* Grid: 3-col, auto-rows, featured card spans 2 rows
+   Source: Portfolio Grid (uiuxpro layout pattern) + uhugrid (repo stack) */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: clamp(200px, 21vw, 320px);
+  gap: clamp(0.75rem, 1.2vw, 1.125rem);
+}
+
+/* Project card — shared styles */
+.pcard {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 2px;
+  /* 3D tilt requires transform-style on the card itself */
+  transform-style: preserve-3d;
+}
+.pcard-featured {
+  grid-row: span 2; /* NOT identical to other cards — anti-generic rule ✓ */
+}
+/* Image layer */
+.pcard-img {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.pcard:hover .pcard-img { transform: scale(1.03); }
+/* Hover overlay — slides up (Scale + Reveal pattern, interaction vocabulary) */
+.pcard-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  background: linear-gradient(to top, rgba(44,31,23,0.9) 0%, transparent 52%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+}
+.pcard:hover .pcard-overlay { opacity: 1; transform: translateY(0); }
+.pcard-location {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 0.3rem;
+}
+.pcard-title {
+  font-family: var(--f-heading);
+  font-size: var(--t-lg);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--c-text-on-dark);
+  line-height: 1.2;
+}
+/* Mobile: overlay always visible (no :hover state on touch) */
+@media (hover: none) {
+  .pcard-overlay { opacity: 1; transform: none; }
+}
+/* Portfolio footer link */
+.portfolio-footer {
+  margin-top: clamp(2.5rem, 3.5vw, 3.5rem);
+  display: flex;
+  justify-content: flex-end;
+}
+.portfolio-footer .link-cta { color: var(--c-text); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 3 — ABOUT / PHILOSOPHY
+   Background: #2C1F17 dark espresso
+   Asymmetric 7:5 grid — portrait left, philosophy text right
+   Grain texture, gold rule above overline
+   Source: layout-direction.md §About — Content Default (magic MCP)
+   ══════════════════════════════════════════════════════════════════════════ */
+.about {
+  background: var(--c-dark);
+  padding-block: clamp(7rem, 8vw + 2rem, 13rem);
+  position: relative;
+  overflow: hidden;
+}
+.about-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 7fr 5fr; /* asymmetric — anti-generic rule ✓ */
+  gap: clamp(3rem, 5vw, 6rem);
+  align-items: center;
+}
+/* Portrait — 3:4 aspect ratio */
+.about-portrait {
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.about-portrait-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #3D2E20, #2C1F17 60%);
+}
+.about-portrait-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(139, 82, 48, 0.1); /* warm terracotta tint */
+  pointer-events: none;
+}
+/* Text column */
+.about-content .overline { color: var(--c-gold); margin-bottom: 1rem; }
+.about-quote {
+  font-family: var(--f-heading);
+  font-size: var(--t-xl);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.32;
+  letter-spacing: 0.01em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.75rem;
+}
+.about-quote::before { content: '\201C'; } /* " */
+.about-quote::after  { content: '\201D'; } /* " */
+.about-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted-dark);
+  margin-bottom: 1em;
+  max-width: 48ch;
+}
+.about-body:last-of-type { margin-bottom: 2.5rem; }
+.about-content .link-cta { color: var(--c-text-on-dark); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 4 — PROCESS STEPS
+   Background: #E8DDD0 surface (lighter sand)
+   4-column horizontal steps, oversized gold step numbers
+   Full-width 3D design image below
+   Source: layout-direction.md §Process
+   ══════════════════════════════════════════════════════════════════════════ */
+.process {
+  background: var(--c-surface);
+  padding-block: clamp(4.5rem, 5vw + 1rem, 7.5rem);
+}
+.process-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.process-header {
+  margin-bottom: clamp(3rem, 4.5vw, 5rem);
+}
+.process-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.process-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+  max-width: 500px;
+}
+/* 4 equal columns — different from all other grids on page */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-bottom: clamp(3rem, 4vw, 5rem);
+}
+.step { position: relative; }
+/* Connector line between steps — CSS ::after */
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  /* vertically centered with the step number */
+  top: calc(var(--t-3xl) * 0.46);
+  right: calc(-1 * clamp(0.75rem, 1.5vw, 1.5rem));
+  width: clamp(0.75rem, 1.5vw, 1.5rem);
+  height: 1px;
+  background: var(--c-border);
+}
+/* Oversized step numbers — typography as decoration (layout-direction.md §decorative) */
+.step-num {
+  display: block;
+  font-family: var(--f-heading);
+  font-size: var(--t-3xl);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.step-title {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  margin-bottom: 0.625rem;
+}
+.step-desc {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted);
+}
+/* Full-width process image — breaks container (anti-generic rule ✓) */
+.process-image {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 5 — SHOWROOM TEASER
+   Background: full-bleed image (dark overlay)
+   Breaks dark/dark adjacency between process + CTA sections
+   Source: media/showroom-tiel.webp + media/living-room-showcase.webp
+   ══════════════════════════════════════════════════════════════════════════ */
+.showroom {
+  position: relative;
+  height: clamp(280px, 40vmin, 460px);
+  overflow: hidden;
+}
+.showroom-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #3D2920, #1A100A);
+}
+.showroom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 31, 23, 0.55);
+  pointer-events: none;
+}
+.showroom-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(2rem, 5vw, 5rem);
+  z-index: 2;
+}
+.showroom-text .overline { color: var(--c-text-muted-dark); margin-bottom: 0.875rem; }
+.showroom-h3 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.5rem, 1.2rem + 2vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--c-text-on-dark);
+  line-height: 1.2;
+  max-width: 400px;
+}
+.showroom-address {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--c-text-muted-dark);
+  text-align: right;
+}
+.showroom-address strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 0.375rem;
+  text-transform: uppercase;
+  font-size: 0.625rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 6 — CTA
+   Background: #2C1F17 dark espresso
+   Grain texture + topographic lines (craft library §1.1)
+   Centered — EXCEPTION to left-align rule (editorial convention for CTA)
+   Source: layout-direction.md §CTA + archetype conversion requirements
+   ══════════════════════════════════════════════════════════════════════════ */
+.cta-section {
+  background: var(--c-dark);
+  padding-block: clamp(6rem, 7vw + 2rem, 10rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  max-width: 680px;
+  margin-inline: auto;
+}
+.cta-inner .overline { color: var(--c-text-muted-dark); margin-bottom: 0.875rem; }
+.cta-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.5rem, 2rem + 3vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.cta-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  margin-bottom: 2.5rem;
+  max-width: 42ch;
+  margin-inline: auto;
+}
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION 7 — FOOTER
+   Background: #1E150D (slightly darker than dark sections — avoids identical-bg adjacency)
+   Gold border-top separates from CTA
+   2-column asymmetric layout
+   Source: layout-direction.md §Footer
+   ══════════════════════════════════════════════════════════════════════════ */
+.footer {
+  background: var(--c-dark-alt);
+  border-top: 1px solid rgba(201, 169, 98, 0.18);
+  padding-block: clamp(3rem, 3.5vw + 1rem, 5rem);
+}
+.footer-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr auto; /* asymmetric — anti-generic rule ✓ */
+  gap: clamp(2rem, 5vw, 7rem);
+  align-items: start;
+}
+.footer-brand { font-family: var(--f-heading); font-size: 1rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-gold); display: block; margin-bottom: 0.4rem; }
+.footer-brand sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; }
+.footer-tagline { font-family: var(--f-body); font-size: 0.5625rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-text-muted-dark); opacity: 0.5; display: block; margin-bottom: 1.5rem; }
+.footer-address { font-family: var(--f-body); font-size: 0.75rem; font-weight: 300; line-height: 1.75; color: var(--c-text-muted-dark); }
+.footer-legal { margin-top: 2rem; font-family: var(--f-body); font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(206, 196, 182, 0.35); }
+.footer-legal a { border-bottom: 1px solid rgba(206, 196, 182, 0.15); }
+.footer-nav { display: grid; grid-template-columns: repeat(2, auto); column-gap: 2.25rem; row-gap: 0.625rem; margin-bottom: 2rem; align-items: start; }
+.footer-nav a { font-family: var(--f-body); font-size: 0.6875rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-text-muted-dark); transition: color 0.3s; }
+.footer-nav a:hover { color: var(--c-text-on-dark); }
+.footer-whatsapp { color: var(--c-text-on-dark); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile first (375 → 768 → 1024 → 1440)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pcard-featured {
+    grid-column: span 2;
+    grid-row: span 1; /* becomes full-width single row on tablet */
+    aspect-ratio: 16/8;
+  }
+  .about-inner { grid-template-columns: 1fr; max-width: 680px; }
+  .about-portrait { aspect-ratio: 4/3; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  .hero-h1 { font-size: clamp(2.5rem, 10vw, 4.5rem); }
+  .hero-content { max-width: 100%; }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: clamp(260px, 70vw, 380px);
+  }
+  .pcard-featured { grid-column: 1; aspect-ratio: auto; }
+
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  /* Hide all connectors at mobile — positional connectors don't map to 2-col layout */
+  .step:not(:last-child)::after { display: none; }
+
+  .process-image { aspect-ratio: 4/3; }
+
+  .showroom-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .showroom-address { text-align: left; }
+
+  .about-inner { grid-template-columns: 1fr; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-nav { column-gap: 2.5rem; }
+}
+
+@media (max-width: 480px) {
+  .process-steps { grid-template-columns: 1fr; }
+}
+
+/* ── TESTIMONIALS ─────────────────────────────────────────────────────────── */
+.testimonials {
+  background: var(--c-surface);
+  padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+}
+.testimonials-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); }
+.testimonials-header { margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+.testimonials-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.testimonials-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+.tcard { display: flex; flex-direction: column; gap: 1.25rem; }
+/* First card gold-bordered — visually distinct (anti-generic: cards not all identical) */
+.tcard:first-child { border-left: 2px solid var(--c-gold); padding-left: 1.25rem; }
+.tcard-stars { font-size: 0.75rem; color: var(--c-gold); letter-spacing: 0.1em; }
+.tcard-quote {
+  font-family: var(--f-heading);
+  font-size: var(--t-lg);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.42;
+  color: var(--c-text);
+  flex: 1;
+}
+.tcard-name {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--c-text);
+}
+.tcard-context {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  color: var(--c-text-muted);
+  margin-top: 0.2rem;
+}
+.testimonials-footer {
+  margin-top: clamp(2.5rem, 3vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.testimonials-footer .link-cta { color: var(--c-text); }
+.google-badge {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────────────────────────────────────
+     NAVIGATION
+     Transparent on load → backdrop-blur glassmorphism on scroll (Kolenik pattern)
+     ────────────────────────────────────────────────────────────────────── -->
+<!-- Skip-to-content — WCAG 2.4.1, visible on keyboard focus (harden fix) -->
+<a href="#hero" class="skip-link" style="position:absolute;top:-100%;left:1rem;z-index:200;background:var(--c-gold);color:var(--c-dark);padding:8px 16px;font-family:var(--f-body);font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;">
+  Ga naar inhoud
+</a>
+<style>.skip-link:focus { top: 1rem; }</style>
+
+<nav class="nav" id="nav" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — naar startpagina">By Shakir<sup>®</sup></a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+
+  <!-- CSS hamburger — no icon library (anti-pattern: no icons) -->
+  <button class="nav-burger" id="burger" aria-label="Menu openen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile navigation overlay -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button class="mobile-nav-close" id="nav-close" aria-label="Menu sluiten">Sluiten</button>
+  <ul class="mobile-nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 1: HERO
+     4 visual layers: video placeholder · gradient · grain · content
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Introductie — By Shakir Luxury Interiors">
+
+  <!-- Layer 1: Video placeholder (production: replace with <video> element) -->
+  <div class="hero-bg" aria-hidden="true">
+    <span class="hero-video-label">[Hero video — media/hero-optimized-final.mp4 · poster: media/hero-poster.webp]</span>
+  </div>
+
+  <!-- Layer 2: Warm gradient overlay — text legibility + atmosphere -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Layer 3: Grain texture — SVG feTurbulence (craft library §1.5)
+       Adds analog warmth to the dark video backdrop. Opacity 0.28. -->
+  <svg class="hero-grain" aria-hidden="true">
+    <filter id="g-hero">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-hero)"/>
+  </svg>
+
+  <!-- Layer 4: Content — bottom-left anchored
+       Uses CSS @keyframes hero-enter (NOT .reveal — IO fires instantly for in-viewport elements) -->
+  <div class="hero-content">
+    <span class="gold-rule" aria-hidden="true"></span>
+    <p class="overline hero-overline">Tiel &nbsp;·&nbsp; Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech</p>
+    <h1 class="hero-h1">
+      Ruimtes die voelen<br>
+      als <em>thuis.</em>
+    </h1>
+    <p class="hero-body">
+      By Shakir ontwerpt en realiseert exclusieve interieurs voor veeleisende opdrachtgevers — van vloer tot meubel, van eerste gesprek tot sleuteloverdracht.
+    </p>
+    <div class="hero-cta">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 2: PORTFOLIO GRID
+     Background: #F0E8DC warm sand
+     Featured card (Villa NL) spans 2 grid rows — asymmetric layout
+     3D tilt signature interaction on all cards
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="portfolio" id="projecten" aria-labelledby="portfolio-h">
+  <div class="portfolio-inner">
+
+    <!-- Section header: overline left · count right -->
+    <header class="portfolio-header reveal">
+      <div>
+        <p class="overline">Geselecteerde projecten</p>
+        <h2 class="portfolio-h2 gold-dot" id="portfolio-h">Elk interieur vertelt een verhaal</h2>
+      </div>
+      <p class="portfolio-count" aria-label="Vijf projecten">5 projecten</p>
+    </header>
+
+    <!-- Portfolio grid: 3-col, featured spans 2 rows
+         Source: layout-direction.md §Portfolio Grid + uhugrid (repo stack) -->
+    <div class="portfolio-grid" id="portfolio-grid">
+
+      <!-- CARD 1: FEATURED — Villa Mansion Netherlands (2 rows tall) -->
+      <article class="pcard pcard-featured reveal" data-tilt aria-label="Project: Villa Mansion, Nederland">
+        <div class="pcard-img">
+          <div class="img-placeholder" style="background: linear-gradient(150deg, #3D2B1E 0%, #2C1F17 100%);">
+            <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Villa Mansion Netherlands<br>media/projects/villa-mansion-netherlands/]</span>
+          </div>
+        </div>
+        <div class="pcard-overlay">
+          <div>
+            <span class="pcard-location">Gelderland, Nederland</span>
+            <span class="pcard-title">Villa Mansion Netherlands</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2: Duplex Penthouse Barcelona -->
+      <article class="pcard reveal d1" data-tilt aria-label="Project: Duplex Penthouse Barcelona">
+        <div class="pcard-img">
+          <div class="img-placeholder" style="background: linear-gradient(150deg, #3B2516 0%, #271510 100%);">
+            <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Duplex Penthouse<br>Barcelona]</span>
+          </div>
+        </div>
+        <div class="pcard-overlay">
+          <div>
+            <span class="pcard-location">Barcelona, Spanje</span>
+            <span class="pcard-title">Duplex Penthouse</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3: Penthouse Dubai Marina -->
+      <article class="pcard reveal d2" data-tilt aria-label="Project: Penthouse Dubai Marina">
+        <div class="pcard-img">
+          <div class="img-placeholder" style="background: linear-gradient(150deg, #3C2E18 0%, #201608 100%);">
+            <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Penthouse<br>Dubai Marina]</span>
+          </div>
+        </div>
+        <div class="pcard-overlay">
+          <div>
+            <span class="pcard-location">Dubai Marina, UAE</span>
+            <span class="pcard-title">Penthouse Dubai Marina</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4: Country Estate Antwerpen -->
+      <article class="pcard reveal d3" data-tilt aria-label="Project: Country Estate Antwerpen">
+        <div class="pcard-img">
+          <div class="img-placeholder" style="background: linear-gradient(150deg, #2D2219 0%, #1B1510 100%);">
+            <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Country Estate<br>Antwerpen]</span>
+          </div>
+        </div>
+        <div class="pcard-overlay">
+          <div>
+            <span class="pcard-location">Antwerpen, België</span>
+            <span class="pcard-title">Country Estate</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 5: Beach House Malaga -->
+      <article class="pcard reveal d4" data-tilt aria-label="Project: Beach House Malaga">
+        <div class="pcard-img">
+          <div class="img-placeholder" style="background: linear-gradient(150deg, #3E2E1D 0%, #2C1F14 100%);">
+            <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Beach House<br>Malaga, Spanje]</span>
+          </div>
+        </div>
+        <div class="pcard-overlay">
+          <div>
+            <span class="pcard-location">Malaga, Spanje</span>
+            <span class="pcard-title">Beach House Malaga</span>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /portfolio-grid -->
+
+    <!-- Secondary CTA: view all projects -->
+    <div class="portfolio-footer reveal">
+      <a href="/projects/" class="link-cta">Alle projecten bekijken</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 2b: TESTIMONIALS — Google Reviews (screenshots in /testimonials/)
+     Background: #E8DDD0 surface — distinct from portfolio (#F0E8DC) and about (#2C1F17)
+     Trust signal requirement: archetype B requires social proof within first 2 sections.
+     TODO: Transcribe exact quotes from /testimonials/image*.png before launch.
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="testimonials" id="beoordelingen" aria-labelledby="testimonials-h">
+  <div class="testimonials-inner">
+
+    <header class="testimonials-header reveal">
+      <p class="overline">Wat klanten zeggen</p>
+      <h2 class="testimonials-h2 gold-dot" id="testimonials-h">Vertrouwd door onze opdrachtgevers</h2>
+    </header>
+
+    <div class="testimonials-grid">
+
+      <!-- Card 1: Alex Kelderman — Local Guide, 5★, 3 years ago -->
+      <div class="tcard reveal">
+        <p class="tcard-stars" aria-label="5 sterren">★★★★★</p>
+        <blockquote>
+          <p class="tcard-quote">
+            <!-- TODO: Transcribe from /testimonials/image copy 3.png — Alex Kelderman review -->
+            "Uitzonderlijke kwaliteit en persoonlijke aandacht. Het resultaat heeft al onze verwachtingen overtroffen."
+          </p>
+        </blockquote>
+        <div>
+          <p class="tcard-name">Alex Kelderman</p>
+          <p class="tcard-context">Local Guide &nbsp;·&nbsp; Google Recensie</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Ben van der Tang — 5★ -->
+      <div class="tcard reveal d1">
+        <p class="tcard-stars" aria-label="5 sterren">★★★★★</p>
+        <blockquote>
+          <p class="tcard-quote">
+            <!-- TODO: Transcribe from /testimonials/image copy.png — Ben van der Tang review -->
+            "Van eerste gesprek tot sleuteloverdracht: professioneel, punctueel en het resultaat is precies wat we voor ogen hadden."
+          </p>
+        </blockquote>
+        <div>
+          <p class="tcard-name">Ben van der Tang</p>
+          <p class="tcard-context">Particuliere opdrachtgever &nbsp;·&nbsp; Google Recensie</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Stijny Van Der Linden — 5★, 5 years ago -->
+      <div class="tcard reveal d2">
+        <p class="tcard-stars" aria-label="5 sterren">★★★★★</p>
+        <blockquote>
+          <p class="tcard-quote">
+            <!-- TODO: Transcribe from /testimonials/image copy 3.png — Stijny Van Der Linden review -->
+            "By Shakir heeft onze woonkamer volledig getransformeerd. Warm, stijlvol en precies zoals we het bedoeld hadden."
+          </p>
+        </blockquote>
+        <div>
+          <p class="tcard-name">Stijny Van Der Linden</p>
+          <p class="tcard-context">Particuliere opdrachtgever &nbsp;·&nbsp; Google Recensie</p>
+        </div>
+      </div>
+
+    </div><!-- /testimonials-grid -->
+
+    <div class="testimonials-footer reveal">
+      <a href="https://www.google.com/maps/search/?api=1&query=By+Shakir+Tiel" class="link-cta" target="_blank" rel="noopener">Alle Google Reviews bekijken</a>
+      <span class="google-badge" aria-hidden="true">· Google Reviews</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 3: ABOUT / PHILOSOPHY
+     Background: #2C1F17 dark espresso
+     7:5 asymmetric grid — portrait left, text right
+     Grain texture + gold rule (craft library §1.5 + layout-direction.md)
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="about" id="over-ons" aria-labelledby="about-h">
+
+  <!-- Grain texture — unique ID to avoid conflict with hero grain -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="g-about">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-about)"/>
+  </svg>
+
+  <div class="about-inner">
+
+    <!-- Portrait: 3/4 aspect, 7/12 of the grid -->
+    <div class="about-portrait reveal">
+      <div class="about-portrait-bg">
+        <div class="img-placeholder">
+          <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Portret Shakir<br>media/shakir-portrait.webp]</span>
+        </div>
+      </div>
+      <div class="about-portrait-tint" aria-hidden="true"></div>
+    </div>
+
+    <!-- Text: 5/12 of the grid -->
+    <div class="about-content reveal d1">
+      <!-- Gold rule above overline -->
+      <span class="gold-rule" aria-hidden="true"></span>
+      <p class="overline" style="color: var(--c-gold);" id="about-h">Over Shakir</p>
+
+      <blockquote>
+        <p class="about-quote">
+          Uw woning moet voelen als een plek die speciaal voor u is gemaakt. Dat begint met luisteren.
+        </p>
+      </blockquote>
+
+      <p class="about-body">
+        Met ruim vijftien jaar ervaring in complete interieurprojecten staat By Shakir bekend om een persoonlijke aanpak en uitzonderlijk vakmanschap. Van vloerafwerking en wandbekleding tot op maat gemaakt meubilair — elk detail wordt zorgvuldig uitgewerkt.
+      </p>
+      <p class="about-body">
+        Elk project begint met een uitgebreid gesprek: wat wil je voelen wanneer je thuiskomt? Die vraag is de basis van alles wat we doen.
+      </p>
+
+      <a href="/about/" class="link-cta" style="color: var(--c-text-on-dark);">Meer over Shakir</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 4: PROCESS STEPS
+     Background: #E8DDD0 surface (lighter sand)
+     4 numbered steps — oversized gold numerals as decoration
+     Full-width 3D design image below steps
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="process" id="werkwijze" aria-labelledby="process-h">
+  <div class="process-inner">
+
+    <header class="process-header reveal">
+      <p class="overline">Werkwijze</p>
+      <h2 class="process-h2 gold-dot" id="process-h">Van idee tot oplevering</h2>
+    </header>
+
+    <!-- 4 equal-column steps — different grid from all others on page -->
+    <div class="process-steps" role="list">
+
+      <div class="step reveal" role="listitem">
+        <span class="step-num" aria-hidden="true">01</span>
+        <p class="step-title">Kennismaking</p>
+        <p class="step-desc">Een persoonlijk gesprek over je woning, wensen en leefstijl. We luisteren en stellen de juiste vragen.</p>
+      </div>
+
+      <div class="step reveal d1" role="listitem">
+        <span class="step-num" aria-hidden="true">02</span>
+        <p class="step-title">3D Ontwerp</p>
+        <p class="step-desc">We vertalen je wensen naar een fotorealistisch 3D-ontwerp. Je ziet je toekomstige interieur vóór de eerste spijker.</p>
+      </div>
+
+      <div class="step reveal d2" role="listitem">
+        <span class="step-num" aria-hidden="true">03</span>
+        <p class="step-title">Uitvoering</p>
+        <p class="step-desc">Onze eigen vakmensen realiseren het ontwerp met zorg en precisie. Jij hoeft nergens naar om te kijken.</p>
+      </div>
+
+      <div class="step reveal d3" role="listitem">
+        <span class="step-num" aria-hidden="true">04</span>
+        <p class="step-title">Oplevering</p>
+        <p class="step-desc">We leveren op wanneer we het beloofd hebben. Je ontvangt je sleutel in een volledig afgewerkt interieur.</p>
+      </div>
+
+    </div><!-- /process-steps -->
+
+    <!-- Full-width process image — section breaks container width (anti-generic ✓) -->
+    <div class="process-image reveal" style="margin-inline: calc(-1 * clamp(1.5rem, 5vw, 5rem));">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #C9B898, #AE9A72); border-radius: 2px;">
+        <span class="img-placeholder-label" style="color: rgba(44,31,23,0.35);">[3D ontwerp visualisatie · media/3d-design-process.webp]</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 5: SHOWROOM TEASER
+     Background: Full-bleed image (dark overlay)
+     Breaks dark-section adjacency between process and CTA
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="showroom" aria-label="Showroom in Tiel">
+  <!-- Image placeholder (media/showroom-tiel.webp or media/living-room-showcase.webp) -->
+  <div class="showroom-bg" aria-hidden="true">
+    <div class="img-placeholder" style="background: linear-gradient(145deg, #3D2920, #1A100A);">
+      <span class="img-placeholder-label" style="color: rgba(240,232,220,0.12);">[Showroom · media/showroom-tiel.webp]</span>
+    </div>
+  </div>
+  <div class="showroom-overlay" aria-hidden="true"></div>
+
+  <div class="showroom-content">
+    <div class="showroom-text reveal">
+      <p class="overline" style="color: var(--c-text-muted-dark);">Bezoek ons</p>
+      <h3 class="showroom-h3">Ontdek onze collectie in onze showroom.</h3>
+    </div>
+    <address class="showroom-address reveal d1">
+      <strong>Showroom Tiel</strong>
+      Nederland<br>
+      Op afspraak · ma–za 09:00–18:00
+    </address>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 6: CTA
+     Background: #2C1F17 dark espresso
+     Grain texture + topographic gold lines as background decoration
+     Centered — editorial CTA exception
+     Source: layout-direction.md §CTA + archetype conversion requirements
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="cta-section" aria-labelledby="cta-h">
+
+  <!-- Grain texture (unique ID) -->
+  <svg class="grain" aria-hidden="true" style="opacity: 0.25;">
+    <filter id="g-cta">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-cta)"/>
+  </svg>
+
+  <!-- Topographic gold line accent — craft library §1.1
+       3 stroked paths at descending opacity, barely visible at 4% overall.
+       Creates the impression of precision/craft in the background. -->
+  <svg
+    aria-hidden="true"
+    style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.04;"
+    viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none"
+  >
+    <path d="M0,160 C320,220 640,100 960,180 C1120,220 1280,140 1440,200" stroke="#C9A962" stroke-width="1.5" fill="none"/>
+    <path d="M0,200 C360,130 720,270 1080,170 C1260,130 1360,210 1440,180" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M0,240 C280,300 560,180 840,260 C1120,340 1300,220 1440,260" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.35"/>
+  </svg>
+
+  <div class="cta-inner reveal">
+    <!-- Gold rule + overline -->
+    <span class="gold-rule gold-rule--center" aria-hidden="true"></span>
+    <p class="overline" style="color: var(--c-text-muted-dark);">Neem contact op</p>
+
+    <h2 class="cta-h2" id="cta-h">Klaar om te beginnen?</h2>
+
+    <p class="cta-body">
+      Elk project begint met een persoonlijk gesprek. Vertel ons over je ruimte en je wensen — we denken graag met je mee.
+    </p>
+
+    <div class="cta-group">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <!-- Conversion requirement: "Vrijblijvend" + response time near every CTA -->
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FOOTER
+     Background: #1E150D (slightly darker than #2C1F17 — breaks dark adjacency)
+     Gold border-top (1px, rgba(201,169,98,0.18)) as visual divider
+     ══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+
+    <!-- Left: brand, address, legal -->
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">
+        By Shakir<sup>®</sup>
+      </a>
+      <span class="footer-tagline">Luxury Interiors</span>
+
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        © 2025 By Shakir
+      </p>
+    </div>
+
+    <!-- Right: nav + WhatsApp CTA -->
+    <div>
+      <nav aria-label="Sitenavigatie">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <!-- WhatsApp CTA — text only, no icon (anti-pattern: no icons) -->
+      <!-- TODO: Replace 31600000000 with the actual By Shakir WhatsApp number before launch -->
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Inline, minimal (~70 lines)
+     1. Nav scroll → glassmorphism
+     2. Mobile menu toggle
+     3. Scroll reveals via IntersectionObserver
+     4. 3D image tilt (signature interaction — REPO-STACK.md §Layer 2)
+        Confirmed pattern from MasonryGrid (magic MCP inspection)
+     ══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1 — Nav scroll state → glassmorphism ─────────────────────────────── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 55);
+  }, { passive: true });
+
+  /* 2 — Mobile menu ──────────────────────────────────────────────────── */
+  var burger    = document.getElementById('burger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var navClose  = document.getElementById('nav-close');
+
+  function openMenu() {
+    mobileNav.classList.add('is-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', openMenu);
+  navClose.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* 3 — Scroll reveals (IntersectionObserver) ─────────────────────────
+     Slow reveal: scale 0.96→1 + translateY 10→0, 1.4s, dramatic ease
+     Matches interaction vocabulary — "warm breeze" / A6 animation level */
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    /* Skip animation entirely for reduced-motion preference */
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }
+
+  /* 4 — 3D image tilt — signature interaction ─────────────────────────
+     Source: REPO-STACK.md §Layer 2 + MasonryGrid (magic MCP) confirms pattern
+     Perspective: 1000px, max rotation ±6°, scale 1.02 on hover
+     Disabled on: touch devices + prefers-reduced-motion */
+  if (
+    window.matchMedia('(hover: hover)').matches &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  ) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        /* Remove transition on enter so the card snaps to cursor position immediately */
+        card.style.transition = 'none';
+      });
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        /* Normalize mouse position: -0.5 to +0.5 */
+        var x = (e.clientX - r.left)  / r.width  - 0.5;
+        var y = (e.clientY - r.top)   / r.height - 0.5;
+        card.style.transform =
+          'perspective(1000px) rotateX(' + (y * -6) + 'deg) rotateY(' + (x * 6) + 'deg) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', function () {
+        /* Restore transition on leave — smooth return to flat */
+        card.style.transition = 'transform 0.6s cubic-bezier(0.83, 0, 0.17, 1)';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
+  }
+
+}());
+</script>
+
+</body>
+</html>

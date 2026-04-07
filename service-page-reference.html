@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Shakir — Diensten · Service Page Reference</title>
+<meta name="description" content="By Shakir biedt volledige interieurontwerpservices — van renovatie tot 3D visualisatie en meubelmaatwerk.">
+<!-- ── FONTS ─── Cormorant Garamond + DM Sans (variable, with opsz) ──────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — exact match to homepage-reference.html + brand spec
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --c-gold:             #C9A962;
+  --c-gold-light:       #E8C26C;
+  --c-gold-dark:        #745B16;
+  --c-dark:             #2C1F17;
+  --c-dark-alt:         #1E150D;
+  --c-bg:               #F0E8DC;
+  --c-surface:          #E8DDD0;
+  --c-surface-elevated: #FAF7F3;
+  --c-terracotta:       #8B5230;
+  --c-terracotta-warm:  #B87856;
+  --c-text:             #2C1F17;
+  --c-text-muted:       #7A756E;
+  --c-text-on-dark:     #F0E8DC;
+  --c-text-muted-dark:  #CEC4B6;
+  --c-border:           #CEC4B6;
+
+  --f-heading: 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  --t-sm:      0.7502rem;
+  --t-base:    1rem;
+  --t-lg:      1.333rem;
+  --t-xl:      1.7769rem;
+  --t-2xl:     2.3686rem;
+  --t-3xl:     3.1573rem;
+  --t-display: clamp(3rem, 2rem + 5vw, 7rem);
+
+  --ease:        cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-reveal:  1.4s;
+  --dur-hover:   0.7s;
+  --dur-page:    1.0s;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+ul, ol { list-style: none; }
+address { font-style: normal; }
+
+/* ── SCROLL REVEALS ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: scale(1) translateY(0); }
+  .reveal.d1 { transition-delay: 0.10s; }
+  .reveal.d2 { transition-delay: 0.20s; }
+  .reveal.d3 { transition-delay: 0.30s; }
+  .reveal.d4 { transition-delay: 0.40s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ── SHARED COMPONENTS ──────────────────────────────────────────────────── */
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.gold-rule--center { margin-inline: auto; }
+
+.overline {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.gold-dot::after { content: '.'; color: var(--c-gold); }
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px;
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn-gold {
+  background: var(--c-gold);
+  color: var(--c-dark);
+}
+.btn-gold:hover { background: var(--c-gold-light); }
+
+.microcopy {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  color: rgba(206, 196, 182, 0.75);
+  margin-top: 0.875rem;
+}
+
+.link-cta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--c-gold);
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.link-cta:hover { opacity: 0.65; }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
+}
+
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0.22;
+}
+
+/* ── NAV ────────────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vh, 1.75rem) clamp(1.5rem, 5vw, 5rem);
+  transition:
+    background 0.6s var(--ease),
+    backdrop-filter 0.6s;
+}
+.nav.is-scrolled {
+  background: rgba(44, 31, 23, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.nav-logo sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  transition: color 0.3s;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--c-text-on-dark); }
+.nav-links a[aria-current="page"] {
+  border-bottom: 1px solid rgba(201, 169, 98, 0.4);
+  padding-bottom: 2px;
+}
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--c-text-muted-dark);
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--c-dark);
+  z-index: 99;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+}
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2.75rem; }
+.mobile-nav-links a {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.mobile-nav-links a:hover { color: var(--c-gold); }
+
+/* ── PAGE HEADER (dark, ~45vh) ──────────────────────────────────────────── */
+.page-header {
+  position: relative;
+  min-height: 45vh;
+  background: var(--c-dark);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-top: 6rem; /* clear fixed nav */
+}
+.page-header-inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 5vw, 5rem);
+  max-width: 720px;
+}
+.page-header-overline {
+  color: var(--c-terracotta-warm);
+  margin-bottom: 1.25rem;
+}
+.page-header-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.75rem, 2rem + 4vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.5rem;
+}
+.page-header-body {
+  font-family: var(--f-body);
+  font-size: clamp(0.9375rem, 0.875rem + 0.3vw, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  max-width: 480px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  opacity: 0.55;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.breadcrumb a { transition: opacity 0.3s; }
+.breadcrumb a:hover { opacity: 0.8; }
+.breadcrumb-sep {
+  opacity: 0.4;
+  font-size: 0.5rem;
+}
+
+/* ── SHARED SECTION LAYOUT ──────────────────────────────────────────────── */
+.section-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+
+/* Services alternating sections */
+.service-section {
+  padding-block: clamp(5rem, 6vw + 1.5rem, 9rem);
+}
+
+/* Split layout: image 60 / text 40 */
+.service-split {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  gap: clamp(3rem, 5vw, 6rem);
+  align-items: center;
+}
+.service-split--reverse {
+  grid-template-columns: 40fr 60fr;
+}
+/* On reverse, swap order so image stays right */
+.service-split--reverse .service-image { order: 2; }
+.service-split--reverse .service-text  { order: 1; }
+
+/* Image block */
+.service-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* Text block */
+.service-number {
+  font-family: var(--f-heading);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.service-number::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--c-gold);
+  flex-shrink: 0;
+}
+.service-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+  margin-bottom: 1.5rem;
+}
+.service-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted);
+  margin-bottom: 1em;
+  max-width: 48ch;
+}
+.service-body:last-of-type { margin-bottom: 2rem; }
+
+/* Dark variant — service 04 */
+.service-section--dark {
+  background: var(--c-dark);
+  position: relative;
+  overflow: hidden;
+}
+.service-section--dark .service-h2 { color: var(--c-text-on-dark); }
+.service-section--dark .service-body { color: var(--c-text-muted-dark); }
+.service-section--dark .service-number { color: var(--c-gold); }
+.service-section--dark .service-number::before { background: var(--c-gold); }
+
+/* Service 04: large display number left, text right */
+.service-split--display {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(3rem, 5vw, 7rem);
+  align-items: center;
+}
+.service-display-num {
+  font-family: var(--f-heading);
+  font-size: clamp(8rem, 5rem + 12vw, 18rem);
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--c-gold);
+  opacity: 0.22;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ── CTA SECTION ────────────────────────────────────────────────────────── */
+.cta-section {
+  background: var(--c-dark);
+  padding-block: clamp(6rem, 7vw + 2rem, 10rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  max-width: 680px;
+  margin-inline: auto;
+}
+.cta-inner .overline { color: var(--c-text-muted-dark); margin-bottom: 0.875rem; }
+.cta-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.5rem, 2rem + 3vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.cta-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted-dark);
+  margin-bottom: 2.5rem;
+  max-width: 42ch;
+  margin-inline: auto;
+}
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── FOOTER ─────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--c-dark-alt);
+  border-top: 1px solid rgba(201, 169, 98, 0.18);
+  padding-block: clamp(3rem, 3.5vw + 1rem, 5rem);
+}
+.footer-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 5vw, 7rem);
+  align-items: start;
+}
+.footer-brand { font-family: var(--f-heading); font-size: 1rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-gold); display: block; margin-bottom: 0.4rem; }
+.footer-brand sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; }
+.footer-tagline { font-family: var(--f-body); font-size: 0.5625rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-text-muted-dark); opacity: 0.5; display: block; margin-bottom: 1.5rem; }
+.footer-address { font-family: var(--f-body); font-size: 0.75rem; font-weight: 300; line-height: 1.75; color: var(--c-text-muted-dark); }
+.footer-legal { margin-top: 2rem; font-family: var(--f-body); font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(206, 196, 182, 0.35); }
+.footer-legal a { border-bottom: 1px solid rgba(206, 196, 182, 0.15); }
+.footer-nav { display: grid; grid-template-columns: repeat(2, auto); column-gap: 2.25rem; row-gap: 0.625rem; margin-bottom: 2rem; align-items: start; }
+.footer-nav a { font-family: var(--f-body); font-size: 0.6875rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-text-muted-dark); transition: color 0.3s; }
+.footer-nav a:hover { color: var(--c-text-on-dark); }
+.footer-whatsapp { color: var(--c-text-on-dark); }
+
+/* ── 3D PAGE: FULL-WIDTH IMAGE ──────────────────────────────────────────── */
+.showcase-section {
+  background: var(--c-surface);
+  padding-block: clamp(4rem, 4.5vw + 1rem, 7rem);
+}
+.showcase-image-wrap {
+  position: relative;
+  aspect-ratio: 21/9;
+  overflow: hidden;
+  border-radius: 2px;
+  /* Full bleed — extends to edge of page */
+  margin-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.showcase-caption {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  margin-top: 1.25rem;
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted);
+  max-width: 68ch;
+}
+
+/* ── 3D PAGE: WHAT & WHY ────────────────────────────────────────────────── */
+.why-section {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 6vw + 1.5rem, 9rem);
+}
+.why-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(3rem, 5vw, 7rem);
+  align-items: start;
+}
+.why-intro-label {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  margin-bottom: 1.25rem;
+}
+.why-intro-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.8rem, 1.4rem + 2vw, 3rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+  margin-bottom: 1.5rem;
+}
+.why-intro-body {
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted);
+  max-width: 44ch;
+}
+
+/* Benefit blocks — oversized gold numerals, no icons */
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 3.5vw, 4rem);
+}
+.benefit {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.benefit-num {
+  font-family: var(--f-heading);
+  font-size: var(--t-3xl);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--c-gold);
+  /* Optical alignment with text */
+  margin-top: -0.1em;
+  flex-shrink: 0;
+}
+.benefit-title {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  margin-bottom: 0.625rem;
+}
+.benefit-desc {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted);
+  max-width: 42ch;
+}
+
+/* ── 3D PAGE: PROCESS STEPS ──────────────────────────────────────────────── */
+.process-section {
+  background: var(--c-surface);
+  padding-block: clamp(4.5rem, 5vw + 1rem, 7.5rem);
+}
+.process-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.process-header {
+  margin-bottom: clamp(3rem, 4.5vw, 5rem);
+}
+.process-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.process-h2 {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+  max-width: 500px;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.step { position: relative; }
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--t-3xl) * 0.46);
+  right: calc(-1 * clamp(0.75rem, 1.5vw, 1.5rem));
+  width: clamp(0.75rem, 1.5vw, 1.5rem);
+  height: 1px;
+  background: var(--c-border);
+}
+.step-num {
+  display: block;
+  font-family: var(--f-heading);
+  font-size: var(--t-3xl);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+.step-title {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  margin-bottom: 0.625rem;
+}
+.step-desc {
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--c-text-muted);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .service-split { grid-template-columns: 1fr; gap: 2.5rem; }
+  .service-split--reverse { grid-template-columns: 1fr; }
+  .service-split--reverse .service-image { order: 0; }
+  .service-split--reverse .service-text  { order: 0; }
+  .service-image { aspect-ratio: 16/9; }
+  .service-body { max-width: 100%; }
+
+  .service-split--display { grid-template-columns: 1fr; }
+  .service-display-num { font-size: clamp(6rem, 20vw, 12rem); }
+
+  .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .step:not(:last-child)::after { display: none; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  .page-header { min-height: 55vmin; }
+
+  .service-split { grid-template-columns: 1fr; }
+  .showcase-image-wrap { aspect-ratio: 16/9; }
+
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+@media (max-width: 480px) {
+  .process-steps { grid-template-columns: 1fr; }
+  .benefit { grid-template-columns: 1fr; }
+  .benefit-num { font-size: var(--t-2xl); }
+}
+
+/* ── TEMPLATE SEPARATOR ─────────────────────────────────────────────────── */
+.template-separator {
+  background: var(--c-dark-alt);
+  border-top: 3px solid var(--c-gold);
+  border-bottom: 3px solid var(--c-gold);
+  padding: 2.5rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.template-separator-label {
+  font-family: var(--f-heading);
+  font-size: var(--t-xl);
+  font-weight: 300;
+  color: var(--c-gold);
+  letter-spacing: 0.02em;
+}
+.template-separator-url {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--c-text-muted-dark);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+.template-separator-rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(201, 169, 98, 0.2);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 200;
+  background: var(--c-gold);
+  color: var(--c-dark);
+  padding: 8px 16px;
+  font-family: var(--f-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.skip-link:focus { top: 1rem; }
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     TEMPLATE 1 — /services/
+     Diensten overzichtspagina
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<a href="#services-main" class="skip-link">Ga naar inhoud</a>
+
+<!-- ── NAVIGATIE ──────────────────────────────────────────────────────────── -->
+<nav class="nav" id="nav-t1" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — naar startpagina">By Shakir<sup>®</sup></a>
+  <ul class="nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/" aria-current="page">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+  <button class="nav-burger" id="burger-t1" aria-label="Menu openen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav-t1" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button class="mobile-nav-close" id="nav-close-t1" aria-label="Menu sluiten">Sluiten</button>
+  <ul class="mobile-nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+
+<!-- ── PAGE HEADER ──────────────────────────────────────────────────────── -->
+<header class="page-header" id="services-main" aria-labelledby="services-h1">
+
+  <!-- Grain texture — unique ID -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="g-services-hdr">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-services-hdr)"/>
+  </svg>
+
+  <div class="page-header-inner">
+    <span class="gold-rule" aria-hidden="true"></span>
+    <p class="overline page-header-overline">Onze diensten</p>
+    <h1 class="page-header-h1 gold-dot" id="services-h1">Van vloer<br>tot meubel</h1>
+    <p class="page-header-body">
+      By Shakir begeleidt je van het eerste idee tot de sleuteloverdracht. Persoonlijk, precies en zonder compromis op kwaliteit.
+    </p>
+  </div>
+
+</header>
+
+
+<!-- ── SERVICE 01: VOLLEDIG INTERIEUR ─────────────────────────────────────
+     bg: #F0E8DC · layout: image left (60%) / text right (40%)
+     ────────────────────────────────────────────────────────────────────── -->
+<section class="service-section" style="background: var(--c-bg);" aria-labelledby="svc-01-h">
+  <div class="section-inner">
+    <div class="service-split reveal">
+
+      <!-- Image placeholder — left, 60% -->
+      <div class="service-image">
+        <div class="img-placeholder" style="background: linear-gradient(145deg, #3D2B1E 0%, #2C1F17 100%);">
+          <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Volledig interieur<br>woonkamer voorbeeld]</span>
+        </div>
+      </div>
+
+      <!-- Text — right, 40% -->
+      <div class="service-text reveal d1">
+        <p class="service-number">Dienst 01</p>
+        <h2 class="service-h2 gold-dot" id="svc-01-h">Volledig interieur</h2>
+        <p class="service-body">
+          Bij een volledig interieurproject neemt By Shakir de complete regie op zich. Van de eerste schets tot de definitieve oplevering: wij coördineren elke vakman, elk materiaal en elk detail — zodat jij je nergens zorgen over hoeft te maken.
+        </p>
+        <p class="service-body">
+          Elk project begint met een uitgebreid kennismakingsgesprek. We leren je woning kennen, begrijpen hoe je leeft en vertalen dat naar een interieur dat voelt alsof het altijd al van jou is geweest.
+        </p>
+        <a href="/contact/" class="link-cta" style="color: var(--c-text);">Bespreek je project</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SERVICE 02: RENOVATIE & VERBOUWING ─────────────────────────────────
+     bg: #E8DDD0 · layout: text left (40%) / image right (60%) — REVERSED
+     ────────────────────────────────────────────────────────────────────── -->
+<section class="service-section" style="background: var(--c-surface);" aria-labelledby="svc-02-h">
+  <div class="section-inner">
+    <div class="service-split service-split--reverse reveal">
+
+      <!-- Text — left (visually), 40% -->
+      <div class="service-text reveal d1">
+        <p class="service-number">Dienst 02</p>
+        <h2 class="service-h2 gold-dot" id="svc-02-h">Renovatie &amp; verbouwing</h2>
+        <p class="service-body">
+          Vloeren die slijten, wanden die je niet meer inspireert, een indeling die niet langer bij je past. By Shakir begeleidt renovaties van elk formaat — van een volledige badkamer tot de complete herindeling van een verdieping.
+        </p>
+        <p class="service-body">
+          We werken met bewezen materialen en eigen vakmensen. Vloerafwerking, wandbekleding, stukadoors- en tegelwerk: alles onder één regie. Geen losse aannemers, geen miscommunicatie, geen verrassingen.
+        </p>
+        <a href="/contact/" class="link-cta" style="color: var(--c-text);">Bespreek je renovatie</a>
+      </div>
+
+      <!-- Image placeholder — right, 60% -->
+      <div class="service-image">
+        <div class="img-placeholder" style="background: linear-gradient(155deg, #3A2518 0%, #241508 100%);">
+          <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Renovatie voorbeeld<br>vloer &amp; wand]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SERVICE 03: MEUBELS OP MAAT ────────────────────────────────────────
+     bg: #F0E8DC · layout: image left (60%) / text right (40%)
+     ────────────────────────────────────────────────────────────────────── -->
+<section class="service-section" style="background: var(--c-bg);" aria-labelledby="svc-03-h">
+  <div class="section-inner">
+    <div class="service-split reveal">
+
+      <!-- Image placeholder — left, 60% -->
+      <div class="service-image">
+        <div class="img-placeholder" style="background: linear-gradient(150deg, #3C2E1A 0%, #221608 100%);">
+          <span class="img-placeholder-label" style="color: rgba(240,232,220,0.18);">[Meubels op maat<br>detail opname]</span>
+        </div>
+      </div>
+
+      <!-- Text — right, 40% -->
+      <div class="service-text reveal d1">
+        <p class="service-number">Dienst 03</p>
+        <h2 class="service-h2 gold-dot" id="svc-03-h">Meubels op maat</h2>
+        <p class="service-body">
+          Standaard meubels passen zelden perfect — niet in afmeting, niet in kleur, niet in uitstraling. By Shakir ontwerpt en laat maatmeubilair vervaardigen dat exact past bij je ruimte én je leefstijl.
+        </p>
+        <p class="service-body">
+          Van een vrijstaand tv-meubel tot ingebouwde kasten die naadloos opgaan in de architectuur: elk stuk wordt ontworpen in samenhang met het volledige interieur. Materialen en afwerkingen kies je in overleg, met advies van onze ontwerpers.
+        </p>
+        <a href="/contact/" class="link-cta" style="color: var(--c-text);">Vraag een offerte aan</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SERVICE 04: 3D ONTWERP & VISUALISATIE ──────────────────────────────
+     bg: #2C1F17 dark · grain texture · display number left / text right
+     ────────────────────────────────────────────────────────────────────── -->
+<section class="service-section service-section--dark" aria-labelledby="svc-04-h">
+
+  <!-- Grain texture — unique ID -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="g-svc-04">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-svc-04)"/>
+  </svg>
+
+  <div class="section-inner">
+    <div class="service-split--display">
+
+      <!-- Large display number "04" — gold, very large, decorative -->
+      <div class="service-display-num reveal" aria-hidden="true">04</div>
+
+      <!-- Text — right column -->
+      <div class="service-text reveal d1">
+        <p class="service-number">Dienst 04</p>
+        <h2 class="service-h2 gold-dot" id="svc-04-h">3D Ontwerp &amp; Visualisatie</h2>
+        <p class="service-body">
+          Voordat er één spijker in de muur gaat, zie je precies hoe je interieur er uit zal zien. By Shakir maakt fotorealistische 3D-visualisaties van elk project — zodat je met vertrouwen akkoord kunt gaan.
+        </p>
+        <p class="service-body">
+          Aanpassingen doorvoeren in een 3D-model is sneller en goedkoper dan wijzigingen tijdens de uitvoering. Onze visualisaties zijn geen impressies — ze zijn nauwkeurige weergaven van materialen, kleuren, licht en proporties.
+        </p>
+        <a href="/services/3d-design/" class="link-cta" style="color: var(--c-text-on-dark);">Meer over 3D ontwerp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA SECTION ────────────────────────────────────────────────────────── -->
+<section class="cta-section" aria-labelledby="cta-h-t1">
+
+  <!-- Grain texture -->
+  <svg class="grain" aria-hidden="true" style="opacity: 0.25;">
+    <filter id="g-cta-t1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-cta-t1)"/>
+  </svg>
+
+  <!-- Topographic lines -->
+  <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.04;" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none">
+    <path d="M0,160 C320,220 640,100 960,180 C1120,220 1280,140 1440,200" stroke="#C9A962" stroke-width="1.5" fill="none"/>
+    <path d="M0,200 C360,130 720,270 1080,170 C1260,130 1360,210 1440,180" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M0,240 C280,300 560,180 840,260 C1120,340 1300,220 1440,260" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.35"/>
+  </svg>
+
+  <div class="cta-inner reveal">
+    <span class="gold-rule gold-rule--center" aria-hidden="true"></span>
+    <p class="overline">Neem contact op</p>
+    <h2 class="cta-h2 gold-dot" id="cta-h-t1">Klaar om te beginnen?</h2>
+    <p class="cta-body">
+      Elk project begint met een persoonlijk gesprek. Vertel ons over je ruimte en je wensen — we denken graag met je mee.
+    </p>
+    <div class="cta-group">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+      <span class="footer-tagline">Luxury Interiors</span>
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        &copy; 2025 By Shakir
+      </p>
+    </div>
+    <div>
+      <nav aria-label="Sitenavigatie">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     TEMPLATE SEPARATOR — visible in browser for reference use
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="template-separator" role="separator" aria-label="Template scheiding">
+  <div>
+    <p class="template-separator-label">Template 2</p>
+    <p class="template-separator-url">/services/3d-design/</p>
+  </div>
+  <div class="template-separator-rule" aria-hidden="true"></div>
+  <p class="template-separator-url" style="opacity: 0.35; font-size: 0.5625rem;">Scroll verder voor sub-pagina template</p>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     TEMPLATE 2 — /services/3d-design/
+     3D Ontwerp &amp; Visualisatie sub-pagina
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<a href="#3d-main" class="skip-link">Ga naar inhoud</a>
+
+<!-- ── NAVIGATIE ──────────────────────────────────────────────────────────── -->
+<nav class="nav" id="nav-t2" aria-label="Hoofdnavigatie" style="position: relative; top: auto; background: rgba(44, 31, 23, 0.72); backdrop-filter: blur(12px);">
+  <a href="/" class="nav-logo" aria-label="By Shakir — naar startpagina">By Shakir<sup>®</sup></a>
+  <ul class="nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/" aria-current="true">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+  <button class="nav-burger" id="burger-t2" aria-label="Menu openen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav-t2" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button class="mobile-nav-close" id="nav-close-t2" aria-label="Menu sluiten">Sluiten</button>
+  <ul class="mobile-nav-links" role="list">
+    <li><a href="/projects/">Projecten</a></li>
+    <li><a href="/services/">Diensten</a></li>
+    <li><a href="/about/">Over ons</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+
+<!-- ── PAGE HEADER ──────────────────────────────────────────────────────── -->
+<header class="page-header" id="3d-main" aria-labelledby="3d-h1">
+
+  <!-- Grain texture — unique ID -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="g-3d-hdr">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-3d-hdr)"/>
+  </svg>
+
+  <div class="page-header-inner">
+    <!-- Breadcrumb: Diensten / 3D Ontwerp -->
+    <nav class="breadcrumb" aria-label="Kruimelpad">
+      <a href="/services/">Diensten</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span>3D Ontwerp</span>
+    </nav>
+    <span class="gold-rule" aria-hidden="true"></span>
+    <h1 class="page-header-h1 gold-dot" id="3d-h1">3D Ontwerp &amp;<br>Visualisatie</h1>
+    <p class="page-header-body">
+      Je ziet je interieur volledig uitgewerkt — vóór de eerste werkzaamheden beginnen. Fotorealistisch, precies en aanpasbaar tot in detail.
+    </p>
+  </div>
+
+</header>
+
+
+<!-- ── FULL-WIDTH SHOWCASE IMAGE ────────────────────────────────────────── -->
+<section class="showcase-section" aria-label="3D visualisatie voorbeeld">
+  <div class="showcase-image-wrap reveal">
+    <div class="img-placeholder" style="background: linear-gradient(160deg, #C9B898 0%, #AE9A72 40%, #8B7248 100%);">
+      <span class="img-placeholder-label" style="color: rgba(44,31,23,0.3);">[Fotorealistisch 3D-ontwerp voorbeeld<br>media/3d-design-process.webp · aspect 21:9]</span>
+    </div>
+  </div>
+  <p class="showcase-caption reveal">
+    Een fotorealistisch 3D-ontwerp van een woonkamer — vóór de eerste werkzaamheden beginnen.
+  </p>
+</section>
+
+
+<!-- ── WAT & WAAROM ──────────────────────────────────────────────────────── -->
+<section class="why-section" aria-labelledby="why-h">
+  <div class="why-inner">
+
+    <!-- Left: intro text -->
+    <div class="reveal">
+      <p class="why-intro-label">Wat &amp; waarom</p>
+      <h2 class="why-intro-h2 gold-dot" id="why-h">Zie het resultaat vóór de uitvoering</h2>
+      <p class="why-intro-body">
+        Met een fotorealistisch 3D-ontwerp elimineer je onzekerheid. Je beslist met vertrouwen — over kleuren, materialen, verhoudingen en lichtinval — nog voordat er iets wordt gebouwd of gesloopt.
+      </p>
+    </div>
+
+    <!-- Right: 3 benefit blocks — oversized gold numerals, no icons -->
+    <div class="benefit-list">
+
+      <div class="benefit reveal d1">
+        <span class="benefit-num" aria-hidden="true">01</span>
+        <div>
+          <p class="benefit-title">Je ziet het eindresultaat vóór de uitvoering begint</p>
+          <p class="benefit-desc">
+            Geen bouwtekeningen die je moet interpreteren — je ziet je toekomstige interieur precies zoals het er uit zal zien. Van de materialen tot de lichtinval op een doordeweekse ochtend.
+          </p>
+        </div>
+      </div>
+
+      <div class="benefit reveal d2">
+        <span class="benefit-num" aria-hidden="true">02</span>
+        <div>
+          <p class="benefit-title">Eenvoudig aanpassingen doorvoeren in het ontwerp</p>
+          <p class="benefit-desc">
+            Wil je toch de andere vloer? Of de wand een tint warmer? In een 3D-model kost een aanpassing minuten in plaats van weken. En de prijs van aanpassen is nul — in tegenstelling tot na de uitvoering.
+          </p>
+        </div>
+      </div>
+
+      <div class="benefit reveal d3">
+        <span class="benefit-num" aria-hidden="true">03</span>
+        <div>
+          <p class="benefit-title">Geen verrassingen tijdens de uitvoering</p>
+          <p class="benefit-desc">
+            Wanneer de uitvoering begint, is alles al besloten en goedgekeurd. Onze vakmensen werken naar een exact goedgekeurd ontwerp — wat ingebouwd is in ons proces en de bouwtijd significant verkort.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── PROCESS STEPS — 3D design focused ────────────────────────────────── -->
+<section class="process-section" aria-labelledby="process-3d-h">
+  <div class="process-inner">
+
+    <header class="process-header reveal">
+      <p class="overline">Werkwijze</p>
+      <h2 class="process-h2 gold-dot" id="process-3d-h">Van gesprek tot goedgekeurd ontwerp</h2>
+    </header>
+
+    <div class="process-steps" role="list">
+
+      <div class="step reveal" role="listitem">
+        <span class="step-num" aria-hidden="true">01</span>
+        <p class="step-title">Gesprek</p>
+        <p class="step-desc">We bespreken je wensen, leefstijl en de ruimte. We meten op, bekijken de lichtinval en stellen de juiste vragen om een accuraat startpunt te hebben.</p>
+      </div>
+
+      <div class="step reveal d1" role="listitem">
+        <span class="step-num" aria-hidden="true">02</span>
+        <p class="step-title">Moodboard</p>
+        <p class="step-desc">We stellen een moodboard samen op basis van jouw voorkeuren — materialen, kleuren en sfeer. Zo stemmen we onze designrichting af voor de eerste 3D-schets begint.</p>
+      </div>
+
+      <div class="step reveal d2" role="listitem">
+        <span class="step-num" aria-hidden="true">03</span>
+        <p class="step-title">3D Ontwerp</p>
+        <p class="step-desc">We modelleren je ruimte volledig in 3D en renderen fotorealistische beelden. Je ontvangt meerdere perspectieven — woonkamer, keuken, slaapkamer — alles wat bij het project hoort.</p>
+      </div>
+
+      <div class="step reveal d3" role="listitem">
+        <span class="step-num" aria-hidden="true">04</span>
+        <p class="step-title">Goedkeuring</p>
+        <p class="step-desc">Na revisies gaan we samen akkoord. Pas als jij volledig tevreden bent met het ontwerp, starten de werkzaamheden. Geen verassingen, geen discussies achteraf.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── CTA SECTION ────────────────────────────────────────────────────────── -->
+<section class="cta-section" aria-labelledby="cta-h-t2">
+
+  <!-- Grain texture -->
+  <svg class="grain" aria-hidden="true" style="opacity: 0.25;">
+    <filter id="g-cta-t2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g-cta-t2)"/>
+  </svg>
+
+  <!-- Topographic lines -->
+  <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.04;" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none">
+    <path d="M0,160 C320,220 640,100 960,180 C1120,220 1280,140 1440,200" stroke="#C9A962" stroke-width="1.5" fill="none"/>
+    <path d="M0,200 C360,130 720,270 1080,170 C1260,130 1360,210 1440,180" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M0,240 C280,300 560,180 840,260 C1120,340 1300,220 1440,260" stroke="#C9A962" stroke-width="1.5" fill="none" opacity="0.35"/>
+  </svg>
+
+  <div class="cta-inner reveal">
+    <span class="gold-rule gold-rule--center" aria-hidden="true"></span>
+    <p class="overline">Vrijblijvend kennismaken</p>
+    <h2 class="cta-h2 gold-dot" id="cta-h-t2">Klaar om te beginnen?</h2>
+    <p class="cta-body">
+      Plan een vrijblijvende kennismaking en ontdek wat een 3D-ontwerp voor jouw project kan betekenen. We nemen binnen 24 uur persoonlijk contact op.
+    </p>
+    <div class="cta-group">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+      <span class="footer-tagline">Luxury Interiors</span>
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        &copy; 2025 By Shakir
+      </p>
+    </div>
+    <div>
+      <nav aria-label="Sitenavigatie">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Minimal, shared across both templates
+     1. Nav scroll → glassmorphism (template 1 nav only — template 2 nav
+        is static/pre-scrolled in this reference file)
+     2. Mobile menu toggles (both templates)
+     3. Scroll reveals via IntersectionObserver
+     ══════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1 — Nav scroll state (Template 1) ─────────────────────────────────── */
+  var navT1 = document.getElementById('nav-t1');
+  if (navT1) {
+    window.addEventListener('scroll', function () {
+      navT1.classList.toggle('is-scrolled', window.scrollY > 55);
+    }, { passive: true });
+  }
+
+  /* 2 — Mobile menu toggles ───────────────────────────────────────────── */
+  function setupMenu(burgerId, mobileNavId, closeId) {
+    var burger    = document.getElementById(burgerId);
+    var mobileNav = document.getElementById(mobileNavId);
+    var navClose  = document.getElementById(closeId);
+    if (!burger || !mobileNav || !navClose) return;
+
+    function openMenu() {
+      mobileNav.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileNav.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', openMenu);
+    navClose.addEventListener('click', closeMenu);
+    mobileNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+
+  setupMenu('burger-t1', 'mobile-nav-t1', 'nav-close-t1');
+  setupMenu('burger-t2', 'mobile-nav-t2', 'nav-close-t2');
+
+  /* 3 — Scroll reveals (IntersectionObserver) ─────────────────────────
+     Scale 0.96→1 + translateY 10→0 · 1.4s · dramatic ease
+     Matches homepage-reference.html reveal pattern exactly. */
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>

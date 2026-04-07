@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Shakir — Over ons &amp; Contact · Reference</title>
+<meta name="description" content="By Shakir ontwerpt en realiseert exclusieve interieurs — van vloer tot meubel, internationaal. Over Shakir + Contact.">
+<!-- ── FONTS ── Cormorant Garamond + DM Sans (variable, with opsz) ─────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — By Shakir · Shaded Terracotta direction
+   Exact values per CREATIVE-DIRECTION.md + homepage-reference.html
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --c-gold:             #C9A962;
+  --c-gold-light:       #E8C26C;
+  --c-gold-dark:        #745B16;
+  --c-dark:             #2C1F17;
+  --c-dark-alt:         #1E150D;
+  --c-bg:               #F0E8DC;
+  --c-surface:          #E8DDD0;
+  --c-surface-elevated: #FAF7F3;
+  --c-terracotta:       #8B5230;
+  --c-text:             #2C1F17;
+  --c-text-muted:       #7A756E;
+  --c-text-on-dark:     #F0E8DC;
+  --c-text-muted-dark:  #CEC4B6;
+  --c-border:           #CEC4B6;
+
+  --f-heading: 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  --t-sm:      0.7502rem;
+  --t-base:    1rem;
+  --t-lg:      1.333rem;
+  --t-xl:      1.7769rem;
+  --t-2xl:     2.3686rem;
+  --t-3xl:     3.1573rem;
+  --t-display: clamp(3rem, 2rem + 5vw, 7rem);
+
+  --ease:        cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-reveal:  1.4s;
+  --dur-hover:   0.7s;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--f-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+ul, ol { list-style: none; }
+address { font-style: normal; }
+
+/* ── SCROLL REVEALS ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity var(--dur-reveal) var(--ease),
+      transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: scale(1) translateY(0); }
+  .reveal.d1 { transition-delay: 0.12s; }
+  .reveal.d2 { transition-delay: 0.22s; }
+  .reveal.d3 { transition-delay: 0.34s; }
+  .reveal.d4 { transition-delay: 0.46s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ── SHARED COMPONENTS ──────────────────────────────────────────────────── */
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.25rem;
+}
+
+.overline {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Gold period after headings */
+.gold-dot::after { content: '.'; color: var(--c-gold); }
+
+/* Primary CTA */
+.btn {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px;
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn-gold {
+  background: var(--c-gold);
+  color: var(--c-dark);
+}
+.btn-gold:hover { background: var(--c-gold-light); }
+
+.microcopy {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  color: rgba(206, 196, 182, 0.75);
+  margin-top: 0.875rem;
+}
+.microcopy--light { color: var(--c-text-muted); }
+
+.link-cta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--c-gold);
+  display: inline-block;
+  transition: opacity 0.35s;
+}
+.link-cta:hover { opacity: 0.65; }
+
+/* Grain overlay — SVG feTurbulence analog warmth */
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
+}
+
+/* Image placeholder */
+.img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0.22;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NAV — Fixed, transparent → glass on scroll
+   Shared across both page templates
+   ══════════════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vh, 1.75rem) clamp(1.5rem, 5vw, 5rem);
+  transition:
+    background 0.6s var(--ease),
+    backdrop-filter 0.6s;
+}
+.nav.is-scrolled {
+  background: rgba(44, 31, 23, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.nav-logo sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  transition: color 0.3s;
+}
+.nav-links a.active { color: var(--c-gold); }
+.nav-links a:hover { color: var(--c-text-on-dark); }
+/* Hamburger — CSS only, no icons */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--c-text-muted-dark);
+  transition: background 0.3s;
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--c-dark);
+  z-index: 99;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem clamp(1.5rem, 5vw, 5rem);
+}
+.mobile-nav.is-open { display: flex; }
+.mobile-nav-close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 5rem);
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  cursor: pointer;
+}
+.mobile-nav-links { display: flex; flex-direction: column; gap: 2.75rem; }
+.mobile-nav-links a {
+  font-family: var(--f-heading);
+  font-size: var(--t-2xl);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.mobile-nav-links a:hover { color: var(--c-gold); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOOTER — #1E150D slightly darker than dark sections
+   Max 2 columns per anti-pattern rules
+   ══════════════════════════════════════════════════════════════════════════ */
+.footer {
+  background: var(--c-dark-alt);
+  border-top: 1px solid rgba(201, 169, 98, 0.18);
+  padding-block: clamp(3.5rem, 5vw, 6rem);
+}
+.footer-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+.footer-brand {
+  font-family: var(--f-heading);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.footer-brand sup { font-size: 0.45em; opacity: 0.45; letter-spacing: 0; vertical-align: super; }
+.footer-tagline {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  opacity: 0.55;
+  margin-bottom: 1.75rem;
+}
+.footer-address {
+  font-family: var(--f-body);
+  font-size: 0.8125rem;
+  line-height: 1.9;
+  color: var(--c-text-muted-dark);
+  opacity: 0.65;
+  margin-bottom: 1.5rem;
+}
+.footer-legal {
+  font-family: var(--f-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--c-text-muted-dark);
+  opacity: 0.4;
+}
+.footer-legal a { text-decoration: underline; text-underline-offset: 3px; }
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.footer-nav a {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-muted-dark);
+  opacity: 0.65;
+  transition: opacity 0.3s;
+}
+.footer-nav a:hover { opacity: 1; }
+.footer-whatsapp { color: var(--c-text-on-dark); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ████  PAGE 1: /about/
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── ABOUT HERO — Large portrait, ~70vh, bg: #2C1F17 ──────────────────── */
+.about-hero {
+  position: relative;
+  min-height: 70vh;
+  background: var(--c-dark);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Portrait placeholder layer */
+.about-hero-portrait {
+  position: absolute;
+  inset: 0;
+  /* Right-side portrait composition — text anchors bottom-left */
+  background: linear-gradient(
+    135deg,
+    #1A100A 0%,
+    #2C1F17 35%,
+    #3D2820 60%,
+    #2A1C13 100%
+  );
+}
+.about-hero-portrait .img-placeholder {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+.about-hero-portrait .img-placeholder-label {
+  color: rgba(240,232,220,0.12);
+  text-align: right;
+}
+
+/* Gradient overlay bottom-to-top for text legibility */
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 31, 23, 0.96) 0%,
+    rgba(44, 31, 23, 0.72) 28%,
+    rgba(44, 31, 23, 0.35) 55%,
+    rgba(44, 31, 23, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+/* Grain texture */
+.about-hero-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+/* Bottom-left content anchor */
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 5vw, 6rem) clamp(3.5rem, 7vh, 5.5rem);
+  max-width: 680px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about-hero-content {
+    animation: hero-enter 1.6s cubic-bezier(0.83, 0, 0.17, 1) 0.35s both;
+  }
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+.about-hero-overline { color: var(--c-text-muted-dark); opacity: 0.8; margin-bottom: 1.5rem; }
+.about-hero-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.25rem, 1.5rem + 3.5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+}
+
+/* ── BIO SECTION — bg: #F0E8DC, 40/60 asymmetric split ────────────────── */
+.about-bio {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 6vw + 2rem, 11rem);
+}
+.about-bio-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+.about-bio-intro-quote {
+  font-family: var(--f-heading);
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.38;
+  color: var(--c-text);
+  letter-spacing: 0.01em;
+}
+.about-bio-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.625rem;
+}
+.about-bio-paragraphs p {
+  font-family: var(--f-body);
+  font-size: clamp(0.9375rem, 0.875rem + 0.25vw, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.78;
+  color: var(--c-text);
+}
+@media (max-width: 820px) {
+  .about-bio-inner { grid-template-columns: 1fr; gap: clamp(2.5rem, 4vw, 4rem); }
+}
+
+/* ── VALUES — bg: #2C1F17 dark, 3-column text blocks ──────────────────── */
+.about-values {
+  background: var(--c-dark);
+  padding-block: clamp(6rem, 7vw + 2rem, 12rem);
+  position: relative;
+  overflow: hidden;
+}
+.about-values-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.about-values-header {
+  margin-bottom: clamp(3rem, 5vw, 5.5rem);
+}
+.about-values-header .overline { color: var(--c-text-muted-dark); margin-bottom: 1rem; }
+.about-values-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2.5rem, 4vw, 5rem);
+}
+.value-block { }
+.value-num {
+  font-family: var(--f-heading);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--c-gold);
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 1.25rem;
+  opacity: 0.7;
+}
+.value-title {
+  font-family: var(--f-heading);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 400;
+  color: var(--c-text-on-dark);
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.value-desc {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--c-text-muted-dark);
+}
+/* Hairline divider above each value block */
+.value-block::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(201, 169, 98, 0.18);
+  margin-bottom: 1.75rem;
+}
+@media (max-width: 820px) {
+  .about-values-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ── SHOWROOM — bg: #E8DDD0, 2-col: image left · text right ────────────── */
+.about-showroom {
+  background: var(--c-surface);
+  padding-block: clamp(5rem, 6vw + 2rem, 10rem);
+}
+.about-showroom-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: clamp(3rem, 5vw, 6.5rem);
+  align-items: start;
+}
+.about-showroom-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #C9B898 0%, #A8927A 50%, #8A6E56 100%);
+}
+.about-showroom-text { padding-top: 0.5rem; }
+.about-showroom-text .overline { color: var(--c-terracotta); margin-bottom: 0.9rem; }
+.about-showroom-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--c-text);
+  margin-bottom: 2rem;
+}
+.about-showroom-address {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 2;
+  color: var(--c-text);
+  margin-bottom: 0.5rem;
+}
+.about-showroom-address strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+.showroom-hours {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--c-border);
+}
+.showroom-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 0.875rem;
+  border-bottom: 1px solid var(--c-border);
+  font-family: var(--f-body);
+  font-size: 0.875rem;
+  color: var(--c-text);
+}
+.showroom-hours-row .day { font-weight: 300; }
+.showroom-hours-row .time { color: var(--c-text-muted); font-size: 0.8125rem; }
+.showroom-badge {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  border: 1px solid rgba(139, 82, 48, 0.3);
+  padding: 5px 10px;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+@media (max-width: 820px) {
+  .about-showroom-inner { grid-template-columns: 1fr; }
+}
+
+/* ── TESTIMONIALS STRIP — bg: #F0E8DC, 3 across ────────────────────────── */
+.about-testimonials {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 6vw, 9rem);
+  border-top: 1px solid var(--c-border);
+}
+.about-testimonials-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+}
+.about-testimonials-header {
+  margin-bottom: clamp(2.5rem, 4vw, 4.5rem);
+}
+.about-testimonials-header .overline { color: var(--c-terracotta); margin-bottom: 0.875rem; }
+.about-testimonials-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  font-weight: 400;
+  color: var(--c-text);
+  line-height: 1.2;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2vw, 2rem);
+}
+.testimonial-card {
+  background: var(--c-surface);
+  border-radius: 2px;
+  padding: clamp(1.75rem, 2.5vw, 2.5rem);
+  position: relative;
+}
+/* Hairline gold top accent */
+.testimonial-card::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--c-gold);
+  margin-bottom: 1.5rem;
+}
+.testimonial-stars {
+  font-size: 0.75rem;
+  color: var(--c-gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.testimonial-quote {
+  font-family: var(--f-heading);
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--c-text);
+  margin-bottom: 1.5rem;
+}
+/* TODO: Replace with verified client quote text */
+.testimonial-meta {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.testimonial-meta span {
+  display: block;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+}
+@media (max-width: 820px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 481px) and (max-width: 820px) {
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── ABOUT CTA — bg: #2C1F17 dark, centered editorial exception ─────────── */
+.about-cta {
+  background: var(--c-dark);
+  padding-block: clamp(6rem, 8vw, 12rem);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.about-cta-inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  max-width: 640px;
+  margin-inline: auto;
+}
+.about-cta .gold-rule { margin-inline: auto; }
+.about-cta .overline { color: var(--c-text-muted-dark); opacity: 0.75; margin-bottom: 1.5rem; }
+.about-cta-h2 {
+  font-family: var(--f-heading);
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  font-weight: 300;
+  color: var(--c-text-on-dark);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.about-cta-h2 em { font-style: italic; color: var(--c-gold); }
+.about-cta-sub {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--c-text-muted-dark);
+  margin-bottom: 2.75rem;
+}
+.about-cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ████  PAGE 2: /contact/
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── CONTACT HEADER — dark compact ~40vh ──────────────────────────────── */
+.contact-header {
+  background: var(--c-dark);
+  padding-top: clamp(7rem, 10vh, 9rem);
+  padding-bottom: clamp(4rem, 6vh, 6rem);
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  position: relative;
+  overflow: hidden;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.contact-header-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.25;
+}
+.contact-header-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .contact-header-content {
+    animation: hero-enter 1.6s cubic-bezier(0.83, 0, 0.17, 1) 0.3s both;
+  }
+}
+.contact-header .overline { color: var(--c-text-muted-dark); opacity: 0.75; margin-bottom: 1.5rem; }
+.contact-header-h1 {
+  font-family: var(--f-heading);
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--c-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+.contact-header-sub {
+  font-family: var(--f-body);
+  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  font-weight: 300;
+  color: var(--c-text-muted-dark);
+  line-height: 1.65;
+  max-width: 420px;
+}
+
+/* ── CONTACT MAIN — bg: #F0E8DC, 60/40 asymmetric split ─────────────── */
+.contact-main {
+  background: var(--c-bg);
+  padding-block: clamp(5rem, 7vw + 2rem, 11rem);
+}
+.contact-main-inner {
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: clamp(3.5rem, 6vw, 9rem);
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .contact-main-inner { grid-template-columns: 1fr; }
+}
+
+/* Form column */
+.contact-form-col { }
+.contact-form-label-heading {
+  font-family: var(--f-heading);
+  font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  font-weight: 400;
+  color: var(--c-text);
+  letter-spacing: 0.01em;
+  margin-bottom: 2.25rem;
+  line-height: 1.2;
+}
+
+/* Form styles */
+.contact-form { display: flex; flex-direction: column; gap: 1.375rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.form-label-note {
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-size: 0.625rem;
+  color: var(--c-text-muted);
+  opacity: 0.75;
+  margin-left: 0.35rem;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--c-text);
+  background: var(--c-surface-elevated);
+  border: 1px solid var(--c-border);
+  border-radius: 2px;
+  padding: 0.875rem 1rem;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  outline: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--c-text-muted);
+  opacity: 0.5;
+}
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 0;
+  border-color: var(--c-gold);
+}
+/* Error state after submit attempt */
+.form-was-submitted .form-input:invalid,
+.form-was-submitted .form-select:invalid,
+.form-was-submitted .form-textarea:invalid {
+  border-color: #B85240;
+  background: #FAF3F1;
+}
+.form-select {
+  /* CSS chevron — no icon library */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A756E' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+/* Two-column row for name + email on wider screens */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 520px) {
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+
+/* Turnstile placeholder */
+.turnstile-placeholder {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 2px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+.turnstile-placeholder span {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  opacity: 0.4;
+}
+
+/* Form footer: submit + privacy */
+.form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+.form-privacy {
+  font-family: var(--f-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--c-text-muted);
+}
+.form-privacy a {
+  border-bottom: 1px solid rgba(122,117,110, 0.4);
+  transition: border-color 0.2s;
+}
+.form-privacy a:hover { border-color: var(--c-text-muted); }
+
+/* Details column (right) */
+.contact-details-col {
+  padding-top: 0.5rem;
+}
+.contact-details-col .gold-rule { }
+.contact-details-col .overline { color: var(--c-terracotta); margin-bottom: 1.5rem; }
+.contact-details-h3 {
+  font-family: var(--f-heading);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 400;
+  color: var(--c-text);
+  margin-bottom: 1.75rem;
+  line-height: 1.2;
+}
+/* Address block */
+.contact-address {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--c-text);
+  margin-bottom: 2rem;
+}
+.contact-address strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--c-text-muted);
+  margin-bottom: 0.35rem;
+}
+/* Hours */
+.contact-hours { margin-bottom: 2.25rem; }
+.contact-hours-title {
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-bottom: 0.875rem;
+  display: block;
+}
+.contact-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 0.625rem;
+  border-bottom: 1px solid var(--c-border);
+  font-family: var(--f-body);
+  font-size: 0.875rem;
+  color: var(--c-text);
+}
+.contact-hours-row:first-of-type { border-top: 1px solid var(--c-border); }
+.contact-hours-row .day { font-weight: 300; }
+.contact-hours-row .time { color: var(--c-text-muted); font-size: 0.8125rem; }
+
+/* Contact links */
+.contact-links { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+.contact-link-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.contact-link-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  opacity: 0.75;
+}
+.contact-link-value {
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: var(--c-text);
+}
+.contact-link-value a { transition: opacity 0.25s; }
+.contact-link-value a:hover { opacity: 0.6; }
+
+/* Map placeholder */
+.contact-map-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--c-surface);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+}
+.contact-map-placeholder .img-placeholder { }
+.contact-map-placeholder .img-placeholder-label { color: rgba(44,31,23,0.3); }
+
+/* ── TEMPLATE SEPARATOR ─────────────────────────────────────────────────── */
+.template-separator {
+  background: #0a0603;
+  padding: 2.5rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.template-separator-label {
+  font-family: var(--f-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240,232,220,0.25);
+  white-space: nowrap;
+}
+.template-separator-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(201,169,98,0.15);
+}
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     PAGE TEMPLATE 1: /about/
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<!-- NAV — id="nav-about" so each template gets its own scroll listener instance -->
+<nav class="nav" id="nav-about" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — startpagina">
+    By Shakir<sup>®</sup>
+  </a>
+  <div class="nav-links" aria-label="Paginalinks">
+    <a href="/projects/">Projecten</a>
+    <a href="/services/">Diensten</a>
+    <a href="/about/" class="active" aria-current="page">Over ons</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <button class="nav-burger" id="burger-about" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-nav-about">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-nav" id="mobile-nav-about" role="dialog" aria-label="Mobiel menu" aria-modal="true">
+  <button class="mobile-nav-close" id="nav-close-about" aria-label="Menu sluiten">Sluiten</button>
+  <nav class="mobile-nav-links" aria-label="Mobiele paginalinks">
+    <a href="/projects/">Projecten</a>
+    <a href="/services/">Diensten</a>
+    <a href="/about/">Over ons</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</div>
+
+
+<!-- ── HERO — Large portrait, ~70vh ──────────────────────────────────────── -->
+<section class="about-hero" aria-labelledby="about-h1">
+
+  <!-- Portrait placeholder — warm dark gradient simulating photography -->
+  <div class="about-hero-portrait" aria-hidden="true">
+    <div class="img-placeholder">
+      <span class="img-placeholder-label">[Portrait Shakir · media/shakir-portrait.webp]</span>
+    </div>
+  </div>
+
+  <!-- Gradient overlay -->
+  <div class="about-hero-overlay" aria-hidden="true"></div>
+
+  <!-- Grain texture -->
+  <svg class="about-hero-grain" aria-hidden="true">
+    <filter id="grain-about-hero">
+      <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-about-hero)" opacity="1"/>
+  </svg>
+
+  <!-- Bottom-left anchored content -->
+  <div class="about-hero-content">
+    <span class="gold-rule"></span>
+    <p class="overline about-hero-overline">Over Shakir</p>
+    <h1 class="about-hero-h1" id="about-h1">Warmte, vakmanschap<br>en oog voor detail</h1>
+  </div>
+
+</section>
+
+
+<!-- ── BIO — 40/60 asymmetric split ──────────────────────────────────────── -->
+<section class="about-bio" aria-labelledby="bio-heading">
+
+  <div class="about-bio-inner">
+
+    <!-- Intro column (40%) — large italic quote -->
+    <div class="reveal">
+      <span class="gold-rule"></span>
+      <p class="overline" style="color: var(--c-terracotta); margin-bottom: 1.875rem;">Filosofie</p>
+      <blockquote class="about-bio-intro-quote">
+        "Elk project begint met een gesprek. Niet over budgetten of plannen — maar over hoe je je wilt voelen in je eigen huis."
+      </blockquote>
+    </div>
+
+    <!-- Extended bio (60%) — 4 paragraphs -->
+    <div class="about-bio-paragraphs reveal d1">
+
+      <p>
+        Shakir begon zijn carrière ruim vijftien jaar geleden in zijn geboortstad Tiel, waar hij al op jonge leeftijd gefascineerd was door de manier waarop ruimte het gevoel van mensen beïnvloedt. Na een opleiding aan de Academie voor Bouwkunst en Interieur honing hij zijn vakmanschap bij gerenommeerde bureaus in Amsterdam en Antwerpen, voordat hij de stap zette om zijn eigen studio op te richten.
+      </p>
+
+      <p>
+        Wat begon als een boutique interieurstudio in het centrum van Tiel, groeide in de afgelopen jaren uit tot een internationale praktijk met projecten in Dubai, Barcelona, Málaga en Marrakech. Toch is de aanpak onveranderd gebleven: persoonlijk, grondig en altijd gericht op de specifieke leefwereld van de opdrachtgever. Elk interieur begint met luisteren.
+      </p>
+
+      <p>
+        Shakir werkt uitsluitend aan projecten waarbij hij van begin tot eind betrokken is — van het eerste schetsontwerp en de fotorealistische 3D-visualisatie tot de uiteindelijke oplevering. Zijn eigen vakmensen realiseren het werk, wat niet alleen kwaliteitszekerheid biedt maar ook zorgt voor een ononderbroken creatieve lijn van ontwerp naar uitvoering.
+      </p>
+
+      <p>
+        De stijl van By Shakir is niet in één woord te vangen — maar in drie woorden misschien wel: warm, tijdloos en doordacht. Materiaalgebruik staat centraal: travertijn, linnen, leer, hout met karakter. Kleuren zijn altijd geworteld in de omgeving. En de details, van de manier waarop het licht op een kast valt tot de exacte textuur van een vloertegel, worden nooit aan het toeval overgelaten.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ── VALUES — dark, 3 text blocks ──────────────────────────────────────── -->
+<section class="about-values" aria-labelledby="values-heading">
+
+  <!-- Grain texture -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="grain-values">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-values)" opacity="1"/>
+  </svg>
+
+  <div class="about-values-inner">
+
+    <header class="about-values-header reveal">
+      <p class="overline" style="color: var(--c-text-muted-dark);">Waar wij voor staan</p>
+      <h2 class="about-values-h2" id="values-heading">Drie principes die<br>elk project sturen</h2>
+    </header>
+
+    <div class="about-values-grid">
+
+      <div class="value-block reveal">
+        <span class="value-num" aria-hidden="true">01</span>
+        <h3 class="value-title">Persoonlijk</h3>
+        <p class="value-desc">By Shakir werkt niet met standaardoplossingen of catalogusinterieurs. Elk project begint bij de mensen die er gaan wonen — hun gewoonten, hun smaak, hun leven. Die persoonlijke benadering is niet een werkwijze, het is een overtuiging.</p>
+      </div>
+
+      <div class="value-block reveal d1">
+        <span class="value-num" aria-hidden="true">02</span>
+        <h3 class="value-title">Vakmanschap</h3>
+        <p class="value-desc">Van ontwerp tot oplevering werken we met eigen vakmensen die het vak verstaan. Geen gehaaste uitvoering, geen compromissen op materiaal of afwerking. De kwaliteit van het eindresultaat is altijd leidend — niet de planning of het budget van de aannemer.</p>
+      </div>
+
+      <div class="value-block reveal d2">
+        <span class="value-num" aria-hidden="true">03</span>
+        <h3 class="value-title">Internationaal</h3>
+        <p class="value-desc">Met projecten in Dubai, Barcelona, Málaga en Antwerpen brengen we internationale ervaring mee naar elk project. Die breedte van referentie — van mediterrane terracottavloeren tot Arabisch geïnspireerde materiaalpaletten — maakt onze ontwerpen rijker en bewuster.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ── SHOWROOM — #E8DDD0, image left · text right ──────────────────────── -->
+<section class="about-showroom" aria-labelledby="showroom-heading">
+
+  <div class="about-showroom-inner">
+
+    <!-- Showroom image placeholder (left) -->
+    <div class="about-showroom-image reveal" aria-hidden="true">
+      <div class="img-placeholder">
+        <span class="img-placeholder-label" style="color: rgba(44,31,23,0.25);">[Showroom interieur · media/showroom-tiel.webp]</span>
+      </div>
+    </div>
+
+    <!-- Showroom details (right) -->
+    <div class="about-showroom-text reveal d1">
+
+      <p class="overline">Kom kennismaken</p>
+      <h2 class="about-showroom-h2 gold-dot" id="showroom-heading">Onze showroom in Tiel</h2>
+
+      <span class="showroom-badge">Op afspraak</span>
+
+      <address class="about-showroom-address">
+        <strong>By Shakir Studio</strong>
+        Waalstraat 12<br>
+        4001 AK Tiel<br>
+        Nederland
+      </address>
+
+      <div class="showroom-hours" role="table" aria-label="Openingstijden showroom">
+        <div class="showroom-hours-row" role="row">
+          <span class="day" role="cell">Maandag</span>
+          <span class="time" role="cell">Op afspraak</span>
+        </div>
+        <div class="showroom-hours-row" role="row">
+          <span class="day" role="cell">Dinsdag – Vrijdag</span>
+          <span class="time" role="cell">09:00 – 18:00</span>
+        </div>
+        <div class="showroom-hours-row" role="row">
+          <span class="day" role="cell">Zaterdag</span>
+          <span class="time" role="cell">09:00 – 17:00</span>
+        </div>
+        <div class="showroom-hours-row" role="row">
+          <span class="day" role="cell">Zondag</span>
+          <span class="time" role="cell">Gesloten</span>
+        </div>
+      </div>
+
+      <a href="/contact/" class="link-cta" style="color: var(--c-text);">Maak een afspraak</a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ── TESTIMONIALS STRIP — 3 across ─────────────────────────────────────── -->
+<section class="about-testimonials" aria-labelledby="testimonials-heading">
+
+  <div class="about-testimonials-inner">
+
+    <header class="about-testimonials-header reveal">
+      <span class="gold-rule"></span>
+      <p class="overline">Wat opdrachtgevers zeggen</p>
+      <h2 class="about-testimonials-h2" id="testimonials-heading">Ervaringen van<br>onze opdrachtgevers</h2>
+    </header>
+
+    <div class="testimonials-grid">
+
+      <!-- Testimonial 1 — Alex Kelderman -->
+      <article class="testimonial-card reveal">
+        <span class="testimonial-stars" aria-label="Vijf sterren">★★★★★</span>
+        <blockquote class="testimonial-quote">
+          <!-- TODO: Replace with verified quote from Alex Kelderman (Google review) -->
+          "Wij hadden een vrij specifiek beeld van wat wij wilden, maar Shakir wist dat om te zetten in iets dat ons echt verraste. Het resultaat voelt als ons thuis, maar dan de beste versie ervan."
+        </blockquote>
+        <footer class="testimonial-meta">
+          Alex Kelderman
+          <span>Volledig interieur · Tiel</span>
+        </footer>
+      </article>
+
+      <!-- Testimonial 2 — Ben van der Tang -->
+      <article class="testimonial-card reveal d1">
+        <span class="testimonial-stars" aria-label="Vijf sterren">★★★★★</span>
+        <blockquote class="testimonial-quote">
+          <!-- TODO: Replace with verified quote from Ben van der Tang (Google review) -->
+          "De samenwerking was van begin tot eind prettig. Je wordt écht gehoord. Het 3D-ontwerp gaf ons al vroeg vertrouwen, en de oplevering was precies zoals beloofd."
+        </blockquote>
+        <footer class="testimonial-meta">
+          Ben van der Tang
+          <span>Renovatie &amp; maatwerk · Nijmegen</span>
+        </footer>
+      </article>
+
+      <!-- Testimonial 3 — Stijny Van Der Linden -->
+      <article class="testimonial-card reveal d2">
+        <span class="testimonial-stars" aria-label="Vijf sterren">★★★★★</span>
+        <blockquote class="testimonial-quote">
+          <!-- TODO: Replace with verified quote from Stijny Van Der Linden (Google review) -->
+          "Shakir heeft een talent om te begrijpen wat je eigenlijk bedoelt — ook als je het zelf niet helemaal kunt omschrijven. Onze woonkamer is nu precies het gevoel dat wij bedoelden maar niet in woorden hadden."
+        </blockquote>
+        <footer class="testimonial-meta">
+          Stijny Van Der Linden
+          <span>Interieuradvies &amp; styling · Den Bosch</span>
+        </footer>
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ── ABOUT CTA — dark, centered ────────────────────────────────────────── -->
+<section class="about-cta" aria-labelledby="about-cta-h">
+
+  <!-- Grain texture -->
+  <svg class="grain" aria-hidden="true" style="opacity: 0.23;">
+    <filter id="grain-about-cta">
+      <feTurbulence type="fractalNoise" baseFrequency="0.69" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-about-cta)" opacity="1"/>
+  </svg>
+
+  <div class="about-cta-inner">
+    <span class="gold-rule reveal"></span>
+    <p class="overline reveal d1">Eerste stap</p>
+    <h2 class="about-cta-h2 reveal d2" id="about-cta-h">Plan een <em>kennismaking</em></h2>
+    <p class="about-cta-sub reveal d2">
+      Een vrijblijvend gesprek over uw woning, wensen en leefstijl. Wij luisteren, stellen de juiste vragen en vertellen u eerlijk wat wij voor u kunnen betekenen.
+    </p>
+    <div class="about-cta-actions reveal d3">
+      <a href="/contact/" class="btn btn-gold">Plan een kennismaking</a>
+      <p class="microcopy">Vrijblijvend &nbsp;·&nbsp; Persoonlijk contact binnen 24 uur</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ── FOOTER (About page) ────────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+      <span class="footer-tagline">Luxury Interiors</span>
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        © 2026 By Shakir
+      </p>
+    </div>
+    <div>
+      <nav aria-label="Sitenavigatie footer">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <!-- WhatsApp CTA — text only, no icon library (anti-pattern: no icons) -->
+      <!-- TODO: Replace 31XXXXXXXXXX with the actual By Shakir WhatsApp number before launch -->
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     TEMPLATE SEPARATOR — visual marker between the two templates
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="template-separator" aria-hidden="true">
+  <span class="template-separator-label">Template 1 — /about/ — einde</span>
+  <span class="template-separator-line"></span>
+  <span class="template-separator-label">Template 2 — /contact/ — begin</span>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     PAGE TEMPLATE 2: /contact/
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<!-- NAV — contact page instance -->
+<nav class="nav" id="nav-contact" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="/" class="nav-logo" aria-label="By Shakir — startpagina">
+    By Shakir<sup>®</sup>
+  </a>
+  <div class="nav-links" aria-label="Paginalinks">
+    <a href="/projects/">Projecten</a>
+    <a href="/services/">Diensten</a>
+    <a href="/about/">Over ons</a>
+    <a href="/contact/" class="active" aria-current="page">Contact</a>
+  </div>
+  <button class="nav-burger" id="burger-contact" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-nav-contact">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu — contact page -->
+<div class="mobile-nav" id="mobile-nav-contact" role="dialog" aria-label="Mobiel menu" aria-modal="true">
+  <button class="mobile-nav-close" id="nav-close-contact" aria-label="Menu sluiten">Sluiten</button>
+  <nav class="mobile-nav-links" aria-label="Mobiele paginalinks">
+    <a href="/projects/">Projecten</a>
+    <a href="/services/">Diensten</a>
+    <a href="/about/">Over ons</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</div>
+
+
+<!-- ── CONTACT HEADER — dark compact ─────────────────────────────────────── -->
+<header class="contact-header" aria-labelledby="contact-h1">
+
+  <!-- Grain -->
+  <svg class="contact-header-grain" aria-hidden="true">
+    <filter id="grain-contact-header">
+      <feTurbulence type="fractalNoise" baseFrequency="0.71" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-contact-header)" opacity="1"/>
+  </svg>
+
+  <div class="contact-header-content">
+    <span class="gold-rule"></span>
+    <p class="overline">Neem contact op</p>
+    <h1 class="contact-header-h1 gold-dot" id="contact-h1">Vertel ons over je project</h1>
+    <p class="contact-header-sub">
+      We nemen binnen 24 uur persoonlijk contact met je op.
+    </p>
+  </div>
+
+</header>
+
+
+<!-- ── CONTACT MAIN — 60/40 split ─────────────────────────────────────────── -->
+<main class="contact-main" id="main-content">
+
+  <div class="contact-main-inner">
+
+    <!-- Form column (left, ~60%) -->
+    <div class="contact-form-col">
+
+      <h2 class="contact-form-label-heading reveal">Uw bericht</h2>
+
+      <!--
+        Native HTML5 form — no JS framework.
+        Error states: .form-was-submitted class added by JS on submit attempt.
+        Cloudflare Turnstile: placeholder div included below.
+        Honeypot field: aria-hidden, visually hidden.
+      -->
+      <form
+        class="contact-form reveal d1"
+        id="contact-form"
+        method="POST"
+        action="/contact/bedankt/"
+        novalidate
+        aria-label="Contactformulier"
+      >
+
+        <!-- Honeypot — hidden from users, visible to bots -->
+        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+          <label for="website">Laat dit veld leeg</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- Naam + E-mailadres — 2-col on wider screens -->
+        <div class="form-row-2">
+
+          <div class="form-field">
+            <label class="form-label" for="naam">Naam <abbr title="verplicht" aria-hidden="true">*</abbr></label>
+            <input
+              class="form-input"
+              type="text"
+              id="naam"
+              name="naam"
+              autocomplete="name"
+              placeholder="Uw volledige naam"
+              required
+              aria-required="true"
+            >
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="email">E-mailadres <abbr title="verplicht" aria-hidden="true">*</abbr></label>
+            <input
+              class="form-input"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              placeholder="naam@voorbeeld.nl"
+              required
+              aria-required="true"
+            >
+          </div>
+
+        </div><!-- /form-row-2 -->
+
+        <!-- Telefoonnummer — optional -->
+        <div class="form-field">
+          <label class="form-label" for="telefoon">
+            Telefoonnummer
+            <span class="form-label-note">(Optioneel)</span>
+          </label>
+          <input
+            class="form-input"
+            type="tel"
+            id="telefoon"
+            name="telefoon"
+            autocomplete="tel"
+            placeholder="06-12345678"
+          >
+        </div>
+
+        <!-- Type project — select -->
+        <div class="form-field">
+          <label class="form-label" for="project-type">Type project <abbr title="verplicht" aria-hidden="true">*</abbr></label>
+          <select
+            class="form-select"
+            id="project-type"
+            name="project_type"
+            required
+            aria-required="true"
+          >
+            <option value="" disabled selected>Selecteer een type</option>
+            <option value="volledig-interieur">Volledig interieur</option>
+            <option value="renovatie">Renovatie</option>
+            <option value="meubels-op-maat">Meubels op maat</option>
+            <option value="3d-ontwerp">3D Ontwerp</option>
+            <option value="anders">Anders</option>
+          </select>
+        </div>
+
+        <!-- Project description — textarea -->
+        <div class="form-field">
+          <label class="form-label" for="omschrijving">Omschrijf je project <abbr title="verplicht" aria-hidden="true">*</abbr></label>
+          <textarea
+            class="form-textarea"
+            id="omschrijving"
+            name="omschrijving"
+            rows="5"
+            placeholder="Vertel ons over uw ruimte, wensen en het gewenste gevoel. Hoe meer context, hoe beter wij ons kunnen voorbereiden."
+            required
+            aria-required="true"
+          ></textarea>
+        </div>
+
+        <!-- Cloudflare Turnstile placeholder -->
+        <!-- Turnstile widget -->
+        <div class="turnstile-placeholder" aria-hidden="true">
+          <span>[Cloudflare Turnstile verificatie]</span>
+        </div>
+        <!-- In production: <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY" data-theme="light"></div> -->
+
+        <!-- Submit + privacy -->
+        <div class="form-footer">
+          <button type="submit" class="btn btn-gold" style="align-self: flex-start;">
+            Stuur uw bericht
+          </button>
+          <p class="form-privacy">
+            Uw gegevens worden niet gedeeld met derden.
+            Lees onze <a href="/privacy/">privacyverklaring</a>.
+          </p>
+        </div>
+
+      </form>
+
+    </div><!-- /contact-form-col -->
+
+
+    <!-- Details column (right, ~40%) -->
+    <div class="contact-details-col reveal d2">
+
+      <span class="gold-rule"></span>
+      <p class="overline">Contactgegevens</p>
+
+      <!-- Address -->
+      <address class="contact-address">
+        <strong>Showroom Tiel</strong>
+        Waalstraat 12<br>
+        4001 AK Tiel<br>
+        Nederland
+      </address>
+
+      <!-- Opening hours -->
+      <div class="contact-hours" aria-label="Openingstijden">
+        <span class="contact-hours-title">Openingstijden</span>
+        <div class="contact-hours-row">
+          <span class="day">Maandag</span>
+          <span class="time">Op afspraak</span>
+        </div>
+        <div class="contact-hours-row">
+          <span class="day">Dinsdag – Zaterdag</span>
+          <span class="time">09:00 – 18:00</span>
+        </div>
+        <div class="contact-hours-row">
+          <span class="day">Zondag</span>
+          <span class="time">Gesloten</span>
+        </div>
+      </div>
+
+      <!-- Contact links -->
+      <div class="contact-links">
+
+        <div class="contact-link-item">
+          <span class="contact-link-label">WhatsApp</span>
+          <span class="contact-link-value">
+            <!-- TODO: Replace with actual WhatsApp number before launch -->
+            <a href="https://wa.me/31XXXXXXXXXX" class="link-cta" style="color: var(--c-text);" aria-label="App ons direct via WhatsApp">App ons direct</a>
+          </span>
+        </div>
+
+        <div class="contact-link-item">
+          <span class="contact-link-label">E-mail</span>
+          <span class="contact-link-value">
+            <a href="mailto:info@byshakir.nl">info@byshakir.nl</a>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="contact-map-placeholder" aria-label="Locatie op kaart — Tiel, Nederland">
+        <div class="img-placeholder">
+          <span class="img-placeholder-label" style="color: rgba(44,31,23,0.3);">[Google Maps embed · Waalstraat 12, Tiel]</span>
+        </div>
+      </div>
+
+    </div><!-- /contact-details-col -->
+
+  </div>
+
+</main>
+
+
+<!-- ── FOOTER (Contact page) ──────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-brand" aria-label="By Shakir — startpagina">By Shakir<sup>®</sup></a>
+      <span class="footer-tagline">Luxury Interiors</span>
+      <address class="footer-address">
+        Showroom &nbsp;·&nbsp; Tiel, Nederland<br>
+        Dubai &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Marrakech
+      </address>
+      <p class="footer-legal">
+        KvK: ______
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacyverklaring</a>
+        &nbsp;·&nbsp;
+        © 2026 By Shakir
+      </p>
+    </div>
+    <div>
+      <nav aria-label="Sitenavigatie footer">
+        <ul class="footer-nav" role="list">
+          <li><a href="/projects/">Projecten</a></li>
+          <li><a href="/services/">Diensten</a></li>
+          <li><a href="/about/">Over ons</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/services/3d-design/">3D Ontwerp</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <a href="https://wa.me/31XXXXXXXXXX" class="link-cta footer-whatsapp" aria-label="Neem contact op via WhatsApp">
+        App ons direct
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Minimal inline (~90 lines)
+     1. Nav scroll → glassmorphism (both nav instances)
+     2. Mobile menu toggle (both instances)
+     3. Scroll reveals via IntersectionObserver
+     4. Form submit attempt → error state class
+     ════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1 — Nav scroll state (both instances) ─────────────────────────────── */
+  ['nav-about', 'nav-contact'].forEach(function (id) {
+    var nav = document.getElementById(id);
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('is-scrolled', window.scrollY > 55);
+    }, { passive: true });
+  });
+
+  /* 2 — Mobile menu toggle ───────────────────────────────────────────── */
+  function initMenu(burgerId, navId, closeId) {
+    var burger    = document.getElementById(burgerId);
+    var mobileNav = document.getElementById(navId);
+    var closeBtn  = document.getElementById(closeId);
+    if (!burger || !mobileNav || !closeBtn) return;
+
+    function openMenu() {
+      mobileNav.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileNav.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    mobileNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+  initMenu('burger-about',   'mobile-nav-about',   'nav-close-about');
+  initMenu('burger-contact', 'mobile-nav-contact', 'nav-close-contact');
+
+  /* 3 — Scroll reveals (IntersectionObserver) ──────────────────────────
+     Scale 0.96→1 + translateY 10→0, 1.4s, --ease.
+     Threshold 12% with -40px bottom margin. */
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    /* Reduced motion: show all immediately */
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }
+
+  /* 4 — Form submit → error states ────────────────────────────────────
+     Adds .form-was-submitted class to enable :invalid CSS selectors.
+     Per conversion patterns SOP: validate on submit, not on blur. */
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      form.classList.add('form-was-submitted');
+      /* Native HTML5 validation — browser handles the rest.
+         Remove this block if using server-side validation only. */
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        var firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) {
+          firstInvalid.focus();
+        }
+      }
+    });
+  }
+
+}());
+</script>
+
+</body>
+</html>
