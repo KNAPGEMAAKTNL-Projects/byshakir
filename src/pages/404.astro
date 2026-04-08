@@ -1,0 +1,88 @@
+---
+// 404 — Not Found
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page Not Found | By Shakir"
+  description="The page you are looking for does not exist. Return to the By Shakir homepage or browse our projects and services."
+  noindex={true}
+>
+  <Header />
+
+  <main>
+    <section class="not-found-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-404"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-404)"/>
+      </svg>
+      <div class="not-found-content">
+        <span class="overline overline-gold">404</span>
+        <h1 class="not-found-h1">Page Not Found</h1>
+        <p class="not-found-body">The page you are looking for does not exist or has been moved. You can return to the homepage or browse our work below.</p>
+        <div class="not-found-links">
+          <a href="/" class="btn btn-gold">Return Home</a>
+          <a href="/projects/" class="link-cta link-cta-light">
+            View Projects
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/contact/" class="link-cta link-cta-light">
+            Contact
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .not-found-hero {
+    background: var(--color-dark);
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .not-found-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 600px;
+  }
+  .not-found-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1.5rem;
+  }
+  .not-found-body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.68;
+    color: var(--color-text-muted-dark);
+    max-width: 42ch;
+    margin-bottom: 2.5rem;
+  }
+  .not-found-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .btn { display: inline-block; text-decoration: none; }
+</style>

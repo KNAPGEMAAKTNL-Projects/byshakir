@@ -1,2 +1,4 @@
+# DEMO SITE — block all crawlers until launch
+# Production robots.txt: CONTENT/robots-production.txt
 User-agent: *
 Disallow: /

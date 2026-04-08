@@ -1,18 +1,20 @@
 ---
 // Breadcrumb — Home > [Section] > [Page]
-// Rendered on all subpages (not homepage)
+// variant="dark"  → light text, for use inside dark hero sections (default)
+// variant="light" → dark text, for use on light surface backgrounds
 interface BreadcrumbItem {
   label: string;
   href?: string;
 }
 interface Props {
   items: BreadcrumbItem[];
+  variant?: 'dark' | 'light';
 }
-const { items } = Astro.props;
+const { items, variant = 'dark' } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <nav class="breadcrumb" aria-label="Breadcrumb">
+  <nav class={`breadcrumb breadcrumb--${variant}`} aria-label="Breadcrumb">
     <ol>
       <li><a href="/">Home</a></li>
       {items.map((item, i) => (
@@ -33,7 +35,6 @@ const { items } = Astro.props;
     font-family: var(--font-body);
     font-size: var(--text-sm);
     font-weight: 300;
-    color: var(--color-text-muted-dark);
     margin-top: 0.75rem;
   }
   .breadcrumb ol {
@@ -47,7 +48,6 @@ const { items } = Astro.props;
   }
   .breadcrumb li { display: flex; align-items: center; }
   .breadcrumb a {
-    color: var(--color-text-muted-dark);
     text-decoration: none;
     transition: color 0.3s;
   }
@@ -56,8 +56,20 @@ const { items } = Astro.props;
     margin-inline: 0.5rem;
     opacity: 0.4;
   }
-  .breadcrumb [aria-current="page"] {
+
+  /* Dark variant — breadcrumb inside dark hero */
+  .breadcrumb--dark { color: var(--color-text-muted-dark); }
+  .breadcrumb--dark a { color: var(--color-text-muted-dark); }
+  .breadcrumb--dark [aria-current="page"] {
     color: var(--color-text-on-dark);
+    opacity: 0.8;
+  }
+
+  /* Light variant — breadcrumb on light surface (e.g. breadcrumb-bar) */
+  .breadcrumb--light { color: var(--color-text-muted); }
+  .breadcrumb--light a { color: var(--color-text-muted); }
+  .breadcrumb--light [aria-current="page"] {
+    color: var(--color-text);
     opacity: 0.8;
   }
 </style>

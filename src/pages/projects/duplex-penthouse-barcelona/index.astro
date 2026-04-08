@@ -7,8 +7,9 @@ import Header from '../../../components/Header.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 
-const seoTitle = 'Duplex Penthouse, Barcelona \u2014 Interior Design | By Shakir';
-const seoDescription = 'Duplex penthouse interior in Barcelona by By Shakir. Mediterranean luxury across two floors. View the project.';
+const seoTitle = 'Penthouse Interior Design Barcelona, Spain | By Shakir';
+const seoDescription = 'Duplex penthouse interior in Barcelona by By Shakir. Mediterranean luxury across two levels, bespoke furniture and spatial planning. View the project.';
+const seoOgImage = '/media/projects/duplex-penthouse-barcelona/cover.webp';
 
 const project = {
   title: 'Duplex Penthouse',
@@ -32,7 +33,7 @@ const relatedProjects = [
 ];
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} ogImage={seoOgImage}>
   <Header currentPage="/projects/" />
 
   <main>

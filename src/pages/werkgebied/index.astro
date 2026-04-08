@@ -1,0 +1,349 @@
+---
+// src/pages/werkgebied/index.astro
+// Service area hub — /werkgebied/
+// Lists all city pages with clean editorial grid
+// Not linked from nav — SEO-only entry point (per DESIGN.md §9 / sitemap.md)
+
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+import { locations } from '../../data/locations';
+
+const SITE = 'https://www.byshakir.com';
+
+// Split into Dutch and international cities
+const dutchCities = locations.filter(
+  (loc) => !['dubai', 'barcelona', 'malaga', 'antwerp'].includes(loc.slug)
+);
+const internationalCities = locations.filter((loc) =>
+  ['dubai', 'barcelona', 'malaga', 'antwerp'].includes(loc.slug)
+);
+---
+
+<Layout
+  title="Interior Design Service Areas | By Shakir, Netherlands"
+  description="Luxury interior design across the Netherlands, Dubai, Barcelona, Malaga and Antwerp. By Shakir serves Amsterdam, Rotterdam, Den Haag, Utrecht and beyond."
+  canonical={`${SITE}/werkgebied/`}
+>
+  <Header currentPage="/projects/" />
+
+  <main>
+
+    <!-- Page hero — compact dark header, consistent with inner page convention -->
+    <section class="page-hero">
+      <!-- Grain -->
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-werkgebied-hero">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#g-werkgebied-hero)"/>
+      </svg>
+
+      <div class="page-hero-content reveal">
+        <Breadcrumb items={[{ label: 'Werkgebied' }]} />
+        <h1 class="page-hero-h1 gold-dot">Service Areas</h1>
+        <p class="page-hero-body">
+          By Shakir designs complete luxury interiors across the Netherlands and internationally.
+          The studio is based in Tiel, Gelderland — within reach of every major Dutch city,
+          and comfortable with projects in Dubai, Barcelona, Malaga and Antwerp.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         NETHERLANDS CITIES
+         Warm bg · 3-col grid of city cards
+         ════════════════════════════════════════════════════════ -->
+    <section class="cities-section" aria-labelledby="nl-h">
+      <div class="cities-inner">
+
+        <header class="cities-header reveal">
+          <p class="overline overline-terracotta">Netherlands</p>
+          <h2 class="cities-h2 gold-dot" id="nl-h">Interior design across the Netherlands</h2>
+          <p class="cities-intro">
+            The studio is based in Tiel, Gelderland — approximately 50–120 km from every major Dutch
+            city. Projects here are personal, direct, and delivered by the same principal who took
+            the first call.
+          </p>
+        </header>
+
+        <ul class="cities-grid" role="list">
+          {dutchCities.map((loc) => (
+            <li>
+              <a href={`/werkgebied/${loc.slug}/`} class="city-card">
+                <div class="city-card-content">
+                  <span class="city-card-province">{loc.province}</span>
+                  <h3 class="city-card-name">{loc.city}</h3>
+                  {loc.distanceFromBase && loc.slug !== 'tiel' && (
+                    <span class="city-card-distance">{loc.distanceFromBase}</span>
+                  )}
+                  {loc.slug === 'tiel' && (
+                    <span class="city-card-distance city-card-home">Studio base · Showroom</span>
+                  )}
+                </div>
+                <span class="city-card-arrow" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         INTERNATIONAL CITIES
+         Surface bg · 2-col grid — fewer cities, richer cards
+         ════════════════════════════════════════════════════════ -->
+    <section class="cities-section cities-section--international" aria-labelledby="intl-h">
+      <div class="cities-inner">
+
+        <header class="cities-header reveal">
+          <p class="overline overline-terracotta">International</p>
+          <h2 class="cities-h2 gold-dot" id="intl-h">Completed projects abroad</h2>
+          <p class="cities-intro">
+            By Shakir has completed commissions in Dubai, Barcelona, Malaga and Antwerp.
+            International projects are managed from Tiel with site visits at key milestones.
+            The 3D visualisation stage is specifically designed for clients who cannot be on-site regularly.
+          </p>
+        </header>
+
+        <ul class="cities-grid cities-grid--international" role="list">
+          {internationalCities.map((loc) => (
+            <li>
+              <a href={`/werkgebied/${loc.slug}/`} class="city-card city-card--international">
+                <div class="city-card-content">
+                  <span class="city-card-province">{loc.province}</span>
+                  <h3 class="city-card-name">{loc.city}</h3>
+                  {loc.relatedProject && (
+                    <span class="city-card-distance">Completed: {loc.relatedProject.title}</span>
+                  )}
+                </div>
+                <span class="city-card-arrow" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         CTA
+         ════════════════════════════════════════════════════════ -->
+    <CtaSection
+      overline="Get in touch"
+      heading="Ready to begin your interior project?"
+      body="Tell us where your property is and what you are thinking. We will tell you quickly whether it is a project we can take on — and what the right first step looks like."
+      buttonText="Begin a Conversation"
+      buttonHref="/contact/"
+      microcopy="No obligation · Personal response within 24 hours"
+    />
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+
+<style>
+/* Page hero — compact dark header */
+.page-hero {
+  background: var(--color-dark);
+  padding-block: clamp(7rem, 12vw, 12rem) clamp(4rem, 6vw, 7rem);
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  position: relative;
+  overflow: hidden;
+  min-height: 40vh;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.page-hero-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 2rem + 4vw, 6rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--color-text-on-dark);
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-hero-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--color-text-muted-dark);
+  max-width: 55ch;
+}
+
+/* Cities sections */
+.cities-section {
+  background: var(--color-bg);
+  padding-block: clamp(5rem, 5vw + 2.5rem, 9rem);
+}
+
+.cities-section--international {
+  background: var(--color-surface);
+}
+
+.cities-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+.cities-header {
+  margin-bottom: clamp(3rem, 4vw, 5rem);
+  max-width: 640px;
+}
+
+.cities-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.cities-intro {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+/* City grid */
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cities-grid--international {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 720px;
+}
+
+/* City card */
+.city-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: var(--color-bg);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.25rem, 2vw, 2rem);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.4s var(--ease);
+  position: relative;
+  min-height: 90px;
+}
+
+.city-card:hover { background: var(--color-surface-elevated); }
+
+.cities-section--international .city-card {
+  background: var(--color-surface);
+}
+.cities-section--international .city-card:hover { background: var(--color-bg); }
+
+.city-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: clamp(1.25rem, 2vw, 2rem);
+  right: clamp(1.25rem, 2vw, 2rem);
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.city-card:hover::after { transform: scaleX(1); }
+
+.city-card-content { flex: 1; }
+
+.city-card-province {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.city-card-name {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: 0.375rem;
+}
+
+.city-card-distance {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6125rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.city-card-home {
+  color: var(--color-terracotta);
+  font-weight: 500;
+}
+
+.city-card-arrow {
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+  transition: color 0.3s, transform 0.3s var(--ease);
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+.city-card:hover .city-card-arrow {
+  color: var(--color-gold);
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cities-grid { grid-template-columns: repeat(2, 1fr); }
+  .cities-grid--international { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .cities-grid { grid-template-columns: 1fr; }
+}
+</style>

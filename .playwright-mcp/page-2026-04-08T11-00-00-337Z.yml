@@ -1,0 +1,215 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - navigation [ref=e2]:
+      - link "By Shakir — Home" [ref=e3] [cursor=pointer]:
+        - /url: /
+        - text: By Shakir
+      - generic [ref=e4]:
+        - link "Projects" [ref=e5] [cursor=pointer]:
+          - /url: /projects/
+        - link "Services" [ref=e6] [cursor=pointer]:
+          - /url: /services/
+        - link "About" [ref=e7] [cursor=pointer]:
+          - /url: /about/
+        - link "Contact" [ref=e8] [cursor=pointer]:
+          - /url: /contact/
+  - main [ref=e9]:
+    - generic [ref=e10]:
+      - img
+      - generic [ref=e13]:
+        - generic [ref=e14]: Netherlands · Dubai · Barcelona · Malaga
+        - heading "Luxury Interiors. Made to Be Lived In." [level=1] [ref=e15]:
+          - generic [ref=e17]: Luxury
+          - generic [ref=e19]: Interiors.
+          - generic [ref=e21]: Made
+          - generic [ref=e23]: to
+          - generic [ref=e25]: Be
+          - generic [ref=e27]: Lived
+          - generic [ref=e29]: In.
+        - paragraph [ref=e30]: Complete residential interiors, from first conversation to final detail. The Netherlands, Dubai, Barcelona and Malaga.
+        - generic [ref=e31]:
+          - link "Begin a Conversation" [ref=e32] [cursor=pointer]:
+            - /url: /contact/
+          - paragraph [ref=e33]: No obligation · Personal response within 24 hours
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: Selected Projects
+          - heading "Recent Commissions." [level=2] [ref=e39]
+        - generic [ref=e40]: 5 projects
+      - paragraph [ref=e41]: "By Shakir is a luxury interior design studio based in Tiel, the Netherlands. Led by principal designer Shakir, the studio creates bespoke residential interiors for private clients in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Each commission covers the full scope: concept development, 3D visualisation, procurement, joinery and final dressing."
+      - generic [ref=e42]:
+        - link "Villa Mansion, Netherlands — interior design by By Shakir Netherlands Villa Mansion" [ref=e43] [cursor=pointer]:
+          - /url: /projects/villa-mansion-netherlands/
+          - img "Villa Mansion, Netherlands — interior design by By Shakir" [ref=e45]
+          - generic [ref=e47]:
+            - generic [ref=e48]: Netherlands
+            - text: Villa Mansion
+        - link "Duplex Penthouse, Barcelona — interior design by By Shakir Barcelona Duplex Penthouse" [ref=e49] [cursor=pointer]:
+          - /url: /projects/duplex-penthouse-barcelona/
+          - img "Duplex Penthouse, Barcelona — interior design by By Shakir" [ref=e51]
+          - generic [ref=e53]:
+            - generic [ref=e54]: Barcelona
+            - text: Duplex Penthouse
+        - link "Penthouse, Dubai Marina — interior design by By Shakir Dubai Marina Penthouse" [ref=e55] [cursor=pointer]:
+          - /url: /projects/penthouse-dubai-marina/
+          - img "Penthouse, Dubai Marina — interior design by By Shakir" [ref=e57]
+          - generic [ref=e59]:
+            - generic [ref=e60]: Dubai Marina
+            - text: Penthouse
+        - link "Country Estate, Antwerpen — interior design by By Shakir Antwerpen Country Estate" [ref=e61] [cursor=pointer]:
+          - /url: /projects/country-estate-antwerpen/
+          - img "Country Estate, Antwerpen — interior design by By Shakir" [ref=e63]
+          - generic [ref=e65]:
+            - generic [ref=e66]: Antwerpen
+            - text: Country Estate
+        - link "Beach House, Malaga — interior design by By Shakir Malaga Beach House" [ref=e67] [cursor=pointer]:
+          - /url: /projects/beach-house-malaga/
+          - img "Beach House, Malaga — interior design by By Shakir" [ref=e69]
+          - generic [ref=e71]:
+            - generic [ref=e72]: Malaga
+            - text: Beach House
+      - link "View All Projects" [ref=e74] [cursor=pointer]:
+        - /url: /projects/
+        - text: View All Projects
+        - img [ref=e75]
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]: Client Words
+        - heading "What Our Clients Say." [level=2] [ref=e81]
+      - generic [ref=e82]:
+        - generic [ref=e83]:
+          - generic "5 out of 5 stars" [ref=e84]: ★★★★★
+          - blockquote [ref=e85]: Luxury, high-quality interior; many furniture makers could learn from this. He also takes the time to discuss everything with you. I definitely recommend everyone to have their home furnished by Shakir.
+          - generic [ref=e86]:
+            - generic [ref=e87]: Mohamed Abdelatty
+            - generic [ref=e88]: Google Review · 5 stars
+        - generic [ref=e89]:
+          - generic "5 out of 5 stars" [ref=e90]: ★★★★★
+          - blockquote [ref=e91]: They work in a very professional manner and provide appropriate advice, which is very helpful when you are lacking inspiration yourself. Everything was custom-made and delivered as agreed.
+          - generic [ref=e92]:
+            - generic [ref=e93]: Em M
+            - generic [ref=e94]: Google Review · 5 stars
+        - generic [ref=e95]:
+          - generic "5 out of 5 stars" [ref=e96]: ★★★★★
+          - blockquote [ref=e97]: By Shakir did the entire house renovation. He was very helpful and listened carefully to what we wanted. Shakir worked expertly and professionally, and we are thrilled with the result.
+          - generic [ref=e98]:
+            - generic [ref=e99]: Yasmin
+            - generic [ref=e100]: Google Review · 5 stars
+      - generic [ref=e102]: Verified Google Reviews
+    - generic [ref=e103]:
+      - img
+      - generic [ref=e104]:
+        - img "Shakir, principal designer at By Shakir, in the studio" [ref=e106]
+        - generic [ref=e107]:
+          - generic [ref=e109]: The Studio
+          - heading "Who Is Behind By Shakir?" [level=2] [ref=e110]
+          - paragraph [ref=e111]:
+            - text: "Shakir's design philosophy begins with a question most studios skip: how do you want to"
+            - emphasis [ref=e112]: feel
+            - text: when you walk through your front door?
+          - paragraph [ref=e113]: Based in Tiel, the Netherlands, with commissions spanning Dubai, Barcelona, Malaga and Antwerpen, the studio approaches every project as a conversation between architecture, material and the life lived within it.
+          - paragraph [ref=e114]: "The aesthetic is rooted in Mediterranean warmth. Travertine, linen, late-afternoon light, all shaped by the precision of Dutch contemporary design. No templates. No trend-chasing. No imposed aesthetic. A considered response to one brief: yours."
+          - link "More About Shakir" [ref=e115] [cursor=pointer]:
+            - /url: /about/
+            - text: More About Shakir
+            - img [ref=e116]
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - generic [ref=e121]: Our Approach
+        - heading "How Does a Project Unfold?" [level=2] [ref=e122]
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e125]: "01"
+          - heading "Concept Development" [level=3] [ref=e126]
+          - paragraph [ref=e127]: Your routines, your preferences, the feeling you want your home to hold. These shape every decision from the first conversation and the first sketch.
+        - generic [ref=e128]:
+          - generic [ref=e129]: "02"
+          - heading "3D Visualisation" [level=3] [ref=e130]
+          - paragraph [ref=e131]: Photorealistic renders of every room before construction begins. Walk through your home, test every detail, refine the design while decisions are still effortless.
+        - generic [ref=e132]:
+          - generic [ref=e133]: "03"
+          - heading "Procurement and Joinery" [level=3] [ref=e134]
+          - paragraph [ref=e135]: Materials, furnishings and bespoke joinery — sourced, managed and coordinated so you never have to chase a single supplier.
+        - generic [ref=e136]:
+          - generic [ref=e137]: "04"
+          - heading "Installation and Dressing" [level=3] [ref=e138]
+          - paragraph [ref=e139]: We oversee the build, coordinate every trade and dress each room to completion. You walk into a finished home.
+      - img "3D interior design visualisation process by By Shakir — photorealistic render of a living space" [ref=e141]
+    - generic [ref=e142]:
+      - img "Interior of the By Shakir showroom in Tiel" [ref=e143]
+      - generic [ref=e144]:
+        - generic [ref=e145]:
+          - generic [ref=e146]: Visit the Showroom
+          - paragraph [ref=e147]: By appointment · Tiel, the Netherlands
+        - link "Plan a Visit" [ref=e148] [cursor=pointer]:
+          - /url: /about/
+          - generic [ref=e149]:
+            - text: Plan a Visit
+            - img [ref=e150]
+    - generic [ref=e152]:
+      - img
+      - img
+      - generic [ref=e153]:
+        - generic [ref=e154]: GET IN TOUCH
+        - heading "Considering a New Interior?" [level=2] [ref=e155]
+        - paragraph [ref=e156]: Whether you are planning a new build or reimagining an existing home — a conversation is where every project begins.
+        - generic [ref=e157]:
+          - link "Begin a Conversation" [ref=e158] [cursor=pointer]:
+            - /url: /contact/
+          - paragraph [ref=e159]: No obligation · Personal response within 24 hours
+  - contentinfo [ref=e160]:
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - link "By Shakir" [ref=e163] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e164]: Luxury Interior Design
+        - generic [ref=e165]:
+          - text: Gijsbert Stoutweg 8
+          - text: 4005 LE Tiel
+          - text: The Netherlands
+        - generic [ref=e166]:
+          - link "+31 344 655 473" [ref=e167] [cursor=pointer]:
+            - /url: tel:+31344655473
+          - link "info@byshakir.com" [ref=e168] [cursor=pointer]:
+            - /url: mailto:info@byshakir.com
+        - generic [ref=e169]:
+          - generic [ref=e170]: "KvK: 11060878"
+          - generic [ref=e171]: ·
+          - link "Privacy" [ref=e172] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Cookies" [ref=e173] [cursor=pointer]:
+            - /url: /cookie-statement/
+          - generic [ref=e174]: ·
+          - generic [ref=e175]: © 2026 By Shakir
+      - generic [ref=e176]:
+        - navigation "Footer navigation" [ref=e177]:
+          - link "Projects" [ref=e178] [cursor=pointer]:
+            - /url: /projects/
+          - link "Services" [ref=e179] [cursor=pointer]:
+            - /url: /services/
+          - link "About" [ref=e180] [cursor=pointer]:
+            - /url: /about/
+          - link "FAQ" [ref=e181] [cursor=pointer]:
+            - /url: /faq/
+          - link "Contact" [ref=e182] [cursor=pointer]:
+            - /url: /contact/
+        - link "Message Us on WhatsApp" [ref=e183] [cursor=pointer]:
+          - /url: https://wa.me/31344655473?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20project.
+          - text: Message Us on WhatsApp
+          - img [ref=e184]
+  - generic [ref=e188]:
+    - button "Menu" [ref=e189]:
+      - img [ref=e191]
+      - generic: Menu
+    - button "Inspect" [ref=e195]:
+      - img [ref=e197]
+      - generic: Inspect
+    - button "Audit" [ref=e199]:
+      - generic [ref=e200]:
+        - img [ref=e201]
+        - img [ref=e204]
+      - generic: Audit
+    - button "Settings" [ref=e207]:
+      - img [ref=e209]
+      - generic: Settings

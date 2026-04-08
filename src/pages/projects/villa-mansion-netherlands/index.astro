@@ -7,8 +7,9 @@ import Header from '../../../components/Header.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 
-const seoTitle = 'Villa Mansion, Netherlands \u2014 Interior Design | By Shakir';
-const seoDescription = 'Complete luxury villa interior in the Netherlands by By Shakir. From spatial planning to final dressing. View the full project.';
+const seoTitle = 'Villa Mansion Netherlands \u2014 Interior Design | By Shakir';
+const seoDescription = 'Complete luxury villa interior in the Netherlands by By Shakir. Spatial planning, bespoke joinery, material selection and final dressing. View the project.';
+const seoOgImage = '/media/projects/villa-mansion-netherlands/cover.webp';
 
 const project = {
   title: 'Villa Mansion',
@@ -33,7 +34,7 @@ const relatedProjects = [
 ];
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} ogImage={seoOgImage}>
   <Header currentPage="/projects/" />
 
   <main>

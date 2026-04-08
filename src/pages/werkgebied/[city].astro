@@ -1,0 +1,912 @@
+---
+// src/pages/werkgebied/[city].astro
+// Location / werkgebied pages — "[service] [city]" keyword targets
+// Design: follows location-page-reference.html layout + design language
+// Copy: English, anti-AI rules applied, unique per city
+// Schema: LocalBusiness (city geo) + FAQPage + BreadcrumbList (auto via Layout)
+
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+import SchemaFAQ from '../../components/seo/SchemaFAQ.astro';
+import { locations, getRelatedLocations } from '../../data/locations';
+import type { LocationData } from '../../data/locations';
+
+export function getStaticPaths() {
+  return locations.map((loc) => ({
+    params: { city: loc.slug },
+    props: { location: loc },
+  }));
+}
+
+interface Props {
+  location: LocationData;
+}
+
+const { location } = Astro.props;
+const relatedLocations = getRelatedLocations(location.slug);
+
+const SITE = 'https://www.byshakir.com';
+
+// ── Schema: LocalBusiness with city-specific geo ─────────────────────────────
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'InteriorDesigner',
+  '@id': `${SITE}/#business`,
+  name: 'By Shakir Luxury Interiors',
+  url: `${SITE}/`,
+  telephone: '+31344655473',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Gijsbert Stoutweg 8',
+    postalCode: '4005 LE',
+    addressLocality: 'Tiel',
+    addressRegion: 'Gelderland',
+    addressCountry: 'NL',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: location.coordinates.lat,
+    longitude: location.coordinates.lng,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: location.city,
+  },
+  priceRange: '€€€',
+};
+
+// ── Meta: title + description vary by city ────────────────────────────────────
+// International cities use a slightly different description pattern
+const isInternational = ['dubai', 'barcelona', 'malaga', 'antwerp'].includes(location.slug);
+
+const pageTitle = isInternational
+  ? `International Interior Design in ${location.city} | By Shakir`
+  : `Interior Design in ${location.city} | By Shakir, Netherlands`;
+const pageDescription = isInternational
+  ? `Luxury interior design in ${location.city} by By Shakir. Complete residential interiors from concept through installation, managed from the Netherlands.`
+  : `By Shakir offers luxury interior design in ${location.city} and the surrounding area. Studio based in Tiel, Netherlands. Begin with a conversation.`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={`${SITE}/werkgebied/${location.slug}/`}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <SchemaFAQ faqs={location.faqs} />
+  </Fragment>
+
+  <Header currentPage="/projects/" />
+
+  <main id="loc-main">
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 1 — HERO
+         65vh · dark #2C1F17 · bottom-left anchored content
+         H1 + direct answer paragraph (40–60 words, AI-citation optimised)
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="loc-hero" aria-label={`Interior design in ${location.city} — By Shakir`}>
+
+      <!-- Warm gradient background — no photography available for city pages -->
+      <div class="loc-hero-bg" aria-hidden="true"></div>
+
+      <!-- Gradient overlay -->
+      <div class="loc-hero-overlay" aria-hidden="true"></div>
+
+      <!-- Grain texture (unique filter ID per page to avoid SVG conflicts) -->
+      <svg class="grain" aria-hidden="true">
+        <filter id={`g-hero-${location.slug}`}>
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter={`url(#g-hero-${location.slug})`}/>
+      </svg>
+
+      <!-- Content — bottom-left anchored, page-load animation -->
+      <div class="loc-hero-content">
+        <p class="overline overline-muted loc-hero-overline">
+          {isInternational
+            ? `By Shakir · Luxury Interior Design · International`
+            : `By Shakir · ${location.province} · Netherlands`}
+        </p>
+        <h1 class="loc-hero-h1 gold-dot">Interior Design in {location.city}</h1>
+        <p class="loc-hero-body">
+          {isInternational
+            ? `By Shakir designs complete luxury interiors in ${location.city} — managed from the studio in Tiel, the Netherlands, with site visits at every key milestone. The same warmth and precision as our Dutch projects, delivered internationally.`
+            : `By Shakir offers complete interior design in ${location.city} and the wider ${location.province} area. Studio based in Tiel${location.distanceFromBase ? `, ${location.distanceFromBase.toLowerCase()}` : ''}. From concept through final installation — one designer, one consistent standard.`}
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 2 — BREADCRUMB
+         Surface bg · SEO + secondary navigation strip
+         ══════════════════════════════════════════════════════════════════ -->
+    <div class="breadcrumb-bar">
+      <Breadcrumb
+        variant="light"
+        items={[
+          { label: 'Werkgebied', href: '/werkgebied/' },
+          { label: location.city },
+        ]}
+      />
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 3 — LOCATION INTRO
+         Warm bg · 2-col asymmetric (5fr : 6fr)
+         Left: service overview + local detail
+         Right: facts sidebar (localDetail data, neighborhoods, response time)
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="loc-intro" aria-labelledby="loc-intro-h">
+      <div class="loc-intro-inner">
+
+        <!-- Prose column -->
+        <div class="loc-intro-text reveal">
+          <p class="overline overline-terracotta">Interior Design in {location.city}</p>
+          <h2 class="loc-intro-h2 gold-dot" id="loc-intro-h">
+            {isInternational
+              ? `Complete interiors in ${location.city}`
+              : `Complete interior design, available in ${location.city}`}
+          </h2>
+
+          <p class="loc-intro-body">
+            {isInternational
+              ? `By Shakir has completed luxury residential projects in ${location.city} — the same full-service scope that defines every commission: spatial planning, 3D visualisation, material selection, procurement, bespoke joinery, and final dressing. Distance changes the logistics. It does not change the standard.`
+              : `By Shakir offers the complete interior design service in ${location.city} and across ${location.province}: spatial planning, 3D visualisation before construction begins, material sourcing, bespoke joinery, and final dressing. One consistent scope from first conversation to the day you walk into a finished home.`}
+          </p>
+
+          <p class="loc-intro-body">
+            {location.localDetail}
+          </p>
+
+          {location.neighborhoods && location.neighborhoods.length > 0 && (
+            <p class="loc-intro-neighborhoods">
+              <span class="loc-neighborhoods-label">Areas served</span>
+              {location.neighborhoods.join(' · ')}
+            </p>
+          )}
+        </div>
+
+        <!-- Facts sidebar -->
+        <aside class="loc-facts reveal d1" aria-label={`Project information for ${location.city}`}>
+          <p class="loc-facts-label">Project information</p>
+
+          <dl>
+            <div class="loc-fact">
+              <dt class="loc-fact-key">Region</dt>
+              <dd class="loc-fact-value">{location.province}</dd>
+            </div>
+
+            {location.population && (
+              <div class="loc-fact">
+                <dt class="loc-fact-key">City population</dt>
+                <dd class="loc-fact-value">{location.population}</dd>
+              </div>
+            )}
+
+            {!isInternational && location.postalCodeRange !== 'N/A' && (
+              <div class="loc-fact">
+                <dt class="loc-fact-key">Postal code range</dt>
+                <dd class="loc-fact-value">{location.postalCodeRange}</dd>
+              </div>
+            )}
+
+            {location.distanceFromBase && (
+              <div class="loc-fact">
+                <dt class="loc-fact-key">Distance from studio</dt>
+                <dd class="loc-fact-value">{location.distanceFromBase}</dd>
+              </div>
+            )}
+
+            {location.responseTime && (
+              <div class="loc-fact">
+                <dt class="loc-fact-key">Response time</dt>
+                <dd class="loc-fact-value">{location.responseTime}</dd>
+              </div>
+            )}
+
+            <div class="loc-fact">
+              <dt class="loc-fact-key">Available</dt>
+              <dd class="loc-fact-value">By appointment</dd>
+            </div>
+          </dl>
+        </aside>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 4 — SERVICES LIST
+         Surface bg · Asymmetric: display left, service points right
+         Links to /services/ and /services/3d-design/
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="loc-services" aria-labelledby="loc-services-h">
+      <div class="loc-services-inner">
+
+        <!-- Left display column -->
+        <div class="reveal">
+          <p class="overline overline-terracotta">What we do</p>
+          <h2 class="loc-services-display" id="loc-services-h">
+            Services available in <em>{location.city}</em>
+          </h2>
+        </div>
+
+        <!-- Right service points -->
+        <div class="loc-service-points">
+
+          <a href="/services/" class="loc-service-point reveal">
+            <span class="loc-service-num" aria-hidden="true">01</span>
+            <div>
+              <p class="loc-service-title">Complete Interior Design</p>
+              <p class="loc-service-text">
+                Spatial planning, material selection, procurement, bespoke joinery, and final dressing —
+                the full scope from first concept through the day you walk into a finished home.
+              </p>
+              <span class="link-cta">View services</span>
+            </div>
+          </a>
+
+          <a href="/services/3d-design/" class="loc-service-point reveal d1">
+            <span class="loc-service-num" aria-hidden="true">02</span>
+            <div>
+              <p class="loc-service-title">3D Visualisation</p>
+              <p class="loc-service-text">
+                Photorealistic renders of every room before construction begins. You see exactly
+                what your home will look like — and approve every detail — before anything is ordered.
+              </p>
+              <span class="link-cta">See how it works</span>
+            </div>
+          </a>
+
+          <a href="/contact/" class="loc-service-point reveal d2">
+            <span class="loc-service-num" aria-hidden="true">03</span>
+            <div>
+              <p class="loc-service-title">Begin a Conversation</p>
+              <p class="loc-service-text">
+                {isInternational
+                  ? `Tell us about your ${location.city} project. We assess international project feasibility in the first consultation — no obligation, personal response within 48 hours.`
+                  : `Tell us about your project in ${location.city}. No obligation. A personal response within 24 hours.`}
+              </p>
+              <span class="link-cta">Get in touch</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 5 — RELATED PROJECT (conditional)
+         Surface bg · Shows if location has a completed project
+         ══════════════════════════════════════════════════════════════════ -->
+    {location.relatedProject && (
+      <section class="loc-project" aria-labelledby="loc-project-h">
+        <div class="loc-project-inner">
+
+          <header class="loc-project-header reveal">
+            <p class="overline overline-terracotta">Completed commission</p>
+            <h2 class="loc-project-h2 gold-dot" id="loc-project-h">
+              {isInternational ? `Project in ${location.city}` : `Our work in ${location.province}`}
+            </h2>
+          </header>
+
+          <a
+            href={`/projects/${location.relatedProject.slug}/`}
+            class="loc-pcard reveal"
+            aria-label={`View project: ${location.relatedProject.title}`}
+          >
+            <div class="loc-pcard-img">
+              <img
+                src={`/media/projects/${location.relatedProject.slug}/cover.webp`}
+                alt={`${location.relatedProject.title} — interior by By Shakir`}
+                loading="lazy"
+                decoding="async"
+                width="860"
+                height="573"
+              />
+            </div>
+            <div class="loc-pcard-overlay">
+              <span class="loc-pcard-location">{location.relatedProject.location}</span>
+              <h3 class="loc-pcard-title">{location.relatedProject.title}</h3>
+              <span class="link-cta link-cta-light">View full project</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+    )}
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 6 — FAQ
+         Warm bg · 3-5 location-specific questions
+         Schema via SchemaFAQ (in head slot above)
+         Editorial Q&A format — no accordion JS needed
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="loc-faq" aria-labelledby="loc-faq-h">
+      <div class="loc-faq-inner">
+
+        <header class="loc-faq-header reveal">
+          <p class="overline overline-terracotta">Common questions</p>
+          <h2 class="loc-faq-h2 gold-dot" id="loc-faq-h">
+            About interior design in {location.city}
+          </h2>
+        </header>
+
+        <div class="loc-faq-list">
+          {location.faqs.map((faq, i) => (
+            <div class={`loc-faq-item reveal${i > 0 ? ` d${Math.min(i, 3)}` : ''}`}>
+              <h3 class="loc-faq-question">{faq.question}</h3>
+              <p class="loc-faq-answer">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 7 — CTA
+         Dark bg · Grain + topo lines · Centered
+         Uses CtaSection component — text contextualised to city
+         ══════════════════════════════════════════════════════════════════ -->
+    <CtaSection
+      overline={isInternational
+        ? `Begin your ${location.city} project`
+        : `Interior design in ${location.city}`}
+      heading={`Ready for a considered interior in ${location.city}?`}
+      body={isInternational
+        ? `Tell us about your ${location.city} property. We assess international project feasibility in the first consultation — same standard, different logistics.`
+        : `Tell us about your project. We respond personally${location.slug === 'tiel' ? ' — and the showroom is right here' : ` — and we are ${location.distanceFromBase?.toLowerCase() ?? 'within reach'}`}.`}
+      buttonText="Begin a Conversation"
+      buttonHref="/contact/"
+      microcopy={isInternational
+        ? 'No obligation · Personal response within 48 hours'
+        : 'No obligation · Personal response within 24 hours'}
+    />
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTION 8 — RELATED CITIES
+         Surface bg · 3-col text links to related werkgebied pages
+         ══════════════════════════════════════════════════════════════════ -->
+    {relatedLocations.length > 0 && (
+      <section class="loc-related" aria-label="Other service areas">
+        <div class="loc-related-inner">
+
+          <p class="overline overline-muted loc-related-label">Other areas we serve</p>
+
+          <nav aria-label="Related location pages">
+            <ul class="loc-related-grid reveal" role="list">
+              {relatedLocations.map((rel) => (
+                <li>
+                  <a href={`/werkgebied/${rel.slug}/`} class="loc-related-link">
+                    Interior design in {rel.city}
+                    <span class="loc-related-sub">{rel.province}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+        </div>
+      </section>
+    )}
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   LOCATION PAGE STYLES
+   CSS vars match global.css @theme tokens — no --c-* aliases here
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── HERO ──────────────────────────────────────────────────────────────── */
+.loc-hero {
+  position: relative;
+  height: 65vh;
+  min-height: 480px;
+  overflow: hidden;
+  background: var(--color-dark);
+}
+
+.loc-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1A100A 0%, #2C1F17 45%, #3D2420 100%);
+}
+
+.loc-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 31, 23, 0.95) 0%,
+    rgba(44, 31, 23, 0.55) 35%,
+    rgba(44, 31, 23, 0.18) 65%,
+    rgba(44, 31, 23, 0.06) 100%
+  );
+  pointer-events: none;
+}
+
+/* .grain is global in global.css */
+
+.loc-hero-content {
+  position: absolute;
+  bottom: clamp(3rem, 7vh, 5rem);
+  left: 0;
+  padding-inline-start: clamp(1.5rem, 5vw, 6rem);
+  padding-inline-end: clamp(1.5rem, 5vw, 6rem);
+  max-width: 720px;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loc-hero-content {
+    animation: hero-enter 1.6s cubic-bezier(0.83, 0, 0.17, 1) 0.35s both;
+  }
+}
+
+.loc-hero-overline {
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.loc-hero-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 1.5rem + 5.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--color-text-on-dark);
+  margin-bottom: 1.25rem;
+}
+
+.loc-hero-body {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--color-text-muted-dark);
+  max-width: 440px;
+}
+
+/* ── BREADCRUMB BAR ───────────────────────────────────────────────────── */
+.breadcrumb-bar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 0.875rem;
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+/* ── INTRO SECTION ────────────────────────────────────────────────────── */
+.loc-intro {
+  background: var(--color-bg);
+  padding-block: clamp(5rem, 5vw + 2.5rem, 9rem);
+}
+
+.loc-intro-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+
+.loc-intro-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  margin-bottom: 1.75rem;
+}
+
+.loc-intro-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text);
+  max-width: 55ch;
+  margin-bottom: 1.25em;
+}
+.loc-intro-body:last-of-type { margin-bottom: 0; }
+
+.loc-intro-neighborhoods {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.loc-neighborhoods-label {
+  display: block;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Facts sidebar */
+.loc-facts {
+  border-top: 1px solid var(--color-border);
+  padding-top: clamp(2rem, 3vw, 2.75rem);
+  margin-top: clamp(0rem, 1.5vw, 2rem);
+}
+
+.loc-facts-label {
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1.75rem;
+}
+
+.loc-fact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.loc-fact:first-of-type { border-top: 1px solid var(--color-border); }
+
+.loc-fact-key {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.loc-fact-value {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.55;
+  text-align: right;
+}
+
+/* ── SERVICES SECTION ─────────────────────────────────────────────────── */
+.loc-services {
+  background: var(--color-surface);
+  padding-block: clamp(5rem, 6vw + 2rem, 10rem);
+}
+
+.loc-services-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: start;
+}
+
+.loc-services-display {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 2rem + 4vw, 6rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  position: relative;
+}
+
+.loc-services-display em {
+  font-style: italic;
+  color: var(--color-terracotta);
+}
+
+.loc-services-display::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-top: 2rem;
+}
+
+.loc-service-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: clamp(0.5rem, 1.5vw, 2rem);
+}
+
+.loc-service-point {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  padding-block: clamp(1.75rem, 2.5vw, 2.5rem);
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s;
+}
+.loc-service-point:first-child { border-top: 1px solid var(--color-border); }
+.loc-service-point:hover { background: var(--color-bg); }
+
+.loc-service-num {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-gold);
+  opacity: 0.55;
+  user-select: none;
+  width: 3.5rem;
+}
+
+.loc-service-title {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.loc-service-text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--color-text-muted);
+  margin-bottom: 0.875rem;
+}
+
+/* ── RELATED PROJECT CARD ─────────────────────────────────────────────── */
+.loc-project {
+  background: var(--color-bg);
+  padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+}
+
+.loc-project-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+.loc-project-header {
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.loc-project-h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+}
+
+.loc-pcard {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  display: block;
+  max-width: 860px;
+  text-decoration: none;
+}
+
+.loc-pcard-img {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.7s var(--ease);
+}
+.loc-pcard-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.loc-pcard:hover .loc-pcard-img { transform: scale(1.03); }
+
+.loc-pcard-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: linear-gradient(to top, rgba(44,31,23,0.9) 0%, rgba(44,31,23,0.3) 50%, transparent 100%);
+}
+
+.loc-pcard-location {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.35rem;
+}
+
+.loc-pcard-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--color-text-on-dark);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+/* ── FAQ SECTION ──────────────────────────────────────────────────────── */
+.loc-faq {
+  background: var(--color-bg);
+  padding-block: clamp(5rem, 6vw + 2rem, 10rem);
+}
+
+.loc-faq-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+  max-width: 860px;
+}
+
+.loc-faq-header {
+  margin-bottom: clamp(3rem, 4vw, 5rem);
+}
+
+.loc-faq-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+}
+
+.loc-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.loc-faq-item {
+  padding-block: clamp(1.75rem, 2.5vw, 2.5rem);
+  border-bottom: 1px solid var(--color-border);
+}
+.loc-faq-item:first-child { border-top: 1px solid var(--color-border); }
+
+.loc-faq-question {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: 0.875rem;
+}
+
+.loc-faq-answer {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  max-width: 70ch;
+}
+
+/* ── RELATED CITIES ───────────────────────────────────────────────────── */
+.loc-related {
+  background: var(--color-surface);
+  padding-block: clamp(3.5rem, 4vw + 1rem, 6rem);
+}
+
+.loc-related-inner {
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+.loc-related-label {
+  margin-bottom: 1.75rem;
+}
+
+.loc-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.loc-related-link {
+  display: block;
+  background: var(--color-surface);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.25rem, 2vw, 2rem);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background 0.4s var(--ease), color 0.4s;
+  position: relative;
+}
+
+.loc-related-link:hover {
+  background: var(--color-bg);
+  color: var(--color-dark);
+}
+
+.loc-related-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: clamp(1.25rem, 2vw, 2rem);
+  right: clamp(1.25rem, 2vw, 2rem);
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.loc-related-link:hover::after { transform: scaleX(1); }
+
+.loc-related-sub {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--color-text-muted);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .loc-intro-inner,
+  .loc-services-inner {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .loc-facts { margin-top: 0; }
+}
+
+@media (max-width: 768px) {
+  .loc-hero { height: 70vh; }
+  .loc-hero-h1 { font-size: clamp(2.25rem, 9vw, 3.75rem); }
+  .loc-hero-body { max-width: 100%; }
+  .loc-pcard { max-width: 100%; }
+  .loc-related-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .loc-service-num { font-size: var(--text-2xl); width: 2.75rem; }
+}
+</style>

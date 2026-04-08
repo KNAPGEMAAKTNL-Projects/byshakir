@@ -8,81 +8,68 @@ import Header from '../../components/Header.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import Footer from '../../components/Footer.astro';
+import SchemaFAQ from '../../components/seo/SchemaFAQ.astro';
 
 const faqs = [
   {
-    q: 'How Much Does Luxury Interior Design Cost?',
-    a: 'Every By Shakir project is priced individually based on scope, materials, project location and the level of bespoke work involved. There is no fixed price list. Cost is discussed openly during the initial conversation, and we provide a clear outline based on your specific brief before any commitment is made. <a href="/contact/">Begin a conversation</a> to discuss your project.',
+    question: 'How Much Does Luxury Interior Design Cost?',
+    answer: 'Every By Shakir project is priced individually based on scope, materials, project location and the level of bespoke work involved. There is no fixed price list. Cost is discussed openly during the initial conversation, and we provide a clear outline based on your specific brief before any commitment is made. <a href="/contact/">Begin a conversation</a> to discuss your project.',
   },
   {
-    q: 'How Long Does a Typical Project Take?',
-    a: 'A single-room redesign typically takes 8 to 12 weeks. A complete home interior, from concept through installation, runs 6 to 12 months. International projects can take longer due to shipping and local building regulations. We agree a realistic timeline at the start of every commission. For a more detailed overview, see <a href="/services/">our design process</a>.',
+    question: 'How Long Does a Typical Project Take?',
+    answer: 'A single-room redesign typically takes 8 to 12 weeks. A complete home interior, from concept through installation, runs 6 to 12 months. International projects can take longer due to shipping and local building regulations. We agree a realistic timeline at the start of every commission. For a more detailed overview, see <a href="/services/">our design process</a>.',
   },
   {
-    q: 'Which Areas Does By Shakir Serve?',
-    a: 'The studio is based in Tiel, the Netherlands. Active projects span the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Shakir travels to every project location for key stages: concept presentation, material approval and final dressing. International commissions receive the same personal attention as a project next door.',
+    question: 'Which Areas Does By Shakir Serve?',
+    answer: 'The studio is based in Tiel, the Netherlands. Active projects span the <a href="/werkgebied/">Netherlands, Dubai, Barcelona, Antwerpen and Malaga</a>. Shakir travels to every project location for key stages: concept presentation, material approval and final dressing. International commissions receive the same personal attention as a project next door.',
   },
   {
-    q: 'How Do I Start a Project with By Shakir?',
-    a: '<a href="/contact/">Get in touch</a> through the contact form or by phone. We respond personally within 24 hours and suggest a first meeting, either in person at the Tiel showroom or by video call. That conversation covers your home, your ambitions and whether By Shakir is the right fit for your project.',
+    question: 'How Do I Start a Project with By Shakir?',
+    answer: '<a href="/contact/">Get in touch</a> through the contact form or by phone. We respond personally within 24 hours and suggest a first meeting, either in person at the Tiel showroom or by video call. That conversation covers your home, your ambitions and whether By Shakir is the right fit for your project.',
   },
   {
-    q: 'Can By Shakir Manage a Project in Another Country?',
-    a: 'Yes. By Shakir regularly manages commissions across borders. Current and completed projects include properties in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. The <a href="/services/3d-design/">3D visualisation stage</a> enables remote approval of every room. Shakir travels to the project site for key milestones. Supplier coordination, procurement and delivery scheduling are handled centrally from the Netherlands.',
+    question: 'Can By Shakir Manage a Project in Another Country?',
+    answer: 'Yes. By Shakir regularly manages commissions across borders. Current and completed projects include properties in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. The <a href="/services/3d-design/">3D visualisation stage</a> enables remote approval of every room. Shakir travels to the project site for key milestones. Supplier coordination, procurement and delivery scheduling are handled centrally from the Netherlands.',
   },
   {
-    q: 'Do I Need to Be Present During the Design Process?',
-    a: 'Not for most of it. The <a href="/services/3d-design/">3D visualisation stage</a> is designed for remote approval: you see every room in photorealistic detail and sign off digitally. Many clients are based in a different country from their property. We handle all site coordination and provide regular photo updates during installation.',
+    question: 'Do I Need to Be Present During the Design Process?',
+    answer: 'Not for most of it. The <a href="/services/3d-design/">3D visualisation stage</a> is designed for remote approval: you see every room in photorealistic detail and sign off digitally. Many clients are based in a different country from their property. We handle all site coordination and provide regular photo updates during installation.',
   },
   {
-    q: 'What Is 3D Interior Design Visualisation?',
-    a: 'A photorealistic digital preview of your finished interior, built before construction begins. Every room is modelled with accurate proportions, real material textures and natural lighting. You review and approve the design on screen. Changes at this stage cost nothing. Read the <a href="/services/3d-design/">full explanation of 3D design</a>.',
+    question: 'What Is 3D Interior Design Visualisation?',
+    answer: 'A photorealistic digital preview of your finished interior, built before construction begins. Every room is modelled with accurate proportions, real material textures and natural lighting. You review and approve the design on screen. Changes at this stage cost nothing. Read the <a href="/services/3d-design/">full explanation of 3D design</a>.',
   },
   {
-    q: 'How Accurate Are the 3D Renders?',
-    a: 'Very. Materials are rendered from real texture samples, lighting is calculated from your property\'s orientation and window placement, and furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room matches the approved render closely. See <a href="/services/3d-design/">how 3D visualisation works</a> for more detail.',
+    question: 'How Accurate Are the 3D Renders?',
+    answer: 'Very. Materials are rendered from real texture samples, lighting is calculated from your property\'s orientation and window placement, and furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room matches the approved render closely. See <a href="/services/3d-design/">how 3D visualisation works</a> for more detail.',
   },
   {
-    q: 'Can I Hire By Shakir for Just One Part of the Process?',
-    a: 'Yes. While most clients choose the complete service, individual elements such as concept development, 3D visualisation or furniture procurement are available separately. The scope is shaped around what your project needs. <a href="/contact/">Begin with a conversation</a> and we will recommend what fits.',
+    question: 'Can I Hire By Shakir for Just One Part of the Process?',
+    answer: 'Yes. While most clients choose the complete service, individual elements such as concept development, 3D visualisation or furniture procurement are available separately. The scope is shaped around what your project needs. <a href="/contact/">Begin with a conversation</a> and we will recommend what fits.',
   },
   {
-    q: 'What Is the Difference Between Interior Design and Interior Decorating?',
-    a: 'Interior design covers the full scope of a residential project: spatial planning, material specification, bespoke joinery, procurement and trade coordination. Interior decorating focuses on surface finishes, furnishings and styling. By Shakir practises interior design and <a href="/services/">interior architecture</a>, meaning we work with spatial structure, not just aesthetics.',
+    question: 'What Is the Difference Between Interior Design and Interior Decorating?',
+    answer: 'Interior design covers the full scope of a residential project: spatial planning, material specification, bespoke joinery, procurement and trade coordination. Interior decorating focuses on surface finishes, furnishings and styling. By Shakir practises interior design and <a href="/services/">interior architecture</a>, meaning we work with spatial structure, not just aesthetics.',
   },
   {
-    q: 'Is By Shakir Insured?',
-    a: 'Yes. The studio carries professional indemnity insurance covering design advice, project management and procurement coordination. If you have specific insurance requirements for your project, raise them during the initial conversation and we will provide documentation.',
+    question: 'Is By Shakir Insured?',
+    answer: 'Yes. The studio carries professional indemnity insurance covering design advice, project management and procurement coordination. If you have specific insurance requirements for your project, raise them during the initial conversation and we will provide documentation.',
   },
   {
-    q: 'What Happens After I Submit the Contact Form?',
-    a: 'We read every enquiry personally. Within 24 hours, you will receive a response from Shakir with a suggestion for a first meeting, either in person at the Tiel showroom or by video call. That conversation is informal, has no obligation and typically lasts around 45 minutes.',
+    question: 'What Happens After I Submit the Contact Form?',
+    answer: 'We read every enquiry personally. Within 24 hours, you will receive a response from Shakir with a suggestion for a first meeting, either in person at the Tiel showroom or by video call. That conversation is informal, has no obligation and typically lasts around 45 minutes.',
   },
 ];
-
-// Generate FAQPage JSON-LD schema
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map(f => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: f.a.replace(/<[^>]*>/g, ''), // Strip HTML for schema
-    },
-  })),
-};
 ---
 
 <Layout
-  title="Frequently Asked Questions — Luxury Interior Design | By Shakir"
-  description="Common questions about luxury interior design: cost, timelines, 3D visualisation and the process. By Shakir, Tiel, the Netherlands."
+  title="Luxury Interior Design: Common Questions | By Shakir"
+  description="Common questions about luxury interior design: cost, process, 3D visualisation and international projects. By Shakir, Tiel. Explore our answers."
 >
+  <Fragment slot="head">
+    <SchemaFAQ faqs={faqs} />
+  </Fragment>
   <Header currentPage="/faq/" />
-
-  <!-- FAQPage Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <main>
     <section class="page-hero">
@@ -95,16 +82,21 @@ const faqSchema = {
         <h1 class="page-hero-h1">Frequently Asked Questions</h1>
         <Breadcrumb items={[{ label: 'FAQ' }]} />
         <p class="page-hero-intro" style="margin-top:0.75rem;">Questions about working with By Shakir</p>
+        <time class="freshness-signal" datetime="2026-04-08">Updated: April 2026</time>
       </div>
     </section>
 
     <section class="faq-section">
       <div class="faq-inner">
+        <p class="faq-intro reveal">
+          By Shakir is a luxury interior design studio in Tiel, the Netherlands. These answers cover the most common questions about cost, timelines, international projects, 3D visualisation and the design process. For anything not covered here, <a href="/contact/">begin a conversation</a>.
+        </p>
+        <h2 class="faq-h2 reveal">Questions About Working With By Shakir</h2>
         <div class="faq-list">
           {faqs.map((faq, i) => (
             <details class:list={['faq-item', 'reveal', i < 4 ? `d${i + 1}` : '']}>
-              <summary class="faq-q">{faq.q}</summary>
-              <p class="faq-a" set:html={faq.a} />
+              <summary class="faq-q">{faq.question}</summary>
+              <p class="faq-a" set:html={faq.answer} />
             </details>
           ))}
         </div>
@@ -150,6 +142,18 @@ const faqSchema = {
     color: var(--color-text-muted-dark);
   }
 
+  .freshness-signal {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted-dark);
+    opacity: 0.55;
+    margin-top: 0.75rem;
+  }
+
   .faq-section {
     background: var(--color-bg);
     padding-block: clamp(5rem, 6vw + 2rem, 9rem);
@@ -157,6 +161,25 @@ const faqSchema = {
   .faq-inner {
     padding-inline: clamp(1.5rem, 5vw, 5rem);
     max-width: 75ch;
+  }
+  .faq-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: clamp(2rem, 3vw, 3rem);
+    max-width: 65ch;
+  }
+  .faq-intro a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+  .faq-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
   }
   .faq-list { display: flex; flex-direction: column; }
   .faq-item {

@@ -7,8 +7,9 @@ import Header from '../../../components/Header.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 
-const seoTitle = 'Beach House, Malaga \u2014 Interior Design | By Shakir';
-const seoDescription = 'Beach house interior in Malaga by By Shakir. Mediterranean coastal design with natural materials. View the project.';
+const seoTitle = 'Beach House Interior Design Malaga, Spain | By Shakir';
+const seoDescription = 'Beach house interior in Malaga by By Shakir. Mediterranean coastal design: natural materials, indoor-outdoor living and generous light. View the project.';
+const seoOgImage = '/media/projects/beach-house-malaga/cover.webp';
 
 const project = {
   title: 'Beach House',
@@ -33,7 +34,7 @@ const relatedProjects = [
 ];
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} ogImage={seoOgImage}>
   <Header currentPage="/projects/" />
 
   <main>

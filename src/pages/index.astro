@@ -47,8 +47,8 @@ const testimonials = [
 ---
 
 <Layout
-  title="Luxury Interior Design — By Shakir | Netherlands, Dubai, Spain"
-  description="By Shakir designs luxury residential interiors across the Netherlands, Dubai, Barcelona and Malaga. From concept to installation. Begin a conversation."
+  title="Luxury Interior Design | Netherlands, Dubai | By Shakir"
+  description="Luxury interior design across the Netherlands, Dubai, Barcelona and Malaga. By Shakir. Complete homes from concept to installation. Begin a conversation."
 >
   <Header currentPage="/" />
 
@@ -123,7 +123,7 @@ const testimonials = [
 
         <!-- Answer capsule for AI SEO -->
         <p class="portfolio-intro reveal">
-          By Shakir is a luxury interior design studio based in Tiel, the Netherlands. Led by principal designer Shakir, the studio creates bespoke residential interiors for private clients in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Each commission covers the full scope: concept development, 3D visualisation, procurement, joinery and final dressing.
+          By Shakir is a luxury interior design studio based in Tiel, the Netherlands. Led by principal designer Shakir, the studio creates bespoke residential interiors for private clients in the <a href="/werkgebied/">Netherlands, Dubai, Barcelona, Antwerpen and Malaga</a>. Each commission covers the full scope: <a href="/services/">concept development, 3D visualisation, procurement, joinery and final dressing</a>.
         </p>
 
         <div class="portfolio-grid">
@@ -265,6 +265,18 @@ const testimonials = [
               <p class="step-desc">{step.desc}</p>
             </div>
           ))}
+        </div>
+
+        <!-- Service links for internal linking + AI SEO -->
+        <div class="process-links reveal">
+          <a href="/services/3d-design/" class="link-cta">
+            3D Visualisation
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="/faq/" class="link-cta">
+            Common Questions
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
 
         <!-- Full-width 3D design image -->
@@ -644,6 +656,14 @@ const testimonials = [
   .about-body:last-of-type { margin-bottom: 2.5rem; }
   .about-body em { font-style: italic; }
 
+  .portfolio-intro a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.3s;
+  }
+  .portfolio-intro a:hover { color: var(--color-text); }
+
   /* ── SECTION 5: PROCESS STEPS ───────────────────────────── */
   .process {
     background: var(--color-surface);
@@ -701,6 +721,11 @@ const testimonials = [
     font-weight: 300;
     line-height: 1.68;
     color: var(--color-text-muted);
+  }
+  .process-links {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(2rem, 3vw, 3rem);
   }
   .process-image {
     width: 100%;

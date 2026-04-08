@@ -8,7 +8,8 @@ import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 
 const seoTitle = 'Country Estate, Antwerpen \u2014 Interior Design | By Shakir';
-const seoDescription = 'Country estate interior near Antwerpen by By Shakir. Heritage architecture, contemporary living. View the project.';
+const seoDescription = 'Country estate interior in Belgium by By Shakir. Heritage architecture meets contemporary luxury living near Antwerpen, from concept to installation. View.';
+const seoOgImage = '/media/projects/country-estate-antwerpen/cover.webp';
 
 const project = {
   title: 'Country Estate',
@@ -33,7 +34,7 @@ const relatedProjects = [
 ];
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} ogImage={seoOgImage}>
   <Header currentPage="/projects/" />
 
   <main>

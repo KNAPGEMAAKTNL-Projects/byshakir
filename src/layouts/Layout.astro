@@ -2,39 +2,69 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import '../styles/effects.css';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import SchemaBreadcrumb from '../components/seo/SchemaBreadcrumb.astro';
 
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
   lang?: string;
 }
 
 const {
   title,
-  description = 'By Shakir designs luxury interiors across the Netherlands, Dubai, Barcelona and Malaga. Complete home interiors from concept through to installation.',
+  description = 'By Shakir designs luxury interior design across the Netherlands, Dubai, Barcelona and Malaga. Complete homes from concept to installation. Begin a conversation.',
+  ogImage = '/media/hero-poster.webp',
+  canonical,
+  noindex = false,
   lang = 'en',
 } = Astro.props;
+
+const siteBase = Astro.site?.href ?? 'https://www.byshakir.com/';
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, siteBase).href;
+const ogImageURL = new URL(ogImage, siteBase).href;
+const ogLocale = lang === 'nl' ? 'nl_NL' : 'en_GB';
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Title & description -->
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Robots -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="By Shakir" />
 
     <!-- Google Fonts: Cormorant Garamond + DM Sans (DESIGN.md §3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Preload critical font weights for LCP — Cormorant 300 (hero h1), DM Sans 300 (body) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=DM+Sans:opsz,wght@9,300&display=swap" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Demo: prevent indexing -->
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- Structured data -->
+    <SchemaLocalBusiness />
+    <SchemaBreadcrumb />
+    <slot name="head" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

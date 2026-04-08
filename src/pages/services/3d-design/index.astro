@@ -6,12 +6,42 @@ import Header from '../../../components/Header.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
+import SchemaFAQ from '../../../components/seo/SchemaFAQ.astro';
+import SchemaService from '../../../components/seo/SchemaService.astro';
+
+const serviceFaqs = [
+  {
+    question: 'How Long Does the 3D Visualisation Stage Take?',
+    answer: 'Two to four weeks for a full home, depending on the number of rooms and revision rounds. A single-room render can be completed within five to seven working days. The timeline is built into the overall project schedule from the start.',
+  },
+  {
+    question: 'How Accurate Are the 3D Renders Compared to the Finished Result?',
+    answer: 'Very. Materials are rendered from real texture samples. Lighting is calculated based on your property\'s orientation and window placement. Furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room looks exactly like the render they approved months earlier.',
+  },
+  {
+    question: 'Can I Make Changes After Seeing the Renders?',
+    answer: 'That is the purpose of this stage. Changes during 3D cost nothing beyond the time to update the model. We encourage clients to sit with the renders for a few days, live with them, and return with questions. Better to adjust a digital wall than a plastered one.',
+  },
+  {
+    question: 'Is 3D Visualisation Available Without the Full Design Service?',
+    answer: 'Yes. While it is included in every <a href="/services/">complete commission</a>, 3D visualisation is also available as a standalone service for clients who have their own architect or contractor. <a href="/contact/">Get in touch</a> to discuss your project.',
+  },
+];
 ---
 
 <Layout
-  title="3D Interior Design Visualisation | By Shakir"
-  description="See your home before construction begins. By Shakir creates photorealistic 3D renders of every room, from spatial planning to lighting and material finishes."
+  title="3D Interior Design Visualisation | By Shakir Studio"
+  description="See your home before construction begins. By Shakir creates photorealistic 3D interior visualisations from spatial planning to final material finishes."
+  ogImage="/media/3d-design-process.webp"
 >
+  <Fragment slot="head">
+    <SchemaService
+      name="3D Interior Design Visualisation"
+      description="Photorealistic 3D renders of every room before construction begins. Full approval of spatial layout, materials and finishes before any build work starts."
+      serviceUrl="/services/3d-design/"
+    />
+    <SchemaFAQ faqs={serviceFaqs} />
+  </Fragment>
   <Header currentPage="/services/3d-design/" />
 
   <main>
@@ -24,6 +54,7 @@ import Footer from '../../../components/Footer.astro';
         <span class="overline overline-gold">3D Design</span>
         <h1 class="page-hero-h1">3D Interior Design Visualisation</h1>
         <Breadcrumb items={[{ label: 'Services', href: '/services/' }, { label: '3D Design' }]} />
+        <time class="freshness-signal" datetime="2026-04-08">Updated: April 2026</time>
       </div>
     </section>
 
@@ -113,22 +144,12 @@ import Footer from '../../../components/Footer.astro';
       <div class="faq-inner">
         <h2 class="section-h2 gold-dot reveal">Questions About 3D Design</h2>
         <div class="faq-list">
-          <details class="faq-item reveal d1">
-            <summary class="faq-q">How Long Does the 3D Visualisation Stage Take?</summary>
-            <p class="faq-a">Two to four weeks for a full home, depending on the number of rooms and revision rounds. A single-room render can be completed within five to seven working days. The timeline is built into the overall project schedule from the start.</p>
-          </details>
-          <details class="faq-item reveal d2">
-            <summary class="faq-q">How Accurate Are the 3D Renders Compared to the Finished Result?</summary>
-            <p class="faq-a">Very. Materials are rendered from real texture samples. Lighting is calculated based on your property's orientation and window placement. Furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room looks exactly like the render they approved months earlier.</p>
-          </details>
-          <details class="faq-item reveal d3">
-            <summary class="faq-q">Can I Make Changes After Seeing the Renders?</summary>
-            <p class="faq-a">That is the purpose of this stage. Changes during 3D cost nothing beyond the time to update the model. We encourage clients to sit with the renders for a few days, live with them, and return with questions. Better to adjust a digital wall than a plastered one.</p>
-          </details>
-          <details class="faq-item reveal d4">
-            <summary class="faq-q">Is 3D Visualisation Available Without the Full Design Service?</summary>
-            <p class="faq-a">Yes. While it is included in every <a href="/services/">complete commission</a>, 3D visualisation is also available as a standalone service for clients who have their own architect or contractor. <a href="/contact/">Get in touch</a> to discuss your project.</p>
-          </details>
+          {serviceFaqs.map((faq, i) => (
+            <details class:list={['faq-item', 'reveal', `d${i + 1}`]}>
+              <summary class="faq-q">{faq.question}</summary>
+              <p class="faq-a" set:html={faq.answer} />
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -174,6 +195,18 @@ import Footer from '../../../components/Footer.astro';
   .breadcrumb a { color: var(--color-text-muted-dark); text-decoration: none; transition: color 0.3s; }
   .breadcrumb a:hover { color: var(--color-gold); }
   .breadcrumb span { opacity: 0.5; margin-inline: 0.5rem; }
+
+  .freshness-signal {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted-dark);
+    opacity: 0.55;
+    margin-top: 0.75rem;
+  }
 
   .content-section {
     background: var(--color-bg);

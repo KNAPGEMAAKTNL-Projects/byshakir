@@ -1,0 +1,55 @@
+---
+const SITE = 'https://www.byshakir.com';
+
+interface Props {
+  name: string;
+  description: string;
+  serviceUrl: string;
+  priceRange?: string;
+}
+
+const { name, description, serviceUrl, priceRange = '€€€' } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${SITE}${serviceUrl}#service`,
+  name,
+  description,
+  url: `${SITE}${serviceUrl}`,
+  provider: { '@id': `${SITE}/#business` },
+  offers: {
+    '@type': 'Offer',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      priceCurrency: 'EUR',
+      description: priceRange,
+    },
+    url: `${SITE}/contact/`,
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'Netherlands' },
+    {
+      '@type': 'City',
+      name: 'Dubai',
+      containedInPlace: { '@type': 'Country', name: 'United Arab Emirates' },
+    },
+    {
+      '@type': 'City',
+      name: 'Barcelona',
+      containedInPlace: { '@type': 'Country', name: 'Spain' },
+    },
+    {
+      '@type': 'City',
+      name: 'Antwerp',
+      containedInPlace: { '@type': 'Country', name: 'Belgium' },
+    },
+    {
+      '@type': 'City',
+      name: 'Malaga',
+      containedInPlace: { '@type': 'Country', name: 'Spain' },
+    },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

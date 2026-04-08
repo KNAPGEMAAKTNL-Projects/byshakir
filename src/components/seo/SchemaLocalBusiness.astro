@@ -1,0 +1,212 @@
+---
+/**
+ * JSON-LD structured data — InteriorDesigner + WebSite @graph
+ *
+ * TODOs before launch (every field must match Google Business Profile exactly):
+ *
+ * 1. BTW_NUMBER   — confirm with Belastingdienst, then uncomment identifier entry
+ * 2. GBP_URL      — add to sameAs once GBP rating recovers (currently 2.7 — omitting intentionally)
+ * 3. REVIEW_DATA  — omitted intentionally (2.7 / 17 reviews would harm credibility signals)
+ * 4. GEO          — verify pin location on Google Maps before publishing (current values are centroid for Tiel)
+ * 5. LinkedIn / Werkspot — add when profiles are live
+ *
+ * Schema quality note (from technical-seo.md):
+ * Attribute-rich schema → 61.7% AI citation rate
+ * Generic/minimal schema → 41.6% (WORSE than no schema at 59.8%)
+ * Every TODO above is a missed signal — fill before launch.
+ */
+
+const SITE = 'https://www.byshakir.com';
+
+// ─── Social / directory profiles ─────────────────────────────────────────────
+const sameAsUrls: string[] = [
+  'https://www.instagram.com/byshakir_interiors/',
+  'https://www.facebook.com/byshakir',
+  'https://www.tiktok.com/@by_shakir_interiors',
+  // 'https://maps.google.com/?cid=XXXXXXXXXXXXXXXXX', // TODO: GBP — add when rating improves
+  // 'https://www.linkedin.com/company/byshakir',      // TODO: LinkedIn
+  // 'https://www.werkspot.nl/profiel/byshakir',       // TODO: Werkspot
+];
+
+// ─── Business identifiers ─────────────────────────────────────────────────────
+const identifiers = [
+  {
+    '@type': 'PropertyValue',
+    name: 'KvK-nummer',
+    propertyID: 'https://www.kvk.nl',
+    value: '11060878',
+  },
+  // TODO: uncomment once BTW-nummer is confirmed with Belastingdienst
+  // {
+  //   '@type': 'PropertyValue',
+  //   name: 'BTW-nummer',
+  //   propertyID: 'https://www.belastingdienst.nl',
+  //   value: 'NL000000000B00',
+  // },
+];
+
+// ─── Aggregate rating ─────────────────────────────────────────────────────────
+// Only add when real verified reviews exist on GBP. Do not estimate or fabricate.
+// const aggregateRating = {
+//   '@type': 'AggregateRating',
+//   ratingValue: '4.9',
+//   reviewCount: '12',
+//   bestRating: '5',
+//   worstRating: '1',
+// };
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'InteriorDesigner',
+      '@id': `${SITE}/#business`,
+
+      // ── Identity ──────────────────────────────────────────────────────────
+      name: 'By Shakir Luxury Interiors',
+      alternateName: 'By Shakir',
+      description:
+        'Luxury residential interior design studio based in Tiel, the Netherlands. Complete commissions from first concept through final installation — spatial planning, 3D visualisation, procurement, bespoke joinery and dressing. Active projects in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga.',
+      url: `${SITE}/`,
+
+      // ── Logo / image ──────────────────────────────────────────────────────
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${SITE}/#logo`,
+        url: `${SITE}/media/logo.svg`,
+        contentUrl: `${SITE}/media/logo.svg`,
+        caption: 'By Shakir Luxury Interiors',
+      },
+      image: `${SITE}/media/hero-poster.webp`,
+
+      // ── Contact ───────────────────────────────────────────────────────────
+      telephone: '+31344655473',
+      email: 'info@byshakir.com',
+
+      // ── Address ───────────────────────────────────────────────────────────
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Gijsbert Stoutweg 8',
+        postalCode: '4005 LE',
+        addressLocality: 'Tiel',
+        addressRegion: 'Gelderland',
+        addressCountry: 'NL',
+      },
+
+      // ── Geo ───────────────────────────────────────────────────────────────
+      // TODO: verify exact pin with Google Maps before launch
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 51.8899,
+        longitude: 5.4395,
+      },
+
+      // ── Legal identifiers ─────────────────────────────────────────────────
+      identifier: identifiers,
+
+      // ── Pricing ───────────────────────────────────────────────────────────
+      priceRange: '€€€',
+      currenciesAccepted: 'EUR',
+      paymentAccepted: 'Invoice, Bank Transfer',
+
+      // ── Availability (by appointment) ─────────────────────────────────────
+      // No fixed opening hours — all meetings are by appointment.
+      // openingHoursSpecification is omitted intentionally.
+
+      // ── Service area ──────────────────────────────────────────────────────
+      areaServed: [
+        { '@type': 'Country', name: 'Netherlands' },
+        {
+          '@type': 'City',
+          name: 'Dubai',
+          containedInPlace: { '@type': 'Country', name: 'United Arab Emirates' },
+        },
+        {
+          '@type': 'City',
+          name: 'Barcelona',
+          containedInPlace: { '@type': 'Country', name: 'Spain' },
+        },
+        {
+          '@type': 'City',
+          name: 'Antwerp',
+          containedInPlace: { '@type': 'Country', name: 'Belgium' },
+        },
+        {
+          '@type': 'City',
+          name: 'Malaga',
+          containedInPlace: { '@type': 'Country', name: 'Spain' },
+        },
+      ],
+
+      // ── Expertise signals ─────────────────────────────────────────────────
+      knowsAbout: [
+        'Luxury interior design',
+        'Residential interior architecture',
+        '3D visualisation and rendering',
+        'Spatial planning and layout',
+        'Material selection and procurement',
+        'Bespoke joinery and custom furniture',
+        'International property interiors',
+        'Full-service renovation management',
+        'Concept development',
+        'Trade and supplier coordination',
+      ],
+
+      // ── Service catalogue ─────────────────────────────────────────────────
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Luxury Interior Design Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': `${SITE}/services/#service`,
+              name: 'Complete Luxury Interior Design',
+              description:
+                'Full-service residential interior design from concept through installation: spatial planning, material selection, 3D visualisation, procurement, bespoke joinery and final dressing.',
+              url: `${SITE}/services/`,
+              provider: { '@id': `${SITE}/#business` },
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': `${SITE}/services/3d-design/#service`,
+              name: '3D Interior Design and Visualisation',
+              description:
+                'Photorealistic 3D renders of every room before construction begins. Full approval of layout, materials and finishes before any build work starts.',
+              url: `${SITE}/services/3d-design/`,
+              provider: { '@id': `${SITE}/#business` },
+            },
+          },
+        ],
+      },
+
+      // ── Profiles & citations ──────────────────────────────────────────────
+      ...(sameAsUrls.length > 0 && { sameAs: sameAsUrls }),
+
+      // ── Reviews (omitted until real GBP data available) ───────────────────
+      // aggregateRating,
+    },
+
+    // ── WebSite node ──────────────────────────────────────────────────────────
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: `${SITE}/`,
+      name: 'By Shakir',
+      alternateName: 'By Shakir Luxury Interiors',
+      description:
+        'Luxury residential interior design by By Shakir — Netherlands, Dubai, Barcelona, Antwerpen and Malaga.',
+      inLanguage: 'en-GB',
+      publisher: {
+        '@id': `${SITE}/#business`,
+      },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

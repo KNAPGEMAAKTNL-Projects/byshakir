@@ -1,0 +1,39 @@
+# By Shakir — Cloudflare Pages Redirects
+# Generated: 2026-04-08
+# Source: REDIRECTS-SOURCE.md + CONTENT/sitemap.md
+# Format: /old-path /new-path/ 301
+# Note: /collections/ has no new equivalent — remapped to /projects/
+
+# ─── Content slug renames ────────────────────────────────────────────────────
+/about-us/ /about/ 301
+
+# ─── Services — 3 duplicate WordPress slugs → single services page ──────────
+/completeluxuryinteriors/ /services/ 301
+/completeluxuryinteriors_clone/ /services/ 301
+/completeluxuryinteriors_clone-2/ /services/ 301
+
+# ─── Project pages — old single-word slugs → new descriptive slugs ──────────
+/project/rotterdamnetherlands/ /projects/villa-mansion-netherlands/ 301
+/project/duplexpenthousebarcelona/ /projects/duplex-penthouse-barcelona/ 301
+/project/dubaimarina/ /projects/penthouse-dubai-marina/ 301
+/project/antwerpenbelgiumbyshakir/ /projects/country-estate-antwerpen/ 301
+/project/project-malaga-spain-3/ /projects/beach-house-malaga/ 301
+
+# ─── Broken footer links (/luxury/ prefix) ──────────────────────────────────
+# Specific rules before the splat below
+/luxury/about-us/ /about/ 301
+/luxury/projects/ /projects/ 301
+/luxury/collections/ /projects/ 301
+
+# ─── WordPress taxonomy — gallery category pages (splat) ────────────────────
+/gallery-category/* /projects/ 301
+
+# ─── WordPress CPT — gallery item pages (splat) ─────────────────────────────
+/project-gallery/* /projects/ 301
+
+# ─── WooCommerce + Elementor draft pages ────────────────────────────────────
+/shop/ / 301
+/cart/ / 301
+/checkout/ / 301
+/my-account/ / 301
+/elementor-1867/ / 301

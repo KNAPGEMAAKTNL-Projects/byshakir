@@ -7,8 +7,9 @@ import Header from '../../../components/Header.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 
-const seoTitle = 'Penthouse, Dubai Marina \u2014 Interior Design | By Shakir';
-const seoDescription = 'Luxury penthouse interior in Dubai Marina by By Shakir. Warm materials, panoramic views. View the project.';
+const seoTitle = 'Dubai Marina Penthouse \u2014 Interior Design | By Shakir';
+const seoDescription = 'Luxury penthouse interior in Dubai Marina by By Shakir. Warm materials and panoramic marina views, from concept to final dressing. View the full project.';
+const seoOgImage = '/media/projects/penthouse-dubai-marina/cover.webp';
 
 const project = {
   title: 'Penthouse',
@@ -33,7 +34,7 @@ const relatedProjects = [
 ];
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} ogImage={seoOgImage}>
   <Header currentPage="/projects/" />
 
   <main>

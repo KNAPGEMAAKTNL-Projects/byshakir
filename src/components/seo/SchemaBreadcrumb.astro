@@ -1,0 +1,63 @@
+---
+const SITE = 'https://www.byshakir.com';
+const pathname = Astro.url.pathname;
+const segments = pathname.split('/').filter(Boolean);
+
+const labelMap: Record<string, string> = {
+  services: 'Services',
+  '3d-design': '3D Interior Design Visualisation',
+  projects: 'Projects',
+  werkgebied: 'Service Areas',
+  about: 'About',
+  contact: 'Contact',
+  faq: 'FAQ',
+  privacy: 'Privacy Policy',
+  'cookie-statement': 'Cookie Statement',
+  'beach-house-malaga': 'Beach House Malaga',
+  'country-estate-antwerpen': 'Country Estate Antwerpen',
+  'duplex-penthouse-barcelona': 'Duplex Penthouse Barcelona',
+  'penthouse-dubai-marina': 'Penthouse Dubai Marina',
+  'villa-mansion-netherlands': 'Villa Mansion Netherlands',
+  // Werkgebied city slugs — capitalised via fallback; explicit for common cities
+  amsterdam: 'Amsterdam',
+  rotterdam: 'Rotterdam',
+  'den-haag': 'Den Haag',
+  utrecht: 'Utrecht',
+  eindhoven: 'Eindhoven',
+  arnhem: 'Arnhem',
+  nijmegen: 'Nijmegen',
+  'den-bosch': 'Den Bosch',
+  wassenaar: 'Wassenaar',
+  apeldoorn: 'Apeldoorn',
+  breda: 'Breda',
+  amersfoort: 'Amersfoort',
+  tiel: 'Tiel',
+  zwolle: 'Zwolle',
+  laren: 'Laren',
+  dubai: 'Dubai',
+  barcelona: 'Barcelona',
+  malaga: 'Malaga',
+  antwerp: 'Antwerp',
+};
+
+const items = [
+  { position: 1, name: 'Home', item: `${SITE}/` },
+  ...segments.map((seg, i) => ({
+    position: i + 2,
+    name: labelMap[seg] ?? seg.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+    item: `${SITE}/${segments.slice(0, i + 1).join('/')}/`,
+  })),
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map(({ position, name, item }) => ({
+    '@type': 'ListItem',
+    position,
+    name,
+    item,
+  })),
+};
+---
+{segments.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
