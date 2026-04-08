@@ -41,6 +41,9 @@ const legalLinks = [
         ))}
         <span class="footer-legal-sep">&middot;</span>
         <span>&copy; {year} By Shakir</span>
+        <span class="footer-legal-sep">&middot;</span>
+        {/* Update slug once knapgemaakt.nl case study is published */}
+        <span>Gerealiseerd door <a href="https://knapgemaakt.nl/project/by-shakir/" target="_blank" rel="noopener">KNAP GEMAAKT.</a></span>
       </div>
     </div>
 
@@ -98,7 +101,6 @@ const legalLinks = [
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--color-text-muted-dark);
-    opacity: 0.5;
     display: block;
     margin-bottom: 1.5rem;
   }
@@ -124,13 +126,16 @@ const legalLinks = [
     color: var(--color-text-muted-dark);
     text-decoration: none;
     transition: color 0.3s;
+    min-block-size: 24px;
+    display: flex;
+    align-items: center;
   }
   .footer-contact a:hover { color: var(--color-text-on-dark); }
   .footer-legal {
     font-family: var(--font-body);
     font-size: 0.6875rem;
     letter-spacing: 0.1em;
-    color: color-mix(in srgb, var(--color-text-muted-dark) 35%, transparent);
+    color: color-mix(in srgb, var(--color-text-muted-dark) 65%, transparent);
     display: flex;
     gap: 0.5rem;
     align-items: center;
