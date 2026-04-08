@@ -8,6 +8,8 @@
 ## 1. Project Identity
 
 **Client:** By Shakir
+**Voice file slug:** `luxury-interior`
+**Site language:** `en`
 **Business type:** Luxury interior design studio — complete home interiors (floors, walls, furniture, 3D visualisation)
 **Location:** Tiel, Netherlands · international (Dubai, Barcelona, Malaga, Antwerp)
 **Archetype:** B — Visual Portfolio (Interieurontwerper, highest visual refinement variant)

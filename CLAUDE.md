@@ -21,17 +21,18 @@ During builds, reference both — homepage-reference.html for layout intent, DES
 Activate `frontend-design` for any HTML generation tasks.
 Use Impeccable commands (/audit, /critique, /polish, etc.) for design refinement.
 
+## Copy Language
+en — All website copy is written in English. This also determines which lang/ copywriting reference files are loaded.
+
 ## Critical Rules
 - All internal links MUST end with trailing slash (Astro trailingSlash: "always")
-- All text in Dutch unless specified otherwise
-- Use je/jij (check DESIGN.md for exceptions)
-- All formatting: Dutch conventions (comma decimals, period thousands, EUR before amount with space)
-- Date format: "15 maart 2025" (day first, lowercase month)
-- Phone format: 06-12345678 or local area code
-- Postcode format: 1234 AB
+- All text in English
+- All formatting: English conventions (comma thousands, period decimals, EUR before amount)
+- Date format: "15 March 2025" (day first, full month name)
+- Phone format: +31 344 655 473 (international format for international clients)
+- Postcode format: 4005 LE (Dutch format retained for address)
 - Never use stock photos for team/project imagery
-- Never use "Versturen" as form button text
-- Never use aggressive sales language ("Wij zijn de #1...")
+- Never use aggressive sales language ("We are the #1...")
 - NEVER add max-w-*, mx-auto, or container wrappers not in the reference HTML
 - NEVER normalize padding/margin values across sections
 - NEVER symmetrize asymmetric layouts from the reference design
