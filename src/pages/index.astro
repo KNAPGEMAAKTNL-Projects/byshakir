@@ -7,6 +7,14 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import CtaSection from '../components/CtaSection.astro';
 import Footer from '../components/Footer.astro';
+import { Picture, Image } from 'astro:assets';
+import heroPoster from '../assets/media/hero-poster.webp';
+import shakirPortrait from '../assets/media/shakir-portrait.webp';
+import process3d from '../assets/media/3d-design-process.webp';
+import showroomTiel from '../assets/media/showroom-tiel.webp';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const covers = import.meta.glob<{ default: ImageMetadata }>('../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getCover = (slug: string) => covers[`../assets/media/projects/${slug}/cover.webp`].default;
 
 const projects = [
   { slug: 'villa-mansion-netherlands', location: 'Netherlands', title: 'Villa Mansion', featured: true },
@@ -61,19 +69,20 @@ const testimonials = [
     <section class="hero">
       <!-- Layer 1 — Video background (poster for LCP) -->
       <div class="hero-bg">
-        <img
-          src="/media/hero-poster.webp"
+        <Picture
+          src={heroPoster}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[400, 800, 1200]}
+          sizes="100vw"
           alt=""
           class="hero-poster"
           loading="eager"
           fetchpriority="high"
-          decoding="async"
         />
         <video
           class="hero-video"
-          src="/media/hero-optimized-final.mp4"
-          poster="/media/hero-poster.webp"
-          autoplay
+          data-src="/media/hero-optimized-final.mp4"
           muted
           loop
           playsinline
@@ -133,10 +142,12 @@ const testimonials = [
               class:list={['pcard', { 'pcard-featured': project.featured }]}
             >
               <div class="pcard-img">
-                <img
-                  src={`/media/projects/${project.slug}/cover.webp`}
+                <Image
+                  src={getCover(project.slug)}
                   alt={`${project.title}, ${project.location} — interior design by By Shakir`}
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  widths={[300, 600, 900]}
+                  sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
                   decoding="async"
                 />
               </div>
@@ -211,9 +222,11 @@ const testimonials = [
       <div class="about-inner">
         <!-- Portrait — 7fr column -->
         <div class="about-portrait reveal">
-          <img
-            src="/media/shakir-portrait.webp"
+          <Image
+            src={shakirPortrait}
             alt="Shakir, principal designer at By Shakir, in the studio"
+            widths={[400, 600, 900]}
+            sizes="(max-width: 768px) 100vw, 60vw"
             loading="lazy"
             decoding="async"
           />
@@ -281,9 +294,11 @@ const testimonials = [
 
         <!-- Full-width 3D design image -->
         <div class="process-image reveal">
-          <img
-            src="/media/3d-design-process.webp"
+          <Image
+            src={process3d}
             alt="3D interior design visualisation process by By Shakir — photorealistic render of a living space"
+            widths={[600, 900, 1400]}
+            sizes="100vw"
             loading="lazy"
             decoding="async"
           />
@@ -296,10 +311,12 @@ const testimonials = [
          Full-width image, text overlay
          ═══════════════════════════════════════════════════════════════ -->
     <section class="showroom">
-      <img
+      <Image
+        src={showroomTiel}
         class="showroom-bg"
-        src="/media/showroom-tiel.webp"
         alt="Interior of the By Shakir showroom in Tiel"
+        widths={[600, 900, 1400]}
+        sizes="100vw"
         loading="lazy"
         decoding="async"
       />
@@ -826,3 +843,16 @@ const testimonials = [
     .process-steps { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  // Delay hero video load until after LCP — prevents 4MB download from competing with poster image.
+  // No { once: true }: listener persists across View Transitions so back-navigation works.
+  document.addEventListener('astro:page-load', function () {
+    var v = document.querySelector('.hero-video');
+    if (v && v.dataset.src && !v.getAttribute('src')) {
+      v.setAttribute('src', v.dataset.src);
+      v.load();
+      v.play().catch(function () {});
+    }
+  });
+</script>

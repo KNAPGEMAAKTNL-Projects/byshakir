@@ -4,12 +4,22 @@
 // Content: CONTENT/projects/duplex-penthouse-barcelona.md
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import coverImg from '../../../assets/media/projects/duplex-penthouse-barcelona/cover.webp';
+import img01 from '../../../assets/media/projects/duplex-penthouse-barcelona/01.webp';
+import img02 from '../../../assets/media/projects/duplex-penthouse-barcelona/02.webp';
+import img03 from '../../../assets/media/projects/duplex-penthouse-barcelona/03.webp';
+import img04 from '../../../assets/media/projects/duplex-penthouse-barcelona/04.webp';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const relatedCovers = import.meta.glob<{ default: ImageMetadata }>('../../../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getRelatedCover = (slug: string) => relatedCovers[`../../../assets/media/projects/${slug}/cover.webp`].default;
 
 const seoTitle = 'Penthouse Interior Design Barcelona, Spain | By Shakir';
 const seoDescription = 'Duplex penthouse interior in Barcelona by By Shakir. Mediterranean luxury across two levels, bespoke furniture and spatial planning. View the project.';
-const seoOgImage = '/media/projects/duplex-penthouse-barcelona/cover.webp';
+const seoOgImage = coverImg.src;
 
 const project = {
   title: 'Duplex Penthouse',
@@ -20,10 +30,11 @@ const project = {
 };
 
 const images = [
-  { src: '/media/projects/duplex-penthouse-barcelona/01.webp', alt: 'Open-plan living area across both levels of the Barcelona duplex penthouse', aspect: 'landscape' },
-  { src: '/media/projects/duplex-penthouse-barcelona/02.webp', alt: 'Sculptural staircase connecting the two floors with natural light from above', aspect: 'portrait' },
-  { src: '/media/projects/duplex-penthouse-barcelona/03.webp', alt: 'Terrace furnished as an outdoor living room with views across Barcelona', aspect: 'landscape' },
-  { src: '/media/projects/duplex-penthouse-barcelona/04.webp', alt: 'Kitchen with natural stone island and Mediterranean timber detailing', aspect: 'landscape' },
+  { src: coverImg, alt: 'Duplex Penthouse Barcelona — luxury residential interior by By Shakir', aspect: 'landscape' },
+  { src: img01, alt: 'Open-plan living area across both levels of the Barcelona duplex penthouse', aspect: 'landscape' },
+  { src: img02, alt: 'Sculptural staircase connecting the two floors with natural light from above', aspect: 'portrait' },
+  { src: img03, alt: 'Terrace furnished as an outdoor living room with views across Barcelona', aspect: 'landscape' },
+  { src: img04, alt: 'Kitchen with natural stone island and Mediterranean timber detailing', aspect: 'landscape' },
 ];
 
 const relatedProjects = [
@@ -52,6 +63,7 @@ const relatedProjects = [
       <div class="project-hero-content hero-content">
         <span class="overline overline-gold">PROJECT &middot; {project.overline}</span>
         <h1 class="project-hero-h1">{project.title}<span class="gold-comma">,</span> <span class="h1-location">Barcelona</span></h1>
+        <Breadcrumb items={[{ label: 'Projects', href: '/projects/' }, { label: project.title }]} />
       </div>
     </section>
 
@@ -63,10 +75,13 @@ const relatedProjects = [
         <div class="gallery-grid">
           {images.map((img, i) => (
             <div class:list={['gallery-item', 'reveal', `d${Math.min(i + 1, 4)}`, { 'gallery-featured': i === 0 }]}>
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
+                widths={[600, 900, 1200]}
+                sizes={i === 0 ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 67vw" : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
                 decoding="async"
               />
             </div>
@@ -124,9 +139,11 @@ const relatedProjects = [
           {relatedProjects.map((rp, i) => (
             <a href={`/projects/${rp.slug}/`} class:list={['related-card', 'reveal', `d${i + 1}`]}>
               <div class="related-card-img">
-                <img
-                  src={`/media/projects/${rp.slug}/cover.webp`}
+                <Image
+                  src={getRelatedCover(rp.slug)}
                   alt={`${rp.title}, ${rp.location} \u2014 interior design by By Shakir`}
+                  widths={[300, 500, 800]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   loading="lazy"
                   decoding="async"
                 />

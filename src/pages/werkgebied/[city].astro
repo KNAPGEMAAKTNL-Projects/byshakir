@@ -13,6 +13,10 @@ import Footer from '../../components/Footer.astro';
 import SchemaFAQ from '../../components/seo/SchemaFAQ.astro';
 import { locations, getRelatedLocations } from '../../data/locations';
 import type { LocationData } from '../../data/locations';
+import { Image } from 'astro:assets';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const covers = import.meta.glob<{ default: ImageMetadata }>('../../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getCover = (slug: string) => covers[`../../assets/media/projects/${slug}/cover.webp`].default;
 
 export function getStaticPaths() {
   return locations.map((loc) => ({
@@ -306,13 +310,13 @@ const pageDescription = isInternational
             aria-label={`View project: ${location.relatedProject.title}`}
           >
             <div class="loc-pcard-img">
-              <img
-                src={`/media/projects/${location.relatedProject.slug}/cover.webp`}
+              <Image
+                src={getCover(location.relatedProject.slug)}
                 alt={`${location.relatedProject.title} — interior by By Shakir`}
+                widths={[300, 500, 800]}
+                sizes="(max-width: 768px) 100vw, 33vw"
                 loading="lazy"
                 decoding="async"
-                width="860"
-                height="573"
               />
             </div>
             <div class="loc-pcard-overlay">

@@ -4,12 +4,23 @@
 // Content: CONTENT/projects/penthouse-dubai-marina.md
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import coverImg from '../../../assets/media/projects/penthouse-dubai-marina/cover.webp';
+import img01 from '../../../assets/media/projects/penthouse-dubai-marina/01.webp';
+import img02 from '../../../assets/media/projects/penthouse-dubai-marina/02.webp';
+import img03 from '../../../assets/media/projects/penthouse-dubai-marina/03.webp';
+import img04 from '../../../assets/media/projects/penthouse-dubai-marina/04.webp';
+import img05 from '../../../assets/media/projects/penthouse-dubai-marina/05.webp';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const relatedCovers = import.meta.glob<{ default: ImageMetadata }>('../../../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getRelatedCover = (slug: string) => relatedCovers[`../../../assets/media/projects/${slug}/cover.webp`].default;
 
 const seoTitle = 'Dubai Marina Penthouse \u2014 Interior Design | By Shakir';
 const seoDescription = 'Luxury penthouse interior in Dubai Marina by By Shakir. Warm materials and panoramic marina views, from concept to final dressing. View the full project.';
-const seoOgImage = '/media/projects/penthouse-dubai-marina/cover.webp';
+const seoOgImage = coverImg.src;
 
 const project = {
   title: 'Penthouse',
@@ -20,11 +31,12 @@ const project = {
 };
 
 const images = [
-  { src: '/media/projects/penthouse-dubai-marina/01.webp', alt: 'Living room with marina views and travertine flooring in the Dubai penthouse', aspect: 'landscape' },
-  { src: '/media/projects/penthouse-dubai-marina/02.webp', alt: 'Dining area positioned facing the sunset over Dubai Marina', aspect: 'landscape' },
-  { src: '/media/projects/penthouse-dubai-marina/03.webp', alt: 'Timber wall panelling and warm lighting in the primary bedroom', aspect: 'portrait' },
-  { src: '/media/projects/penthouse-dubai-marina/04.webp', alt: 'Kitchen with natural stone surfaces and integrated joinery', aspect: 'landscape' },
-  { src: '/media/projects/penthouse-dubai-marina/05.webp', alt: 'Bathroom with floor-to-ceiling travertine and warm brass fixtures', aspect: 'portrait' },
+  { src: coverImg, alt: 'Penthouse Dubai Marina — luxury residential interior by By Shakir', aspect: 'landscape' },
+  { src: img01, alt: 'Living room with marina views and travertine flooring in the Dubai penthouse', aspect: 'landscape' },
+  { src: img02, alt: 'Dining area positioned facing the sunset over Dubai Marina', aspect: 'landscape' },
+  { src: img03, alt: 'Timber wall panelling and warm lighting in the primary bedroom', aspect: 'portrait' },
+  { src: img04, alt: 'Kitchen with natural stone surfaces and integrated joinery', aspect: 'landscape' },
+  { src: img05, alt: 'Bathroom with floor-to-ceiling travertine and warm brass fixtures', aspect: 'portrait' },
 ];
 
 const relatedProjects = [
@@ -53,6 +65,7 @@ const relatedProjects = [
       <div class="project-hero-content hero-content">
         <span class="overline overline-gold">PROJECT &middot; {project.overline}</span>
         <h1 class="project-hero-h1">{project.title}<span class="gold-comma">,</span> <span class="h1-location">Dubai Marina</span></h1>
+        <Breadcrumb items={[{ label: 'Projects', href: '/projects/' }, { label: project.title }]} />
       </div>
     </section>
 
@@ -64,10 +77,13 @@ const relatedProjects = [
         <div class="gallery-grid">
           {images.map((img, i) => (
             <div class:list={['gallery-item', 'reveal', `d${Math.min(i + 1, 4)}`, { 'gallery-featured': i === 0 }]}>
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
+                widths={[600, 900, 1200]}
+                sizes={i === 0 ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 67vw" : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
                 decoding="async"
               />
             </div>
@@ -125,9 +141,11 @@ const relatedProjects = [
           {relatedProjects.map((rp, i) => (
             <a href={`/projects/${rp.slug}/`} class:list={['related-card', 'reveal', `d${i + 1}`]}>
               <div class="related-card-img">
-                <img
-                  src={`/media/projects/${rp.slug}/cover.webp`}
+                <Image
+                  src={getRelatedCover(rp.slug)}
                   alt={`${rp.title}, ${rp.location} \u2014 interior design by By Shakir`}
+                  widths={[300, 500, 800]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   loading="lazy"
                   decoding="async"
                 />

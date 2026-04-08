@@ -1,19 +1,19 @@
 /**
- * GSAP Effects — Dynamic Import (DESIGN.md §11)
+ * GSAP Effects — Loaded via dynamic import + IntersectionObserver (Layout.astro)
  * Animation level: 6/10 — GSAP justified (3+ exclusive effects)
  *
  * Effects:
  * 1. Portfolio grid stagger (ScrollTrigger, 100ms per card)
- * 2. Hero headline word split (SplitText, 1.4s, 100ms/word)
+ * 2. Hero headline word split (manual, 1.4s, 100ms/word)
+ * 3. Process steps stagger (ScrollTrigger, 120ms per step)
  *
  * Performance:
- * - Dynamic import — NOT in initial bundle
- * - scrub: 1 (smoothed, not raw)
- * - Max 15 ScrollTrigger instances
- * - Respects prefers-reduced-motion
+ * - Exported function — NOT self-invoking. Caller (Layout.astro) decides when to run.
+ * - GSAP itself dynamically imported here — only loads when this module is called.
+ * - Respects prefers-reduced-motion.
  */
 
-async function initGSAP(): Promise<void> {
+export async function initGSAP(): Promise<void> {
   if (typeof window === 'undefined') return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -24,7 +24,6 @@ async function initGSAP(): Promise<void> {
   gsap.registerPlugin(ScrollTrigger);
 
   // Project easing equivalent for GSAP
-  // CSS: cubic-bezier(0.83, 0, 0.17, 1) → GSAP CustomEase or power4.inOut approximation
   const ease = 'power4.inOut';
 
   // 1. Portfolio grid stagger — cards fade up with scale
@@ -49,23 +48,21 @@ async function initGSAP(): Promise<void> {
   }
 
   // 2. Hero headline word split — words fade up sequentially
+  // LCP rule: opacity min 0.1 (never 0) so the element registers as painted
   const heroH1 = document.querySelector('.hero-h1');
   if (heroH1) {
-    // Manual word split (SplitText is a premium GSAP plugin — use manual approach)
-    // Regex accounts for Astro's data attributes on <br> elements (dev + prod)
     const text = heroH1.innerHTML;
     const words = text.split(/(\s+|<br[^>]*\/?>)/);
     heroH1.innerHTML = words
       .map((word) => {
         if (word.match(/^\s+$/) || word.match(/<br[^>]*\/?>/)) return word;
-        return `<span class="word-split" style="display:inline-block;overflow:hidden"><span class="word-inner" style="display:inline-block">${word}</span></span>`;
+        return `<span class="word-split" style="display:inline-block;overflow:hidden;padding-bottom:0.25em;margin-bottom:-0.25em"><span class="word-inner" style="display:inline-block">${word}</span></span>`;
       })
       .join('');
 
     const wordInners = heroH1.querySelectorAll('.word-inner');
-    gsap.set(wordInners, { y: '110%', opacity: 0 });
+    gsap.set(wordInners, { y: '110%', opacity: 0.1 }); // min 0.1 — LCP must see element painted
 
-    // Delay to let hero-enter animation complete first (0.35s delay + 1.6s duration)
     gsap.to(wordInners, {
       y: '0%',
       opacity: 1,
@@ -76,7 +73,7 @@ async function initGSAP(): Promise<void> {
     });
   }
 
-  // 3. Process steps stagger (if on page)
+  // 3. Process steps stagger
   const processSteps = document.querySelectorAll('.step');
   if (processSteps.length > 0) {
     gsap.set(processSteps, { opacity: 0, y: 24 });
@@ -96,7 +93,3 @@ async function initGSAP(): Promise<void> {
     });
   }
 }
-
-// Initialize on load and after page transitions
-initGSAP();
-document.addEventListener('astro:after-swap', initGSAP);

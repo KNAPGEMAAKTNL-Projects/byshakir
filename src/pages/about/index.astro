@@ -7,12 +7,15 @@ import Header from '../../components/Header.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import Footer from '../../components/Footer.astro';
+import { Image, Picture } from 'astro:assets';
+import shakirPortrait from '../../assets/media/shakir-portrait.webp';
+import showroomTiel from '../../assets/media/showroom-tiel.webp';
 ---
 
 <Layout
   title="About — Shakir, Luxury Interior Designer | By Shakir"
   description="Meet the designer behind By Shakir. Luxury residential interiors across the Netherlands, Dubai, Barcelona and Malaga. Based in Tiel. Visit the showroom."
-  ogImage="/media/shakir-portrait.webp"
+  ogImage={shakirPortrait.src}
 >
   <Header currentPage="/about/" />
 
@@ -24,9 +27,13 @@ import Footer from '../../components/Footer.astro';
         <rect width="100%" height="100%" filter="url(#g-ah)"/>
       </svg>
       <div class="about-hero-inner">
-        <div class="about-hero-portrait reveal">
-          <img
-            src="/media/shakir-portrait.webp"
+        <div class="about-hero-portrait">
+          <Picture
+            src={shakirPortrait}
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[400, 600, 900]}
+            sizes="(max-width: 768px) 100vw, 45vw"
             alt="Shakir, principal designer at By Shakir, in the studio"
             loading="eager"
             fetchpriority="high"
@@ -52,7 +59,7 @@ import Footer from '../../components/Footer.astro';
       <div class="story-inner">
         <div class="story-content reveal">
           <h2 class="section-h2 gold-dot">The Studio Story</h2>
-          <p class="body-text body-text-lg">The studio was founded on a conviction that luxury interior design does not have to feel cold. The Dutch market has no shortage of clean Scandinavian minimalism. Beautiful, certainly. But not warm. Not lived in.</p>
+          <p class="body-text body-text-lg">The studio was founded fifteen years ago on a conviction that luxury interior design does not have to feel cold. The Dutch market has no shortage of clean Scandinavian minimalism. Beautiful, certainly. But not warm. Not lived in.</p>
           <p class="body-text body-text-lg">By Shakir brings a Mediterranean sensibility to an industry that often defaults to restraint. Travertine over cool marble. Warm sand tones over arctic white. Linen and textured stone where others reach for glass and steel. This is not a reaction against minimalism. It is an alternative for clients who want their home to feel inviting, not merely impressive.</p>
           <p class="body-text body-text-lg">That approach has led to commissions across four countries: a <a href="/projects/villa-mansion-netherlands/">villa mansion in the Netherlands</a>, a <a href="/projects/duplex-penthouse-barcelona/">duplex penthouse in Barcelona</a>, a <a href="/projects/country-estate-antwerpen/">country estate near Antwerpen</a>, a <a href="/projects/beach-house-malaga/">beach house in Malaga</a> and a <a href="/projects/penthouse-dubai-marina/">penthouse overlooking Dubai Marina</a>.</p>
         </div>
@@ -88,9 +95,11 @@ import Footer from '../../components/Footer.astro';
     <section class="showroom-section">
       <div class="showroom-split">
         <div class="showroom-image reveal">
-          <img
-            src="/media/showroom-tiel.webp"
+          <Image
+            src={showroomTiel}
             alt="Interior of the By Shakir showroom in Tiel, showing material samples, fabric swatches and project photography"
+            widths={[500, 800, 1100]}
+            sizes="(max-width: 768px) 100vw, 60vw"
             loading="lazy"
             decoding="async"
           />
@@ -147,7 +156,9 @@ import Footer from '../../components/Footer.astro';
     height: 100%;
     object-fit: cover;
     object-position: top center;
+    transition: transform 0.7s var(--ease);
   }
+  .about-hero-portrait:hover img { transform: scale(1.03); }
   .about-hero-h1 {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
@@ -251,7 +262,8 @@ import Footer from '../../components/Footer.astro';
     overflow: hidden;
     border-radius: 2px;
   }
-  .showroom-image img { width: 100%; height: 100%; object-fit: cover; }
+  .showroom-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+  .showroom-image:hover img { transform: scale(1.03); }
   .showroom-h2 {
     font-family: var(--font-heading);
     font-size: var(--text-2xl);

@@ -89,33 +89,7 @@ Before execution, 3D drawings and sketches are made from floor plans. Clients re
 
 ---
 
-## Social Proof
 
-**Google reviews source:** Screenshots in `/testimonials/` folder (processed in `reviews.md`)
-**Overall score:** Not captured in screenshots — number of total reviews unknown
-**Date of screenshots:** Unclear (oldest reviews go back ~6 years)
-
-**⚠️ Important caveat:** Several reviews appear to be for a previous business at this address ("Mega Meubels" is named in one review; another uses "she" to describe the contact, inconsistent with Shakir's profile). Do not use these reviews without verifying with client.
-
-**Usable reviews (all ⭐⭐⭐⭐⭐):**
-
-| Reviewer | Stars | Text available? |
-|---|---|---|
-| Cor M | ⭐⭐⭐⭐⭐ | Yes (mentions "she" — may be wrong business) |
-| Ben van der Tang | ⭐⭐⭐⭐⭐ | Text unclear in screenshot |
-| Mohammed Abdeldity | ⭐⭐⭐⭐⭐ | No text — only "Positief: Punctuality, Quality, Professionalism, Value" |
-| Alex Kelderman | ⭐⭐⭐⭐⭐ | No text in screenshot |
-| Stijny Van Der Linden | ⭐⭐⭐⭐⭐ | No text in screenshot |
-| Houssam Vamily | ⭐⭐⭐⭐⭐ | Text unclear |
-| R Glas | ⭐⭐⭐⭐⭐ | Text unclear |
-
-**Negative reviews:**
-| Reviewer | Stars | Notes |
-|---|---|---|
-| Soli Ospanbekov | ⭐ | Text unclear · all dimensions rated negative |
-| Marah Vos | ⭐⭐⭐⭐⭐ | Mentions website not working well — likely outdated |
-
-**Usable for site:** Ask client for 3–5 current client testimonials with permission to publish by name.
 
 **Named portfolio projects (publicly listed on site):**
 1. Beach House Malaga (Spain)

@@ -4,12 +4,23 @@
 // Content: CONTENT/projects/country-estate-antwerpen.md
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import coverImg from '../../../assets/media/projects/country-estate-antwerpen/cover.webp';
+import img01 from '../../../assets/media/projects/country-estate-antwerpen/01.webp';
+import img02 from '../../../assets/media/projects/country-estate-antwerpen/02.webp';
+import img03 from '../../../assets/media/projects/country-estate-antwerpen/03.webp';
+import img04 from '../../../assets/media/projects/country-estate-antwerpen/04.webp';
+import img05 from '../../../assets/media/projects/country-estate-antwerpen/05.webp';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const relatedCovers = import.meta.glob<{ default: ImageMetadata }>('../../../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getRelatedCover = (slug: string) => relatedCovers[`../../../assets/media/projects/${slug}/cover.webp`].default;
 
 const seoTitle = 'Country Estate, Antwerpen \u2014 Interior Design | By Shakir';
 const seoDescription = 'Country estate interior in Belgium by By Shakir. Heritage architecture meets contemporary luxury living near Antwerpen, from concept to installation. View.';
-const seoOgImage = '/media/projects/country-estate-antwerpen/cover.webp';
+const seoOgImage = coverImg.src;
 
 const project = {
   title: 'Country Estate',
@@ -20,11 +31,12 @@ const project = {
 };
 
 const images = [
-  { src: '/media/projects/country-estate-antwerpen/01.webp', alt: 'Reception room with high ceilings and contemporary furnishings in the Antwerpen country estate', aspect: 'landscape' },
-  { src: '/media/projects/country-estate-antwerpen/02.webp', alt: 'Bespoke kitchen joinery with warm timber finish against original stone walls', aspect: 'landscape' },
-  { src: '/media/projects/country-estate-antwerpen/03.webp', alt: 'Primary bedroom with linen bedding and muted colour palette', aspect: 'portrait' },
-  { src: '/media/projects/country-estate-antwerpen/04.webp', alt: 'Library or study with built-in shelving and reading light', aspect: 'portrait' },
-  { src: '/media/projects/country-estate-antwerpen/05.webp', alt: 'Garden room with views across the estate grounds', aspect: 'landscape' },
+  { src: coverImg, alt: 'Country Estate Antwerpen — luxury residential interior by By Shakir', aspect: 'landscape' },
+  { src: img01, alt: 'Reception room with high ceilings and contemporary furnishings in the Antwerpen country estate', aspect: 'landscape' },
+  { src: img02, alt: 'Bespoke kitchen joinery with warm timber finish against original stone walls', aspect: 'landscape' },
+  { src: img03, alt: 'Primary bedroom with linen bedding and muted colour palette', aspect: 'portrait' },
+  { src: img04, alt: 'Library or study with built-in shelving and reading light', aspect: 'portrait' },
+  { src: img05, alt: 'Garden room with views across the estate grounds', aspect: 'landscape' },
 ];
 
 const relatedProjects = [
@@ -53,6 +65,7 @@ const relatedProjects = [
       <div class="project-hero-content hero-content">
         <span class="overline overline-gold">PROJECT &middot; {project.overline}</span>
         <h1 class="project-hero-h1">{project.title}<span class="gold-comma">,</span> <span class="h1-location">Antwerpen</span></h1>
+        <Breadcrumb items={[{ label: 'Projects', href: '/projects/' }, { label: project.title }]} />
       </div>
     </section>
 
@@ -64,10 +77,13 @@ const relatedProjects = [
         <div class="gallery-grid">
           {images.map((img, i) => (
             <div class:list={['gallery-item', 'reveal', `d${Math.min(i + 1, 4)}`, { 'gallery-featured': i === 0 }]}>
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
+                widths={[600, 900, 1200]}
+                sizes={i === 0 ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 67vw" : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
                 decoding="async"
               />
             </div>
@@ -125,9 +141,11 @@ const relatedProjects = [
           {relatedProjects.map((rp, i) => (
             <a href={`/projects/${rp.slug}/`} class:list={['related-card', 'reveal', `d${i + 1}`]}>
               <div class="related-card-img">
-                <img
-                  src={`/media/projects/${rp.slug}/cover.webp`}
+                <Image
+                  src={getRelatedCover(rp.slug)}
                   alt={`${rp.title}, ${rp.location} \u2014 interior design by By Shakir`}
+                  widths={[300, 500, 800]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   loading="lazy"
                   decoding="async"
                 />

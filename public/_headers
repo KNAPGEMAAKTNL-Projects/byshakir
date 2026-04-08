@@ -1,0 +1,25 @@
+# Cloudflare Pages — HTTP headers
+# Generated: 2026-04-08
+
+# ── Preview deployments: never index ──────────────────────────────────────────
+https://byshakir.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://byshakir.knapgemaakt.nl/*
+  X-Robots-Tag: noindex
+
+# ── Production: security headers ──────────────────────────────────────────────
+https://www.byshakir.com/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+
+# ── Immutable assets: Astro-hashed bundles ────────────────────────────────────
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Immutable assets: self-hosted fonts ───────────────────────────────────────
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

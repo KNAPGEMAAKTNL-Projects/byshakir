@@ -4,12 +4,23 @@
 // Content: CONTENT/projects/beach-house-malaga.md
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import coverImg from '../../../assets/media/projects/beach-house-malaga/cover.webp';
+import img01 from '../../../assets/media/projects/beach-house-malaga/01.webp';
+import img02 from '../../../assets/media/projects/beach-house-malaga/02.webp';
+import img03 from '../../../assets/media/projects/beach-house-malaga/03.webp';
+import img04 from '../../../assets/media/projects/beach-house-malaga/04.webp';
+import img05 from '../../../assets/media/projects/beach-house-malaga/05.webp';
+type CoverMap = Record<string, { default: ImageMetadata }>;
+const relatedCovers = import.meta.glob<{ default: ImageMetadata }>('../../../assets/media/projects/*/cover.webp', { eager: true }) as CoverMap;
+const getRelatedCover = (slug: string) => relatedCovers[`../../../assets/media/projects/${slug}/cover.webp`].default;
 
 const seoTitle = 'Beach House Interior Design Malaga, Spain | By Shakir';
 const seoDescription = 'Beach house interior in Malaga by By Shakir. Mediterranean coastal design: natural materials, indoor-outdoor living and generous light. View the project.';
-const seoOgImage = '/media/projects/beach-house-malaga/cover.webp';
+const seoOgImage = coverImg.src;
 
 const project = {
   title: 'Beach House',
@@ -20,11 +31,12 @@ const project = {
 };
 
 const images = [
-  { src: '/media/projects/beach-house-malaga/01.webp', alt: 'Open-plan living area with fully retractable doors to the terrace in the Malaga beach house', aspect: 'landscape' },
-  { src: '/media/projects/beach-house-malaga/02.webp', alt: 'Kitchen and breakfast area with morning light and natural stone surfaces', aspect: 'landscape' },
-  { src: '/media/projects/beach-house-malaga/03.webp', alt: 'Terrace with outdoor dining set and views towards the Mediterranean', aspect: 'landscape' },
-  { src: '/media/projects/beach-house-malaga/04.webp', alt: 'Primary bedroom with linen bedding and cross-ventilation from sea-facing windows', aspect: 'portrait' },
-  { src: '/media/projects/beach-house-malaga/05.webp', alt: 'Bathroom with natural stone and brass fixtures suited to coastal conditions', aspect: 'portrait' },
+  { src: coverImg, alt: 'Beach House Malaga — luxury coastal interior by By Shakir', aspect: 'landscape' },
+  { src: img01, alt: 'Open-plan living area with fully retractable doors to the terrace in the Malaga beach house', aspect: 'landscape' },
+  { src: img02, alt: 'Kitchen and breakfast area with morning light and natural stone surfaces', aspect: 'landscape' },
+  { src: img03, alt: 'Terrace with outdoor dining set and views towards the Mediterranean', aspect: 'landscape' },
+  { src: img04, alt: 'Primary bedroom with linen bedding and cross-ventilation from sea-facing windows', aspect: 'portrait' },
+  { src: img05, alt: 'Bathroom with natural stone and brass fixtures suited to coastal conditions', aspect: 'portrait' },
 ];
 
 const relatedProjects = [
@@ -53,6 +65,7 @@ const relatedProjects = [
       <div class="project-hero-content hero-content">
         <span class="overline overline-gold">PROJECT &middot; {project.overline}</span>
         <h1 class="project-hero-h1">{project.title}<span class="gold-comma">,</span> <span class="h1-location">Malaga</span></h1>
+        <Breadcrumb items={[{ label: 'Projects', href: '/projects/' }, { label: project.title }]} />
       </div>
     </section>
 
@@ -64,10 +77,13 @@ const relatedProjects = [
         <div class="gallery-grid">
           {images.map((img, i) => (
             <div class:list={['gallery-item', 'reveal', `d${Math.min(i + 1, 4)}`, { 'gallery-featured': i === 0 }]}>
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
+                widths={[600, 900, 1200]}
+                sizes={i === 0 ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 67vw" : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
                 decoding="async"
               />
             </div>
@@ -125,9 +141,11 @@ const relatedProjects = [
           {relatedProjects.map((rp, i) => (
             <a href={`/projects/${rp.slug}/`} class:list={['related-card', 'reveal', `d${i + 1}`]}>
               <div class="related-card-img">
-                <img
-                  src={`/media/projects/${rp.slug}/cover.webp`}
+                <Image
+                  src={getRelatedCover(rp.slug)}
                   alt={`${rp.title}, ${rp.location} \u2014 interior design by By Shakir`}
+                  widths={[300, 500, 800]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   loading="lazy"
                   decoding="async"
                 />

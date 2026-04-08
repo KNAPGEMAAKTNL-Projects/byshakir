@@ -8,6 +8,8 @@ import CtaSection from '../../../components/CtaSection.astro';
 import Footer from '../../../components/Footer.astro';
 import SchemaFAQ from '../../../components/seo/SchemaFAQ.astro';
 import SchemaService from '../../../components/seo/SchemaService.astro';
+import { Image } from 'astro:assets';
+import process3d from '../../../assets/media/3d-design-process.webp';
 
 const serviceFaqs = [
   {
@@ -32,7 +34,7 @@ const serviceFaqs = [
 <Layout
   title="3D Interior Design Visualisation | By Shakir Studio"
   description="See your home before construction begins. By Shakir creates photorealistic 3D interior visualisations from spatial planning to final material finishes."
-  ogImage="/media/3d-design-process.webp"
+  ogImage={process3d.src}
 >
   <Fragment slot="head">
     <SchemaService
@@ -42,7 +44,7 @@ const serviceFaqs = [
     />
     <SchemaFAQ faqs={serviceFaqs} />
   </Fragment>
-  <Header currentPage="/services/3d-design/" />
+  <Header currentPage="/services/" />
 
   <main>
     <section class="page-hero">
@@ -77,9 +79,11 @@ const serviceFaqs = [
           <h2 class="section-h2">What Can You See in a 3D Render<span class="gold-mark">?</span></h2>
           <div class="includes-grid">
             <div class="includes-image">
-              <img
-                src="/media/3d-design-process.webp"
+              <Image
+                src={process3d}
                 alt="3D interior design render showing a living space with accurate material textures and lighting"
+                widths={[400, 600, 900]}
+                sizes="(max-width: 768px) 100vw, 45vw"
                 loading="lazy"
                 decoding="async"
               />
