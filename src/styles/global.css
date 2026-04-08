@@ -47,6 +47,18 @@
   /* ── Easing (DESIGN.md §10 — Dramatic) ── */
   --ease: cubic-bezier(0.83, 0, 0.17, 1);
 
+  /* ── Semantic Colors ── */
+  --color-error: #AB0016;
+
+  /* ── Alpha variants (--color-dark and --color-gold with common opacities) ── */
+  --color-dark-overlay-heavy: rgba(44, 31, 23, 0.93);
+  --color-dark-overlay-mid: rgba(44, 31, 23, 0.72);
+  --color-dark-overlay-light: rgba(44, 31, 23, 0.55);
+  --color-dark-overlay-card: rgba(44, 31, 23, 0.90);
+  --color-gold-border: rgba(201, 169, 98, 0.18);
+  --color-gold-border-mid: rgba(201, 169, 98, 0.25);
+  --color-gold-border-strong: rgba(201, 169, 98, 0.30);
+
   /* ── Animation Keyframes ── */
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(30px); }
@@ -60,6 +72,45 @@
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+/* ═══════════════════════════════════════════════
+   Shared Utilities — used across all pages
+   Centralised here to avoid per-page duplication
+   ═══════════════════════════════════════════════ */
+
+.overline {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+  display: block;
+}
+.overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+.overline-terracotta { color: var(--color-terracotta); margin-bottom: 0.875rem; }
+.overline-muted { color: var(--color-text-muted-dark); margin-bottom: 0.875rem; }
+
+.gold-dot::after { content: '.'; color: var(--color-gold); }
+.gold-mark { color: var(--color-gold); }
+
+.gold-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+/* Decorative noise texture — feTurbulence SVG overlay */
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.27;
 }
 
 /* ═══════════════════════════════════════════════

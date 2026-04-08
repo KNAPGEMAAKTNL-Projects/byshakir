@@ -26,6 +26,8 @@ const {
     <!-- Google Fonts: Cormorant Garamond + DM Sans (DESIGN.md §3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload critical font weights for LCP — Cormorant 300 (hero h1), DM Sans 300 (body) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=DM+Sans:opsz,wght@9,300&display=swap" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,40,300;0,40,400;0,40,500;1,9,300&display=swap"
       rel="stylesheet"
@@ -62,8 +64,7 @@ const {
       document.addEventListener('astro:after-swap', initReveal);
     </script>
 
-
-<!-- GSAP effects — dynamic import, not in initial bundle -->
+    <!-- GSAP effects — dynamic import, not in initial bundle -->
     <script src="../scripts/gsap-effects.ts"></script>
   </body>
 </html>
