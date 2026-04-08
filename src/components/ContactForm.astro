@@ -302,24 +302,8 @@
     text-underline-offset: 2px;
   }
 
-  /* Button */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 16px 32px;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.7s var(--ease), opacity 0.3s;
-  }
-  .btn-gold { background: var(--color-gold); color: var(--color-dark); }
-  .btn-gold:hover { background: var(--color-gold-light); }
+  /* Button — .btn base is global; override for <button> element context */
+  .btn { display: inline-flex; align-items: center; justify-content: center; border: none; transition: background 0.7s var(--ease), opacity 0.3s; }
   .btn-gold:disabled { opacity: 0.6; cursor: not-allowed; }
   .form-submit { margin-top: 1.5rem; min-width: 200px; }
 

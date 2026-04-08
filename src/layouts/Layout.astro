@@ -66,5 +66,10 @@ const {
 
     <!-- GSAP effects — dynamic import, not in initial bundle -->
     <script src="../scripts/gsap-effects.ts"></script>
+
+    <!-- Noscript: ensure .reveal content is visible without JS -->
+    <noscript>
+      <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
   </body>
 </html>

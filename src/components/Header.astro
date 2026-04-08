@@ -99,7 +99,9 @@ const navLinks = [
       burger?.focus();
     }
 
-    burger?.addEventListener('click', openMenu);
+    burger?.addEventListener('click', () => {
+      mobileNav?.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
     closeBtn?.addEventListener('click', closeMenu);
 
     // Close on link click (mobile nav)

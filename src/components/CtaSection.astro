@@ -129,28 +129,6 @@ const displayHeading = endsWithQuestion ? heading.slice(0, -1) : heading;
     flex-direction: column;
     align-items: center;
   }
-  .btn {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 16px 32px;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background 0.7s var(--ease);
-  }
-  .btn-gold {
-    background: var(--color-gold);
-    color: var(--color-dark);
-  }
-  .btn-gold:hover { background: var(--color-gold-light); }
-  .microcopy {
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    letter-spacing: 0.07em;
-    color: rgba(206, 196, 182, 0.75);
-    margin-top: 0.875rem;
-  }
+  /* .btn and .microcopy are global — see global.css */
+  .btn { display: inline-block; text-decoration: none; }
 </style>

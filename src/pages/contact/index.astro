@@ -79,9 +79,23 @@ import Footer from '../../components/Footer.astro';
 
           <!-- Static map facade — zero cookies, zero iframe -->
           <div class="map-facade">
-            <div class="map-placeholder">
-              <span class="map-label">Tiel, the Netherlands</span>
-            </div>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Gijsbert+Stoutweg+8+4005LE+Tiel+Netherlands"
+              class="map-image-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open By Shakir showroom location in Google Maps"
+            >
+              <img
+                src="/media/map-tiel.webp"
+                alt="Map showing By Shakir showroom location in Tiel, the Netherlands"
+                width="520"
+                height="254"
+                loading="lazy"
+                decoding="async"
+                class="map-img"
+              />
+            </a>
             <a
               href="https://www.google.com/maps/search/?api=1&query=Gijsbert+Stoutweg+8+4005LE+Tiel+Netherlands"
               class="map-link"
@@ -184,21 +198,19 @@ import Footer from '../../components/Footer.astro';
 
   /* Static map facade — zero cookies */
   .map-facade { margin-top: 2rem; }
-  .map-placeholder {
-    aspect-ratio: 16/9;
-    background: var(--color-surface);
+  .map-image-link {
+    display: block;
     border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     margin-bottom: 0.75rem;
+    transition: opacity 0.4s var(--ease);
   }
-  .map-label {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    font-weight: 300;
-    color: var(--color-text-muted);
-    letter-spacing: 0.05em;
+  .map-image-link:hover { opacity: 0.85; }
+  .map-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
   }
   .map-link {
     font-family: var(--font-body);

@@ -323,47 +323,9 @@ const testimonials = [
 </Layout>
 
 <style>
-  /* ── SHARED UTILITIES ───────────────────────────────────── */
-  .btn {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 16px 32px;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background 0.7s var(--ease);
-  }
-  .btn-gold {
-    background: var(--color-gold);
-    color: var(--color-dark);
-  }
-  .btn-gold:hover { background: var(--color-gold-light); }
-  .microcopy {
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    letter-spacing: 0.07em;
-    color: rgba(206, 196, 182, 0.75);
-    margin-top: 0.875rem;
-  }
-  .link-cta {
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--color-gold);
-    display: inline-block;
-    text-decoration: none;
-    transition: opacity 0.3s;
-    color: var(--color-text);
-  }
-  .link-cta { transition: opacity 0.3s var(--ease); }
-  .link-cta:hover { opacity: 0.65; }
-  .link-cta-light { color: var(--color-text-on-dark); }
+  /* .btn, .link-cta, .microcopy are global — see global.css */
+  .btn { display: inline-block; text-decoration: none; }
+  .link-cta { color: var(--color-text); }
 
   /* ── SECTION 1: HERO ────────────────────────────────────── */
   .hero {
