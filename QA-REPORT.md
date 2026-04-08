@@ -45,10 +45,10 @@
 
 | Requirement | Status | Detail |
 |---|---|---|
-| "Gerealiseerd door KNAP GEMAAKT." | ❌ **MISSING** | Not present anywhere in `src/`. Required per project QA checklist. |
-| Link to knapgemaakt.nl case study | ❌ **MISSING** | No attribution link exists. |
-| `target="_blank" rel="noopener"` on link | ❌ **MISSING** | N/A — attribution absent |
-| Text blends with surrounding copy | ❌ **MISSING** | N/A — attribution absent |
+| "Gerealiseerd door KNAP GEMAAKT." | ✅ PASS | Footer.astro — in `.footer-legal` row, same size/color as surrounding copy |
+| Link to knapgemaakt.nl case study | ✅ PASS | `https://knapgemaakt.nl/project/maatwerk-website-voor-by-shakir/` |
+| `target="_blank" rel="noopener"` on link | ✅ PASS | Present |
+| Text blends with surrounding copy | ✅ PASS | Same `.footer-legal` styling — no visual separation |
 
 ### Cookie Compliance
 
@@ -92,11 +92,6 @@
 ### Blocking (must fix before launch)
 
 1. **BTW-nummer missing from footer** — Obtain BTW-nummer from client / Belastingdienst. Add to `Footer.astro` in the `.footer-legal` row alongside the KvK-nummer. Required by Art. 3:15d BW.
-
-2. **"Gerealiseerd door KNAP GEMAAKT." attribution missing** — Add to the bottom of `Footer.astro`. Requirements:
-   - Text: `Gerealiseerd door <a href="https://knapgemaakt.nl/project/[slug]/" target="_blank" rel="noopener">KNAP GEMAAKT.</a>`
-   - Replace `[slug]` with the actual case study slug once published on knapgemaakt.nl
-   - Styling: same size, same color as `.footer-legal` — no visual separation, no emphasis
 
 3. **Cloudflare Turnstile site key is placeholder** — Replace `TURNSTILE_SITE_KEY_PLACEHOLDER` in `ContactForm.astro:83` with the real site key from the Cloudflare Turnstile dashboard. Without this, form spam protection is inactive.
 
