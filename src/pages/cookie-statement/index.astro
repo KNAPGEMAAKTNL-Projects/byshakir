@@ -1,0 +1,117 @@
+---
+// Cookie Statement — /cookie-statement/
+// Language: Dutch (legal requirement)
+// This site is essentially cookie-free — Cloudflare Turnstile uses one technical cookie
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Cookieverklaring | By Shakir"
+  description="By Shakir gebruikt geen tracking- of marketingcookies. Informatie over het gebruik van technische cookies op byshakir.com."
+  lang="nl"
+>
+  <Header />
+
+  <main>
+    <section class="legal-hero">
+      <div class="legal-hero-content">
+        <h1 class="legal-h1">Cookieverklaring</h1>
+      </div>
+    </section>
+
+    <article class="legal-content">
+      <div class="legal-inner">
+
+        <section class="legal-section">
+          <h2>Geen tracking- of marketingcookies</h2>
+          <p>By Shakir maakt geen gebruik van tracking-cookies, marketing-cookies of cookies van sociale media. Je wordt niet gevolgd op andere websites en er worden geen advertentieprofielen aangemaakt.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Cloudflare Turnstile (functioneel cookie)</h2>
+          <p>Het contactformulier op deze website is beveiligd met Cloudflare Turnstile om spam te voorkomen. Turnstile plaatst één technisch cookie dat uitsluitend dient om te bepalen of een formulierinzending afkomstig is van een mens. Dit cookie bevat geen persoonsgegevens en wordt niet gebruikt voor tracking of profilering.</p>
+          <p>Op grond van artikel 5.3 van de Telecommunicatiewet is voor dit functionele cookie geen toestemming vereist, omdat het noodzakelijk is voor de technische werking van het formulier.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Cloudflare Web Analytics</h2>
+          <p>Voor bezoekersstatistieken maken wij gebruik van Cloudflare Web Analytics. Dit systeem plaatst <strong>geen cookies</strong> en verwerkt geen persoonsgegevens. Alle meetdata is volledig geanonimiseerd en bevat geen IP-adressen of andere identificerende informatie.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Vragen</h2>
+          <p>Heb je vragen over deze cookieverklaring of over hoe wij omgaan met je gegevens? Bekijk onze <a href="/privacy/">privacyverklaring</a> of neem contact op via <a href="mailto:info@byshakir.com">info@byshakir.com</a>.</p>
+        </section>
+
+        <p class="legal-updated">Laatste update: 8 april 2026</p>
+
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-hero {
+    background: var(--color-dark);
+    min-height: 28vh;
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 7rem;
+  }
+  .legal-hero-content { max-width: 700px; }
+  .legal-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+  }
+
+  .legal-content {
+    background: var(--color-bg);
+    padding-block: clamp(4rem, 5vw + 2rem, 7rem);
+  }
+  .legal-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    max-width: 70ch;
+  }
+  .legal-section {
+    margin-bottom: clamp(2rem, 3vw, 3rem);
+  }
+  .legal-section h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+  .legal-section p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75em;
+    max-width: 65ch;
+  }
+  .legal-section a {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .legal-updated {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+    margin-top: clamp(2rem, 4vw, 4rem);
+  }
+</style>

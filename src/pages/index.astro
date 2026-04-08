@@ -1,0 +1,868 @@
+---
+// Homepage — /
+// Copy: CONTENT/homepage.md (English)
+// Layout: DESIGN.md §2 section background sequence
+// Tokens: global.css @theme block
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CtaSection from '../components/CtaSection.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = [
+  { slug: 'villa-mansion-netherlands', location: 'Netherlands', title: 'Villa Mansion', featured: true },
+  { slug: 'duplex-penthouse-barcelona', location: 'Barcelona', title: 'Duplex Penthouse', featured: false },
+  { slug: 'penthouse-dubai-marina', location: 'Dubai Marina', title: 'Penthouse', featured: false },
+  { slug: 'country-estate-antwerpen', location: 'Antwerpen', title: 'Country Estate', featured: false },
+  { slug: 'beach-house-malaga', location: 'Malaga', title: 'Beach House', featured: false },
+];
+
+const steps = [
+  {
+    num: '01',
+    title: 'Concept Development',
+    desc: 'Your routines, your preferences, the feeling you want your home to hold. These shape every decision from the first conversation and the first sketch.',
+  },
+  {
+    num: '02',
+    title: '3D Visualisation',
+    desc: 'Photorealistic renders of every room before construction begins. Walk through your home, test every detail, refine the design while decisions are still effortless.',
+  },
+  {
+    num: '03',
+    title: 'Procurement and Joinery',
+    desc: 'Materials, furnishings and bespoke joinery\u00A0\u2014 sourced, managed and coordinated so you never have to chase a single supplier.',
+  },
+  {
+    num: '04',
+    title: 'Installation and Dressing',
+    desc: 'We oversee the build, coordinate every trade and dress each room to completion. You walk into a finished home.',
+  },
+];
+
+const testimonials = [
+  { name: 'Mohamed Abdelatty', context: 'Google Review \u00B7 5 stars', quote: 'Luxury, high-quality interior; many furniture makers could learn from this. He also takes the time to discuss everything with you. I definitely recommend everyone to have their home furnished by Shakir.' },
+  { name: 'Em M', context: 'Google Review \u00B7 5 stars', quote: 'They work in a very professional manner and provide appropriate advice, which is very helpful when you are lacking inspiration yourself. Everything was custom-made and delivered as agreed.' },
+  { name: 'Yasmin', context: 'Google Review \u00B7 5 stars', quote: 'By Shakir did the entire house renovation. He was very helpful and listened carefully to what we wanted. Shakir worked expertly and professionally, and we are thrilled with the result.' },
+];
+---
+
+<Layout
+  title="Luxury Interior Design — By Shakir | Netherlands, Dubai, Spain"
+  description="By Shakir designs luxury residential interiors across the Netherlands, Dubai, Barcelona and Malaga. From concept to installation. Begin a conversation."
+>
+  <Header currentPage="/" />
+
+  <main>
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 1 — HERO
+         Background: dark #2C1F17 · 100dvh · Video + gradient + grain
+         Content: bottom-left anchored (NOT centered)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <!-- Layer 1 — Video background (poster for LCP) -->
+      <div class="hero-bg">
+        <img
+          src="/media/hero-poster.webp"
+          alt=""
+          class="hero-poster"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <video
+          class="hero-video"
+          src="/media/hero-optimized-final.mp4"
+          poster="/media/hero-poster.webp"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+      </div>
+
+      <!-- Layer 2 — Gradient overlay (DESIGN.md §7.6) -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Layer 3 — Grain texture (BUILD-PLAN.md craft element #1) -->
+      <svg class="hero-grain" aria-hidden="true">
+        <filter id="g-hero">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#g-hero)"/>
+      </svg>
+
+      <!-- Layer 4 — Content (bottom-left anchored) -->
+      <div class="hero-content">
+        <span class="overline hero-overline">Netherlands &middot; Dubai &middot; Barcelona &middot; Malaga</span>
+        <h1 class="hero-h1">Luxury Interiors.<br/>Made to Be Lived In.</h1>
+        <p class="hero-body">Complete residential interiors, from first conversation to final detail. The Netherlands, Dubai, Barcelona and Malaga.</p>
+        <div class="hero-cta">
+          <a href="/contact/" class="btn btn-gold">Begin a Conversation</a>
+          <p class="microcopy">No obligation &middot; Personal response within 24 hours</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 2 — PORTFOLIO GRID
+         Background: #F0E8DC warm sand
+         Grid: 3-col, featured card spans 2 rows
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="portfolio">
+      <div class="portfolio-inner">
+        <div class="portfolio-header reveal">
+          <div>
+            <span class="overline overline-terracotta">Selected Projects</span>
+            <h2 class="portfolio-h2 gold-dot">Recent Commissions</h2>
+          </div>
+          <span class="portfolio-count">5 projects</span>
+        </div>
+
+        <!-- Answer capsule for AI SEO -->
+        <p class="portfolio-intro reveal">
+          By Shakir is a luxury interior design studio based in Tiel, the Netherlands. Led by principal designer Shakir, the studio creates bespoke residential interiors for private clients in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Each commission covers the full scope: concept development, 3D visualisation, procurement, joinery and final dressing.
+        </p>
+
+        <div class="portfolio-grid">
+          {projects.map((project, i) => (
+            <a
+              href={`/projects/${project.slug}/`}
+              class:list={['pcard', { 'pcard-featured': project.featured }]}
+            >
+              <div class="pcard-img">
+                <img
+                  src={`/media/projects/${project.slug}/cover.webp`}
+                  alt={`${project.title}, ${project.location} — interior design by By Shakir`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+              <div class="pcard-overlay">
+                <div>
+                  <span class="pcard-location">{project.location}</span>
+                  <span class="pcard-title">{project.title}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="portfolio-footer reveal">
+          <a href="/projects/" class="link-cta">
+            View All Projects
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 3 — TESTIMONIALS
+         Background: #E8DDD0 surface
+         3-column card grid
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="testimonials">
+      <div class="testimonials-inner">
+        <div class="testimonials-header reveal">
+          <span class="overline overline-terracotta">Client Words</span>
+          <h2 class="testimonials-h2 gold-dot">What Our Clients Say</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div class:list={['tcard', 'reveal', `d${i + 1}`, { 'tcard-featured': i === 0 }]}>
+              <div class="tcard-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote class="tcard-quote">{t.quote}</blockquote>
+              <div>
+                <cite class="tcard-name">{t.name}</cite>
+                <span class="tcard-context">{t.context}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="testimonials-footer reveal">
+          <span class="google-badge">Verified Google Reviews</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 4 — ABOUT / PHILOSOPHY
+         Background: #2C1F17 dark espresso
+         Grid: 7fr image : 5fr text (asymmetric)
+         Grain texture + gold rule
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="about">
+      <!-- Grain texture -->
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-about">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#g-about)"/>
+      </svg>
+
+      <div class="about-inner">
+        <!-- Portrait — 7fr column -->
+        <div class="about-portrait reveal">
+          <img
+            src="/media/shakir-portrait.webp"
+            alt="Shakir, principal designer at By Shakir, in the studio"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="about-portrait-tint" aria-hidden="true"></div>
+        </div>
+
+        <!-- Text — 5fr column -->
+        <div class="about-content reveal d2">
+          <!-- Gold rule (BUILD-PLAN.md craft element #2) -->
+          <span class="gold-rule" aria-hidden="true"></span>
+          <span class="overline overline-gold">The Studio</span>
+          <h2 class="about-h2">Who Is Behind By Shakir<span class="gold-mark">?</span></h2>
+
+          <p class="about-body">
+            Shakir's design philosophy begins with a question most studios skip: how do you want to <em>feel</em> when you walk through your front door?
+          </p>
+          <p class="about-body">
+            Based in Tiel, the Netherlands, with commissions spanning Dubai, Barcelona, Malaga and Antwerpen, the studio approaches every project as a conversation between architecture, material and the life lived within it.
+          </p>
+          <p class="about-body">
+            The aesthetic is rooted in Mediterranean warmth. Travertine, linen, late-afternoon light, all shaped by the precision of Dutch contemporary design. No templates. No trend-chasing. No imposed aesthetic. A considered response to one brief: yours.
+          </p>
+
+          <a href="/about/" class="link-cta link-cta-light">
+            More About Shakir
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 5 — PROCESS STEPS
+         Background: #E8DDD0 surface
+         4-column, oversized gold step numbers
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="process">
+      <div class="process-inner">
+        <div class="process-header reveal">
+          <span class="overline overline-terracotta">Our Approach</span>
+          <h2 class="process-h2">How Does a Project Unfold<span class="gold-mark">?</span></h2>
+        </div>
+
+        <div class="process-steps">
+          {steps.map((step, i) => (
+            <div class:list={['step']}>
+              <span class="step-num">{step.num}</span>
+              <h3 class="step-title">{step.title}</h3>
+              <p class="step-desc">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Full-width 3D design image -->
+        <div class="process-image reveal">
+          <img
+            src="/media/3d-design-process.webp"
+            alt="3D interior design visualisation process by By Shakir — photorealistic render of a living space"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 6 — SHOWROOM TEASER
+         Full-width image, text overlay
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="showroom">
+      <img
+        class="showroom-bg"
+        src="/media/showroom-tiel.webp"
+        alt="Interior of the By Shakir showroom in Tiel"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="showroom-overlay" aria-hidden="true"></div>
+      <div class="showroom-content">
+        <div class="showroom-text">
+          <span class="overline overline-muted">Visit the Showroom</span>
+          <p class="showroom-line">By appointment &middot; Tiel, the Netherlands</p>
+        </div>
+        <a href="/about/" class="showroom-link">
+          <span class="link-cta link-cta-light">
+            Plan a Visit
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 7 — CTA
+         ═══════════════════════════════════════════════════════════════ -->
+    <CtaSection
+      heading="Considering a New Interior?"
+      body="Whether you are planning a new build or reimagining an existing home \u2014 a conversation is where every project begins."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ── SHARED UTILITIES ───────────────────────────────────── */
+  .overline {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1;
+    display: block;
+  }
+  .overline-terracotta { color: var(--color-terracotta); margin-bottom: 0.875rem; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .overline-muted { color: var(--color-text-muted-dark); margin-bottom: 0.875rem; }
+  .gold-dot::after { content: '.'; color: var(--color-gold); }
+  .gold-mark { color: var(--color-gold); }
+  .gold-rule {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--color-gold);
+    margin-bottom: 1.25rem;
+  }
+  .grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.27;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.7s var(--ease);
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-dark);
+  }
+  .btn-gold:hover { background: var(--color-gold-light); }
+  .microcopy {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.07em;
+    color: rgba(206, 196, 182, 0.75);
+    margin-top: 0.875rem;
+  }
+  .link-cta {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--color-gold);
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.3s;
+    color: var(--color-text);
+  }
+  .link-cta { transition: opacity 0.3s var(--ease); }
+  .link-cta:hover { opacity: 0.65; }
+  .link-cta-light { color: var(--color-text-on-dark); }
+
+  /* ── SECTION 1: HERO ────────────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 100dvh;
+    min-height: 600px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--color-dark);
+  }
+  .hero-poster,
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(44, 31, 23, 0.93) 0%,
+      rgba(44, 31, 23, 0.58) 32%,
+      rgba(44, 31, 23, 0.22) 60%,
+      rgba(44, 31, 23, 0.08) 100%
+    );
+    pointer-events: none;
+  }
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.28;
+  }
+  .hero-content {
+    position: absolute;
+    bottom: clamp(3rem, 8vh, 5.5rem);
+    left: 0;
+    padding-inline: clamp(1.5rem, 5vw, 6rem);
+    max-width: 700px;
+    z-index: 2;
+  }
+  .hero-overline {
+    color: var(--color-text-muted-dark);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+  .hero-h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-display);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1.5rem;
+  }
+  .hero-body {
+    font-family: var(--font-body);
+    font-size: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+    font-weight: 300;
+    line-height: 1.68;
+    color: var(--color-text-muted-dark);
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* ── SECTION 2: PORTFOLIO GRID ──────────────────────────── */
+  .portfolio {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 5vw + 2.5rem, 9rem);
+  }
+  .portfolio-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+  .portfolio-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .portfolio-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+  .portfolio-count {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    padding-bottom: 0.2rem;
+  }
+  .portfolio-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    max-width: 70ch;
+    margin-bottom: clamp(2rem, 3vw, 3rem);
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(200px, 21vw, 320px);
+    gap: clamp(0.75rem, 1.2vw, 1.125rem);
+  }
+  .pcard {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transform-style: preserve-3d;
+    display: block;
+    text-decoration: none;
+  }
+  .pcard-featured { grid-row: span 2; }
+  .pcard-img {
+    position: absolute;
+    inset: 0;
+  }
+  .pcard-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .pcard:hover .pcard-img img { transform: scale(1.03); }
+  .pcard-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(1rem, 2vw, 1.75rem);
+    background: linear-gradient(to top, rgba(44,31,23,0.9) 0%, transparent 52%);
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.55s var(--ease),
+      transform 0.55s var(--ease);
+  }
+  .pcard:hover .pcard-overlay { opacity: 1; transform: translateY(0); }
+  @media (hover: none) {
+    .pcard-overlay { opacity: 1; transform: none; }
+  }
+  .pcard-location {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.3rem;
+  }
+  .pcard-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: var(--color-text-on-dark);
+    line-height: 1.2;
+  }
+  .portfolio-footer {
+    margin-top: clamp(2.5rem, 3.5vw, 3.5rem);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* ── SECTION 3: TESTIMONIALS ────────────────────────────── */
+  .testimonials {
+    background: var(--color-surface);
+    padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+  }
+  .testimonials-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); }
+  .testimonials-header { margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+  .testimonials-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+  .tcard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .tcard-featured {
+    border-left: 2px solid var(--color-gold);
+    padding-left: 1.25rem;
+  }
+  .tcard-stars {
+    font-size: 0.75rem;
+    color: var(--color-gold);
+    letter-spacing: 0.1em;
+  }
+  .tcard-quote {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.42;
+    color: var(--color-text);
+    flex: 1;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  .tcard-name {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    font-style: normal;
+    display: block;
+  }
+  .tcard-context {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+    display: block;
+  }
+  .testimonials-footer {
+    margin-top: clamp(2.5rem, 3vw, 3.5rem);
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .google-badge {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ── SECTION 4: ABOUT / PHILOSOPHY ──────────────────────── */
+  .about {
+    background: var(--color-dark);
+    padding-block: clamp(7rem, 8vw + 2rem, 13rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-inner {
+    position: relative;
+    z-index: 2;
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: center;
+  }
+  .about-portrait {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .about-portrait-tint {
+    position: absolute;
+    inset: 0;
+    background: rgba(139, 82, 48, 0.1);
+    pointer-events: none;
+  }
+  .about-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1.75rem;
+  }
+  .about-body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted-dark);
+    margin-bottom: 1em;
+    max-width: 48ch;
+  }
+  .about-body:last-of-type { margin-bottom: 2.5rem; }
+  .about-body em { font-style: italic; }
+
+  /* ── SECTION 5: PROCESS STEPS ───────────────────────────── */
+  .process {
+    background: var(--color-surface);
+    padding-block: clamp(4.5rem, 5vw + 1rem, 7.5rem);
+  }
+  .process-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); }
+  .process-header { margin-bottom: clamp(3rem, 4.5vw, 5rem); }
+  .process-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    max-width: 500px;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-bottom: clamp(3rem, 4vw, 5rem);
+  }
+  .step { position: relative; }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--text-3xl) * 0.46);
+    right: calc(-1 * clamp(0.75rem, 1.5vw, 1.5rem));
+    width: clamp(0.75rem, 1.5vw, 1.5rem);
+    height: 1px;
+    background: var(--color-border);
+  }
+  .step-num {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-gold);
+    margin-bottom: 1.25rem;
+  }
+  .step-title {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 0.625rem;
+  }
+  .step-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    line-height: 1.68;
+    color: var(--color-text-muted);
+  }
+  .process-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .process-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── SECTION 6: SHOWROOM TEASER ─────────────────────────── */
+  .showroom {
+    position: relative;
+    height: clamp(280px, 40vmin, 460px);
+    overflow: hidden;
+  }
+  .showroom-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .showroom-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 31, 23, 0.55);
+    pointer-events: none;
+  }
+  .showroom-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(2rem, 5vw, 5rem);
+    z-index: 2;
+  }
+  .showroom-line {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 1.2rem + 2vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: var(--color-text-on-dark);
+    line-height: 1.2;
+    max-width: 400px;
+  }
+  .showroom-link { text-decoration: none; }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pcard-featured {
+      grid-column: span 2;
+      grid-row: span 1;
+      aspect-ratio: 16/8;
+    }
+    .about-inner {
+      grid-template-columns: 1fr;
+      max-width: 680px;
+    }
+    .about-portrait { aspect-ratio: 4/3; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-h1 { font-size: clamp(2.5rem, 10vw, 4.5rem); }
+    .hero-content { max-width: 100%; }
+
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: clamp(260px, 70vw, 380px);
+    }
+    .pcard-featured { grid-column: 1; aspect-ratio: auto; }
+
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    .about-inner { grid-template-columns: 1fr; }
+
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .step:not(:last-child)::after { display: none; }
+    .process-image { aspect-ratio: 4/3; }
+
+    .showroom-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+  }
+</style>

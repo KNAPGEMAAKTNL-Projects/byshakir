@@ -1,0 +1,222 @@
+---
+// Contact — /contact/
+// Content: CONTENT/contact.md
+// Minimal copy — the form does the work
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Contact — Begin a Conversation | By Shakir"
+  description="Contact By Shakir for a personal conversation about your interior project. Based in Tiel, Netherlands. Luxury interiors across NL, Dubai, Spain and Belgium."
+>
+  <Header currentPage="/contact/" />
+
+  <main>
+    <!-- Page header — dark, compact -->
+    <section class="page-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-ch"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-ch)"/>
+      </svg>
+      <div class="page-hero-content hero-content">
+        <span class="overline overline-gold">Contact</span>
+        <h1 class="page-hero-h1">Begin a Conversation</h1>
+        <Breadcrumb items={[{ label: 'Contact' }]} />
+        <p class="page-hero-intro" style="margin-top:1rem;">Tell us about your project. We read every enquiry personally and respond within 24 hours with a suggestion for a first meeting, either in person or by video call.</p>
+      </div>
+    </section>
+
+    <!-- Form + sidebar — 7:5 split -->
+    <section class="contact-section">
+      <div class="contact-inner">
+        <div class="contact-form-col reveal">
+          <ContactForm />
+        </div>
+
+        <aside class="contact-sidebar reveal d2">
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">Phone</h3>
+            <a href="tel:+31344655473" class="sidebar-link">+31 344 655 473</a>
+          </div>
+
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">Email</h3>
+            <a href="mailto:info@byshakir.com" class="sidebar-link">info@byshakir.com</a>
+          </div>
+
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">WhatsApp</h3>
+            <a
+              href="https://wa.me/31344655473?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20project."
+              class="sidebar-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Message us on WhatsApp</a>
+          </div>
+
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">Address</h3>
+            <address class="sidebar-address">
+              Gijsbert Stoutweg 8<br/>
+              4005 LE Tiel<br/>
+              The Netherlands
+            </address>
+          </div>
+
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">Business Registration</h3>
+            <span class="sidebar-text">KvK: 11060878</span>
+          </div>
+
+          <div class="sidebar-block">
+            <h3 class="sidebar-heading">Visiting</h3>
+            <span class="sidebar-text">By appointment</span>
+          </div>
+
+          <!-- Static map facade — zero cookies, zero iframe -->
+          <div class="map-facade">
+            <div class="map-placeholder">
+              <span class="map-label">Tiel, the Netherlands</span>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Gijsbert+Stoutweg+8+4005LE+Tiel+Netherlands"
+              class="map-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-left:4px;">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  .page-hero {
+    background: var(--color-dark);
+    min-height: 40vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-content {
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 600px;
+  }
+  .page-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1.25rem;
+  }
+  .page-hero-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.68;
+    color: var(--color-text-muted-dark);
+    max-width: 45ch;
+  }
+
+  .contact-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .contact-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(3rem, 6vw, 7rem);
+    align-items: start;
+  }
+
+  .sidebar-block {
+    margin-bottom: 1.75rem;
+  }
+  .sidebar-heading {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+    margin-bottom: 0.5rem;
+  }
+  .sidebar-link {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .sidebar-link:hover { color: var(--color-terracotta); }
+  .sidebar-address {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--color-text);
+    font-style: normal;
+  }
+  .sidebar-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    color: var(--color-text);
+  }
+
+  /* Static map facade — zero cookies */
+  .map-facade { margin-top: 2rem; }
+  .map-placeholder {
+    aspect-ratio: 16/9;
+    background: var(--color-surface);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+  .map-label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+  }
+  .map-link {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .map-link:hover { opacity: 0.65; }
+
+  @media (max-width: 768px) {
+    .contact-inner { grid-template-columns: 1fr; }
+  }
+</style>

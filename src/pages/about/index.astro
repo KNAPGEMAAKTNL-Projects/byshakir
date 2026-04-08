@@ -1,0 +1,301 @@
+---
+// About — /about/
+// Content: CONTENT/about.md
+// Voice: Third-person narrative → first-person "we" (values)
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="About — Shakir, Luxury Interior Designer | By Shakir"
+  description="Meet the designer behind By Shakir. Luxury residential interiors across the Netherlands, Dubai, Barcelona and Malaga. Based in Tiel. Visit the showroom."
+>
+  <Header currentPage="/about/" />
+
+  <main>
+    <!-- Hero — dark, portrait + bio side by side (5:7 split, opposite of homepage 7:5) -->
+    <section class="about-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-ah"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-ah)"/>
+      </svg>
+      <div class="about-hero-inner">
+        <div class="about-hero-portrait reveal">
+          <img
+            src="/media/shakir-portrait.webp"
+            alt="Shakir, principal designer at By Shakir, in the studio"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <div class="about-hero-content reveal d2">
+          <span class="overline overline-gold">About</span>
+          <h1 class="about-hero-h1">About Shakir</h1>
+          <Breadcrumb items={[{ label: 'About' }]} />
+          <p class="about-hero-body">Shakir is a luxury interior designer based in Tiel, the Netherlands. The studio creates complete residential interiors for private clients in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Every project runs from concept development and 3D visualisation through procurement, joinery and final dressing. The work is rooted in Mediterranean warmth, shaped by international experience and designed around one thing: how you live.</p>
+          <div class="bio-card">
+            <strong class="bio-name">Shakir</strong>
+            <span class="bio-role">Principal Designer and Founder</span>
+            <span class="bio-location">Tiel, the Netherlands</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Story — light section -->
+    <section class="story-section">
+      <div class="story-inner">
+        <div class="story-content reveal">
+          <h2 class="section-h2 gold-dot">The Studio Story</h2>
+          <p class="body-text body-text-lg">The studio was founded on a conviction that luxury interior design does not have to feel cold. The Dutch market has no shortage of clean Scandinavian minimalism. Beautiful, certainly. But not warm. Not lived in.</p>
+          <p class="body-text body-text-lg">By Shakir brings a Mediterranean sensibility to an industry that often defaults to restraint. Travertine over cool marble. Warm sand tones over arctic white. Linen and textured stone where others reach for glass and steel. This is not a reaction against minimalism. It is an alternative for clients who want their home to feel inviting, not merely impressive.</p>
+          <p class="body-text body-text-lg">That approach has led to commissions across four countries: a <a href="/projects/villa-mansion-netherlands/">villa mansion in the Netherlands</a>, a <a href="/projects/duplex-penthouse-barcelona/">duplex penthouse in Barcelona</a>, a <a href="/projects/country-estate-antwerpen/">country estate near Antwerpen</a>, a <a href="/projects/beach-house-malaga/">beach house in Malaga</a> and a <a href="/projects/penthouse-dubai-marina/">penthouse overlooking Dubai Marina</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values — surface section, stacked cards (NOT a grid like homepage) -->
+    <section class="values-section">
+      <div class="values-inner">
+        <h2 class="section-h2 gold-dot reveal">How We Work</h2>
+        <div class="values-stack">
+          <div class="value-item reveal d1">
+            <h3 class="value-title">Your Life Shapes Every Decision</h3>
+            <p class="value-text">We do not start with a style. We start with you. Your daily routines, your preferences, the feeling you want when you walk through the door. The design follows from there, not the other way around. That is why no two By Shakir interiors look the same.</p>
+          </div>
+          <div class="value-item reveal d2">
+            <h3 class="value-title">You See Everything Before It Is Built</h3>
+            <p class="value-text">Every project includes photorealistic <a href="/services/3d-design/">3D visualisation</a> of every room. You approve finishes, furniture placement and lighting on screen. Changes at this stage cost nothing. By the time construction begins, you know exactly what you are getting.</p>
+          </div>
+          <div class="value-item reveal d3">
+            <h3 class="value-title">One Designer from Start to Finish</h3>
+            <p class="value-text">Shakir leads every commission personally. Not a project manager, not an associate. The same person who develops the concept also selects the materials, coordinates the trades and places the final objects. One relationship, one vision, the entire project.</p>
+          </div>
+          <div class="value-item reveal d4">
+            <h3 class="value-title">International Standards, Personal Scale</h3>
+            <p class="value-text">Projects in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Each one managed with the same level of personal attention. Shakir travels to every project location for concept presentation, material approval and final dressing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showroom — image section -->
+    <section class="showroom-section">
+      <div class="showroom-split">
+        <div class="showroom-image reveal">
+          <img
+            src="/media/showroom-tiel.webp"
+            alt="Interior of the By Shakir showroom in Tiel, showing material samples, fabric swatches and project photography"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="showroom-content reveal d2">
+          <span class="gold-rule" aria-hidden="true"></span>
+          <h2 class="showroom-h2 gold-dot">Visit the Showroom</h2>
+          <p class="showroom-body">The By Shakir showroom is in Tiel, the Netherlands. See material samples, review project photography and discuss your plans in person.</p>
+          <address class="showroom-address">
+            <strong>Address</strong><br/>
+            Gijsbert Stoutweg 8<br/>
+            4005 LE Tiel<br/>
+            The Netherlands
+          </address>
+          <p class="showroom-visiting"><strong>Visiting:</strong> By appointment. <a href="/contact/">Get in touch</a> to arrange a visit.</p>
+        </div>
+      </div>
+    </section>
+
+    <CtaSection
+      heading="Curious What We Could Create for Your Home?"
+      body="Every project begins with a conversation about your home and how you want to live in it."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .gold-dot::after { content: '.'; color: var(--color-gold); }
+  .gold-rule { display: block; width: 40px; height: 1px; background: var(--color-gold); margin-bottom: 1.25rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  /* About hero — 5:7 split (opposite of homepage 7:5 for variety) */
+  .about-hero {
+    background: var(--color-dark);
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(6rem, 7vw + 2rem, 10rem);
+    padding-top: clamp(8rem, 10vw, 12rem);
+  }
+  .about-hero-inner {
+    position: relative;
+    z-index: 2;
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: center;
+  }
+  .about-hero-portrait {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .about-hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .about-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1.5rem;
+  }
+  .about-hero-body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted-dark);
+    margin-bottom: 2rem;
+    max-width: 48ch;
+  }
+  .bio-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(201, 169, 98, 0.25);
+  }
+  .bio-name { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-text-on-dark); }
+  .bio-role { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 300; color: var(--color-text-muted-dark); }
+  .bio-location { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 300; color: var(--color-text-muted-dark); opacity: 0.7; }
+
+  /* Story — light */
+  .story-section {
+    background: var(--color-bg);
+    padding-block: clamp(6rem, 7vw + 2rem, 11rem);
+  }
+  .story-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); }
+  .section-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+  .body-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 1em;
+    max-width: 65ch;
+  }
+  .body-text-lg { font-size: var(--text-lg); line-height: 1.55; }
+  .body-text a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Values — surface */
+  .values-section {
+    background: var(--color-surface);
+    padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+  }
+  .values-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .values-inner .section-h2 { margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+  .values-stack { display: flex; flex-direction: column; gap: clamp(2.5rem, 3vw, 3.5rem); }
+  .value-item {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--color-gold);
+  }
+  .value-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+  .value-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    max-width: 55ch;
+  }
+  .value-text a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Showroom — asymmetric split */
+  .showroom-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .showroom-split {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: center;
+  }
+  .showroom-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .showroom-image img { width: 100%; height: 100%; object-fit: cover; }
+  .showroom-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+  }
+  .showroom-body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    max-width: 45ch;
+  }
+  .showroom-address {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    font-style: normal;
+    margin-bottom: 1rem;
+  }
+  .showroom-address strong { font-weight: 500; color: var(--color-text); display: block; margin-bottom: 0.25rem; }
+  .showroom-visiting {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted);
+  }
+  .showroom-visiting strong { font-weight: 500; }
+  .showroom-visiting a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  @media (max-width: 768px) {
+    .about-hero-inner { grid-template-columns: 1fr; }
+    .about-hero-portrait { aspect-ratio: 4/3; }
+    .showroom-split { grid-template-columns: 1fr; }
+  }
+</style>

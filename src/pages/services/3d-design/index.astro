@@ -1,0 +1,333 @@
+---
+// 3D Design — /services/3d-design/
+// Content: CONTENT/services/3d-design.md
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import CtaSection from '../../../components/CtaSection.astro';
+import Footer from '../../../components/Footer.astro';
+---
+
+<Layout
+  title="3D Interior Design Visualisation | By Shakir"
+  description="See your home before construction begins. By Shakir creates photorealistic 3D renders of every room, from spatial planning to lighting and material finishes."
+>
+  <Header currentPage="/services/3d-design/" />
+
+  <main>
+    <section class="page-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-3d"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-3d)"/>
+      </svg>
+      <div class="page-hero-content hero-content">
+        <span class="overline overline-gold">3D Design</span>
+        <h1 class="page-hero-h1">3D Interior Design Visualisation</h1>
+        <Breadcrumb items={[{ label: 'Services', href: '/services/' }, { label: '3D Design' }]} />
+      </div>
+    </section>
+
+    <!-- Answer capsule + what is 3D -->
+    <section class="content-section">
+      <div class="content-inner">
+        <p class="answer-capsule reveal">
+          3D interior design visualisation lets you see every room of your home in photorealistic detail before construction begins. By Shakir produces full renders of each space as a standard part of every <a href="/services/">commission</a>: spatial layouts, material finishes, lighting and furniture placement, all visible and adjustable before any physical work starts.
+        </p>
+
+        <div class="description reveal d1">
+          <h2 class="section-h2">What Is 3D Interior Design Visualisation<span class="gold-mark">?</span></h2>
+          <p class="body-text">A photorealistic preview of your finished interior, built digitally, before construction begins.</p>
+          <p class="body-text">Every room is modelled in three dimensions with accurate proportions, real material textures and natural lighting conditions. The result looks like a photograph of a room that does not yet exist. You can see how a marble countertop catches morning light, how a sofa fabric sits against the wall colour, how a hallway feels at its narrowest point.</p>
+          <p class="body-text">This is not a mood board. Not a sketch. It is a working model of your home that you can review, question and refine at your own pace. Changes at this stage cost nothing but time. Changes during construction cost considerably more.</p>
+        </div>
+
+        <!-- What can you see — visual list with 5:7 split -->
+        <div class="includes-block reveal d2">
+          <h2 class="section-h2">What Can You See in a 3D Render<span class="gold-mark">?</span></h2>
+          <div class="includes-grid">
+            <div class="includes-image">
+              <img
+                src="/media/3d-design-process.webp"
+                alt="3D interior design render showing a living space with accurate material textures and lighting"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <ul class="includes-list">
+              <li>Full spatial layout with accurate room dimensions</li>
+              <li>Material finishes (stone, timber, fabric, metal) rendered at texture level</li>
+              <li>Natural and artificial lighting mapped to your property's orientation</li>
+              <li>Furniture, fixtures and bespoke joinery in their exact positions</li>
+              <li>Colour relationships between surfaces, soft furnishings and artwork</li>
+            </ul>
+          </div>
+          <p class="body-text">For international projects where clients cannot visit the property during construction, the 3D stage is especially valuable. You approve every room remotely with complete confidence in what the finished result will look like. <a href="/projects/">See completed interiors</a> to compare renders with reality.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why — dark section, 2-column layout (different from services hub's 2x2 grid) -->
+    <section class="why-section">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-3dw"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-3dw)"/>
+      </svg>
+      <div class="why-inner">
+        <h2 class="why-h2 reveal">Why Use 3D Visualisation for Your Interior<span class="gold-mark">?</span></h2>
+        <div class="why-stack">
+          <div class="why-card reveal d1">
+            <h3 class="why-title">No expensive mid-build changes</h3>
+            <p class="why-desc">Decisions are made on screen, not on site. The render is your opportunity to refine every detail while changes cost nothing.</p>
+          </div>
+          <div class="why-card reveal d2">
+            <h3 class="why-title">Remote confidence for international clients</h3>
+            <p class="why-desc">By Shakir manages projects across four countries. The 3D stage lets you approve your Dubai penthouse from Amsterdam, or your Malaga beach house from London.</p>
+          </div>
+          <div class="why-card reveal d3">
+            <h3 class="why-title">Accurate material and colour testing</h3>
+            <p class="why-desc">See how your chosen marble interacts with the oak flooring. How the linen curtains sit against the wall finish. In context, at scale, in the correct light.</p>
+          </div>
+          <div class="why-card reveal d4">
+            <h3 class="why-title">Included in every full commission</h3>
+            <p class="why-desc">3D visualisation is not an add-on. It is a standard part of the <a href="/services/">complete design process</a>, built into every project from the start.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process — how the 3D process works -->
+    <section class="process-section">
+      <div class="process-inner">
+        <h2 class="section-h2 reveal">How Does the 3D Process Work<span class="gold-mark">?</span></h2>
+        <div class="process-prose reveal d1">
+          <p class="body-text">The 3D stage sits between concept approval and procurement. Once spatial layouts and the material direction are agreed, we build the digital model.</p>
+          <p class="body-text">A typical project involves two to three rounds of renders. The first round establishes the overall scheme: room shapes, key materials, furniture scale. You review, we discuss, and we note what works and what needs to shift.</p>
+          <p class="body-text">The second round refines specific selections: individual furniture pieces, final material finishes, lighting positions. A third round, if needed, addresses remaining details.</p>
+          <p class="body-text">Each round includes a video call or in-person meeting to walk through the renders together. Once you sign off on the final version, that approved model becomes the specification document for procurement and construction. Nothing is ordered or built until you have seen it and said yes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ — surface section -->
+    <section class="faq-section">
+      <div class="faq-inner">
+        <h2 class="section-h2 gold-dot reveal">Questions About 3D Design</h2>
+        <div class="faq-list">
+          <details class="faq-item reveal d1">
+            <summary class="faq-q">How Long Does the 3D Visualisation Stage Take?</summary>
+            <p class="faq-a">Two to four weeks for a full home, depending on the number of rooms and revision rounds. A single-room render can be completed within five to seven working days. The timeline is built into the overall project schedule from the start.</p>
+          </details>
+          <details class="faq-item reveal d2">
+            <summary class="faq-q">How Accurate Are the 3D Renders Compared to the Finished Result?</summary>
+            <p class="faq-a">Very. Materials are rendered from real texture samples. Lighting is calculated based on your property's orientation and window placement. Furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room looks exactly like the render they approved months earlier.</p>
+          </details>
+          <details class="faq-item reveal d3">
+            <summary class="faq-q">Can I Make Changes After Seeing the Renders?</summary>
+            <p class="faq-a">That is the purpose of this stage. Changes during 3D cost nothing beyond the time to update the model. We encourage clients to sit with the renders for a few days, live with them, and return with questions. Better to adjust a digital wall than a plastered one.</p>
+          </details>
+          <details class="faq-item reveal d4">
+            <summary class="faq-q">Is 3D Visualisation Available Without the Full Design Service?</summary>
+            <p class="faq-a">Yes. While it is included in every <a href="/services/">complete commission</a>, 3D visualisation is also available as a standalone service for clients who have their own architect or contractor. <a href="/contact/">Get in touch</a> to discuss your project.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <CtaSection
+      heading="See Your Home Before It Exists"
+      body="Tell us about your project. We will show you how 3D visualisation fits into the process."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .gold-dot::after { content: '.'; color: var(--color-gold); }
+  .gold-mark { color: var(--color-gold); }
+  .gold-rule { display: block; width: 40px; height: 1px; background: var(--color-gold); margin-bottom: 1.25rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  .page-hero {
+    background: var(--color-dark);
+    min-height: 40vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-content {
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 700px;
+  }
+  .page-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1rem;
+  }
+  .breadcrumb {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted-dark);
+  }
+  .breadcrumb a { color: var(--color-text-muted-dark); text-decoration: none; transition: color 0.3s; }
+  .breadcrumb a:hover { color: var(--color-gold); }
+  .breadcrumb span { opacity: 0.5; margin-inline: 0.5rem; }
+
+  .content-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .content-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .answer-capsule {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--color-text);
+    margin-bottom: clamp(3rem, 4vw, 5rem);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--color-gold);
+  }
+  .answer-capsule a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+  .section-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+  .body-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 1em;
+    max-width: 65ch;
+  }
+  .body-text a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+  .description { margin-bottom: clamp(3rem, 5vw, 5rem); }
+
+  /* Includes block — 5:7 image + list */
+  .includes-block { margin-bottom: 2rem; }
+  .includes-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 3vw, 3rem);
+    margin-bottom: 2rem;
+    align-items: start;
+  }
+  .includes-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .includes-image img { width: 100%; height: 100%; object-fit: cover; }
+  .includes-list {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .includes-list li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .includes-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 1px;
+    background: var(--color-gold);
+  }
+
+  /* Why section */
+  .why-section {
+    background: var(--color-dark);
+    padding-block: clamp(6rem, 7vw + 2rem, 11rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .why-inner { position: relative; z-index: 2; padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .why-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-text-on-dark);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .why-stack { display: flex; flex-direction: column; gap: clamp(2rem, 3vw, 3rem); }
+  .why-card { padding-left: 1.5rem; border-left: 1px solid rgba(201, 169, 98, 0.3); }
+  .why-title {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-on-dark);
+    margin-bottom: 0.5rem;
+  }
+  .why-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted-dark);
+  }
+  .why-desc a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Process section */
+  .process-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+  }
+  .process-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+
+  /* FAQ */
+  .faq-section {
+    background: var(--color-surface);
+    padding-block: clamp(4.5rem, 5vw + 1rem, 7rem);
+  }
+  .faq-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .faq-inner .section-h2 { margin-bottom: clamp(2rem, 3vw, 3rem); }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-top: 1px solid var(--color-border); padding-block: 1.25rem; }
+  .faq-item:last-child { border-bottom: 1px solid var(--color-border); }
+  .faq-q {
+    font-family: var(--font-body); font-size: var(--text-base); font-weight: 400;
+    color: var(--color-text); cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after { content: '+'; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 300; color: var(--color-gold); flex-shrink: 0; }
+  details[open] .faq-q::after { content: '\2212'; }
+  .faq-a {
+    font-family: var(--font-body); font-size: var(--text-sm); font-weight: 300;
+    line-height: 1.72; color: var(--color-text-muted); margin-top: 1rem; max-width: 60ch;
+  }
+  .faq-a a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  @media (max-width: 768px) {
+    .includes-grid { grid-template-columns: 1fr; }
+  }
+</style>

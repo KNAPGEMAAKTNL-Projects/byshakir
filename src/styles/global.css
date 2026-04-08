@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════
+   By Shakir — Design Tokens
+   Source: DESIGN.md (single source of truth)
+   Tone: E4 D3 F7 R10 A6
+   ═══════════════════════════════════════════════ */
+
+@theme {
+  /* ── Color Palette ── */
+  --color-gold: #C9A962;
+  --color-gold-light: #E8C26C;
+  --color-gold-dark: #745B16;
+  --color-dark: #2C1F17;
+  --color-dark-alt: #1E150D;
+  --color-bg: #F0E8DC;
+  --color-surface: #E8DDD0;
+  --color-surface-elevated: #FAF7F3;
+  --color-terracotta: #8B5230;
+  --color-terracotta-warm: #B87856;
+  --color-text: #2C1F17;
+  --color-text-muted: #7A756E;
+  --color-text-on-dark: #F0E8DC;
+  --color-text-muted-dark: #CEC4B6;
+  --color-border: #CEC4B6;
+  --color-cool: #7AABB8;
+
+  /* ── Typography ── */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+
+  /* ── Type Scale (perfect-fourth, ratio 1.333) ── */
+  --text-display: clamp(3rem, 2rem + 5vw, 7rem);
+  --text-4xl: 4.2087rem;
+  --text-3xl: 3.1573rem;
+  --text-2xl: 2.3686rem;
+  --text-xl: 1.7769rem;
+  --text-lg: 1.333rem;
+  --text-base: 1rem;
+  --text-sm: 0.7502rem;
+  --text-xs: 0.5628rem;
+
+  /* ── Border Radius ── */
+  --radius-card: 2px;
+  --radius-button: 2px;
+
+  /* ── Easing (DESIGN.md §10 — Dramatic) ── */
+  --ease: cubic-bezier(0.83, 0, 0.17, 1);
+
+  /* ── Animation Keyframes ── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-reveal {
+    from { transform: scale(0.96) translateY(10px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Base Layer
+   ═══════════════════════════════════════════════ */
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    overflow-wrap: break-word;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  /* Heading defaults — Cormorant Garamond, light weight */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: var(--text-display);
+    font-weight: 300;
+    line-height: 1.04;
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  /* Prevent hero heading from being invisible on load (LCP) */
+  h1 { opacity: 1; }
+
+  /* Focus visible — gold outline for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-dark);
+  }
+
+  /* Ensure text doesn't overflow on long words */
+  p, li, td, th, blockquote {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}

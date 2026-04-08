@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════
+   By Shakir — Effects & Animation Utilities
+   Source: DESIGN.md §10-11, effects-library.md
+   ═══════════════════════════════════════════════ */
+
+/* ── Scroll-Driven Animation Utilities ──
+   Tailwind does not generate these. */
+
+@layer utilities {
+  .anim-timeline-view { animation-timeline: view(); }
+  .anim-timeline-scroll { animation-timeline: scroll(); }
+  .anim-timeline-scroll-root { animation-timeline: scroll(root); }
+  .anim-range-entry { animation-range: entry 0% entry 100%; }
+  .anim-range-cover { animation-range: cover 0% cover 100%; }
+}
+
+/* ── Scroll Reveal (IntersectionObserver-driven) ──
+   Elements start hidden, gain .in class when scrolled into view.
+   Duration: 1.4s with dramatic easing (DESIGN.md §10). */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transition:
+      opacity 1.4s var(--ease),
+      transform 1.4s var(--ease);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Stagger delay classes (max 4 — DESIGN.md §11) */
+  .reveal.d1 { transition-delay: 0.10s; }
+  .reveal.d2 { transition-delay: 0.20s; }
+  .reveal.d3 { transition-delay: 0.30s; }
+  .reveal.d4 { transition-delay: 0.40s; }
+}
+
+/* ── CSS Scroll-Driven Scale Reveal ──
+   Progressive enhancement for browsers supporting animation-timeline.
+   ~83% global coverage (March 2026). Firefox behind flag. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .scroll-reveal {
+      animation: scale-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+
+/* ── Hero Video Parallax ──
+   0.25x scroll speed. Disabled on mobile (< 768px). */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero-parallax {
+      animation: parallax-hero linear;
+      animation-timeline: scroll();
+      animation-range: 0% 100%;
+    }
+  }
+}
+
+@keyframes parallax-hero {
+  from { transform: translateY(0); }
+  to { transform: translateY(-15%); }
+}
+
+/* ── Hero Entrance ──
+   Page-load animation. NOT scroll-triggered. */
+
+.hero-content {
+  animation: hero-enter 1.6s var(--ease) 0.35s both;
+}
+
+/* ── Reduced Motion Fallback ──
+   All animations disabled. Content immediately visible. */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-content {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .hero-parallax {
+    animation: none !important;
+  }
+}

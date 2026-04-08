@@ -1,0 +1,189 @@
+---
+// Portfolio Overview — /projects/
+// Content: CONTENT/projects/projects.md
+// Layout: masonry-style grid (different from homepage 3-col grid with featured card)
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const projects = [
+  { slug: 'villa-mansion-netherlands', location: 'Netherlands', title: 'Villa Mansion', type: 'Complete residential interior' },
+  { slug: 'duplex-penthouse-barcelona', location: 'Barcelona', title: 'Duplex Penthouse', type: 'Complete residential interior' },
+  { slug: 'penthouse-dubai-marina', location: 'Dubai Marina', title: 'Penthouse', type: 'Complete residential interior' },
+  { slug: 'country-estate-antwerpen', location: 'Antwerpen', title: 'Country Estate', type: 'Complete residential interior' },
+  { slug: 'beach-house-malaga', location: 'Malaga', title: 'Beach House', type: 'Complete residential interior' },
+];
+---
+
+<Layout
+  title="Projects — Luxury Interior Design Portfolio | By Shakir"
+  description="Explore By Shakir's portfolio of luxury residential interiors. Villas, penthouses and estates across the Netherlands, Dubai, Barcelona and Malaga."
+>
+  <Header currentPage="/projects/" />
+
+  <main>
+    <section class="page-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-prj"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-prj)"/>
+      </svg>
+      <div class="page-hero-content hero-content">
+        <span class="overline overline-gold">Portfolio</span>
+        <h1 class="page-hero-h1">Projects</h1>
+        <p class="page-hero-intro">Luxury residential interiors across the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Each commission designed from concept through to installation.</p>
+      </div>
+    </section>
+
+    <!-- Project grid — 2-column with alternating sizes for editorial feel -->
+    <section class="portfolio-section">
+      <div class="portfolio-inner">
+        <div class="portfolio-grid">
+          {projects.map((project, i) => (
+            <a
+              href={`/projects/${project.slug}/`}
+              class:list={['project-card', 'reveal', `d${Math.min(i + 1, 4)}`, { 'project-card-wide': i === 0 || i === 3 }]}
+            >
+              <div class="project-card-img">
+                <img
+                  src={`/media/projects/${project.slug}/cover.webp`}
+                  alt={`${project.title}, ${project.location} — interior design by By Shakir`}
+                  loading={i < 2 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+              <div class="project-card-overlay">
+                <span class="project-card-location">{project.location}</span>
+                <span class="project-card-title">{project.title}</span>
+                <span class="project-card-type">{project.type}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaSection
+      heading="Have a Project in Mind?"
+      body="Every commission begins with a conversation about your home and how you want to live in it."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  .page-hero {
+    background: var(--color-dark);
+    min-height: 42vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-content {
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 650px;
+  }
+  .page-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 1rem;
+  }
+  .page-hero-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.68;
+    color: var(--color-text-muted-dark);
+    max-width: 50ch;
+  }
+
+  /* Portfolio grid — 2-col with alternating wide cards */
+  .portfolio-section {
+    background: var(--color-bg);
+    padding-block: clamp(4rem, 5vw + 2rem, 8rem);
+  }
+  .portfolio-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+  }
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    display: block;
+    text-decoration: none;
+    aspect-ratio: 4/5;
+  }
+  .project-card-wide {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+  .project-card-img {
+    position: absolute;
+    inset: 0;
+  }
+  .project-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .project-card:hover .project-card-img img { transform: scale(1.03); }
+  .project-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    background: linear-gradient(to top, rgba(44,31,23,0.88) 0%, transparent 55%);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  }
+  .project-card:hover .project-card-overlay { opacity: 1; transform: translateY(0); }
+  @media (hover: none) {
+    .project-card-overlay { opacity: 1; transform: none; }
+  }
+  .project-card-location {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.3rem;
+  }
+  .project-card-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--color-text-on-dark);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+  .project-card-type {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted-dark);
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .project-card-wide { grid-column: 1; aspect-ratio: 4/5; }
+  }
+</style>

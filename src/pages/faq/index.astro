@@ -1,0 +1,208 @@
+---
+// FAQ — /faq/
+// Content: CONTENT/faq.md
+// Accordion: native <details>/<summary> (BUILD-PLAN.md: zero JS)
+// Schema: FAQPage JSON-LD
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const faqs = [
+  {
+    q: 'How Much Does Luxury Interior Design Cost?',
+    a: 'Every By Shakir project is priced individually based on scope, materials, project location and the level of bespoke work involved. There is no fixed price list. Cost is discussed openly during the initial conversation, and we provide a clear outline based on your specific brief before any commitment is made. <a href="/contact/">Begin a conversation</a> to discuss your project.',
+  },
+  {
+    q: 'How Long Does a Typical Project Take?',
+    a: 'A single-room redesign typically takes 8 to 12 weeks. A complete home interior, from concept through installation, runs 6 to 12 months. International projects can take longer due to shipping and local building regulations. We agree a realistic timeline at the start of every commission. For a more detailed overview, see <a href="/services/">our design process</a>.',
+  },
+  {
+    q: 'Which Areas Does By Shakir Serve?',
+    a: 'The studio is based in Tiel, the Netherlands. Active projects span the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Shakir travels to every project location for key stages: concept presentation, material approval and final dressing. International commissions receive the same personal attention as a project next door.',
+  },
+  {
+    q: 'How Do I Start a Project with By Shakir?',
+    a: '<a href="/contact/">Get in touch</a> through the contact form or by phone. We respond personally within 24 hours and suggest a first meeting, either in person at the Tiel showroom or by video call. That conversation covers your home, your ambitions and whether By Shakir is the right fit for your project.',
+  },
+  {
+    q: 'Can By Shakir Manage a Project in Another Country?',
+    a: 'Yes. By Shakir regularly manages commissions across borders. Current and completed projects include properties in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. The <a href="/services/3d-design/">3D visualisation stage</a> enables remote approval of every room. Shakir travels to the project site for key milestones. Supplier coordination, procurement and delivery scheduling are handled centrally from the Netherlands.',
+  },
+  {
+    q: 'Do I Need to Be Present During the Design Process?',
+    a: 'Not for most of it. The <a href="/services/3d-design/">3D visualisation stage</a> is designed for remote approval: you see every room in photorealistic detail and sign off digitally. Many clients are based in a different country from their property. We handle all site coordination and provide regular photo updates during installation.',
+  },
+  {
+    q: 'What Is 3D Interior Design Visualisation?',
+    a: 'A photorealistic digital preview of your finished interior, built before construction begins. Every room is modelled with accurate proportions, real material textures and natural lighting. You review and approve the design on screen. Changes at this stage cost nothing. Read the <a href="/services/3d-design/">full explanation of 3D design</a>.',
+  },
+  {
+    q: 'How Accurate Are the 3D Renders?',
+    a: 'Very. Materials are rendered from real texture samples, lighting is calculated from your property\'s orientation and window placement, and furniture is modelled to manufacturer dimensions. Clients regularly tell us the finished room matches the approved render closely. See <a href="/services/3d-design/">how 3D visualisation works</a> for more detail.',
+  },
+  {
+    q: 'Can I Hire By Shakir for Just One Part of the Process?',
+    a: 'Yes. While most clients choose the complete service, individual elements such as concept development, 3D visualisation or furniture procurement are available separately. The scope is shaped around what your project needs. <a href="/contact/">Begin with a conversation</a> and we will recommend what fits.',
+  },
+  {
+    q: 'What Is the Difference Between Interior Design and Interior Decorating?',
+    a: 'Interior design covers the full scope of a residential project: spatial planning, material specification, bespoke joinery, procurement and trade coordination. Interior decorating focuses on surface finishes, furnishings and styling. By Shakir practises interior design and <a href="/services/">interior architecture</a>, meaning we work with spatial structure, not just aesthetics.',
+  },
+  {
+    q: 'Is By Shakir Insured?',
+    a: 'Yes. The studio carries professional indemnity insurance covering design advice, project management and procurement coordination. If you have specific insurance requirements for your project, raise them during the initial conversation and we will provide documentation.',
+  },
+  {
+    q: 'What Happens After I Submit the Contact Form?',
+    a: 'We read every enquiry personally. Within 24 hours, you will receive a response from Shakir with a suggestion for a first meeting, either in person at the Tiel showroom or by video call. That conversation is informal, has no obligation and typically lasts around 45 minutes.',
+  },
+];
+
+// Generate FAQPage JSON-LD schema
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a.replace(/<[^>]*>/g, ''), // Strip HTML for schema
+    },
+  })),
+};
+---
+
+<Layout
+  title="Frequently Asked Questions — Luxury Interior Design | By Shakir"
+  description="Common questions about luxury interior design: cost, timelines, 3D visualisation and the process. By Shakir, Tiel, the Netherlands."
+>
+  <Header currentPage="/faq/" />
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <main>
+    <section class="page-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-fh"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-fh)"/>
+      </svg>
+      <div class="page-hero-content hero-content">
+        <span class="overline overline-gold">FAQ</span>
+        <h1 class="page-hero-h1">Frequently Asked Questions</h1>
+        <Breadcrumb items={[{ label: 'FAQ' }]} />
+        <p class="page-hero-intro" style="margin-top:0.75rem;">Questions about working with By Shakir</p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="faq-inner">
+        <div class="faq-list">
+          {faqs.map((faq, i) => (
+            <details class:list={['faq-item', 'reveal', i < 4 ? `d${i + 1}` : '']}>
+              <summary class="faq-q">{faq.q}</summary>
+              <p class="faq-a" set:html={faq.a} />
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaSection
+      heading="Still Have a Question?"
+      body="We are happy to answer anything not covered here."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  .page-hero {
+    background: var(--color-dark);
+    min-height: 38vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-content {
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 600px;
+  }
+  .page-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+    margin-bottom: 0.75rem;
+  }
+  .page-hero-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    color: var(--color-text-muted-dark);
+  }
+
+  .faq-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .faq-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+    max-width: 75ch;
+  }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item {
+    border-top: 1px solid var(--color-border);
+    padding-block: 1.5rem;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--color-border); }
+  .faq-q {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: '+';
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease);
+  }
+  details[open] .faq-q::after { content: '\2212'; }
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-top: 1.25rem;
+    max-width: 60ch;
+  }
+  :global(.faq-a a) {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

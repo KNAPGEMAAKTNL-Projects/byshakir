@@ -1,0 +1,416 @@
+---
+// Villa Mansion, Netherlands — /projects/villa-mansion-netherlands/
+// Primary keyword: luxury villa interior design Netherlands
+// Content: CONTENT/projects/villa-mansion-netherlands.md
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import CtaSection from '../../../components/CtaSection.astro';
+import Footer from '../../../components/Footer.astro';
+
+const seoTitle = 'Villa Mansion, Netherlands \u2014 Interior Design | By Shakir';
+const seoDescription = 'Complete luxury villa interior in the Netherlands by By Shakir. From spatial planning to final dressing. View the full project.';
+
+const project = {
+  title: 'Villa Mansion',
+  location: 'The Netherlands',
+  overline: 'THE NETHERLANDS',
+  type: 'Complete residential interior',
+  status: 'Completed',
+};
+
+const images = [
+  { src: '/media/projects/villa-mansion-netherlands/01.webp', alt: 'Living room with natural stone flooring and full-height garden views', aspect: 'landscape' },
+  { src: '/media/projects/villa-mansion-netherlands/02.webp', alt: 'Bespoke kitchen cabinetry in warm timber finish', aspect: 'landscape' },
+  { src: '/media/projects/villa-mansion-netherlands/03.webp', alt: 'Primary bedroom with linen headboard and layered lighting', aspect: 'portrait' },
+  { src: '/media/projects/villa-mansion-netherlands/04.webp', alt: 'Bathroom with natural stone surfaces and brass fixtures', aspect: 'portrait' },
+  { src: '/media/projects/villa-mansion-netherlands/05.webp', alt: 'Entrance hall with built-in joinery and natural light', aspect: 'landscape' },
+];
+
+const relatedProjects = [
+  { slug: 'duplex-penthouse-barcelona', title: 'Duplex Penthouse', location: 'Barcelona', tagline: 'Urban luxury across two levels' },
+  { slug: 'penthouse-dubai-marina', title: 'Penthouse', location: 'Dubai Marina', tagline: 'Warm materials against a modern skyline' },
+  { slug: 'country-estate-antwerpen', title: 'Country Estate', location: 'Antwerpen', tagline: 'Heritage architecture meets contemporary living' },
+];
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <Header currentPage="/projects/" />
+
+  <main>
+    <!-- ═══════════════════════════════════════════════════════════════
+         PROJECT HERO — Dark, compact (40-65vh)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="project-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-phero">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#g-phero)"/>
+      </svg>
+
+      <div class="project-hero-content hero-content">
+        <span class="overline overline-gold">PROJECT &middot; {project.overline}</span>
+        <h1 class="project-hero-h1">{project.title}<span class="gold-comma">,</span> <span class="h1-location">{project.location}</span></h1>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         IMAGE GALLERY — Asymmetric 3-column grid
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="gallery">
+      <div class="gallery-inner">
+        <div class="gallery-grid">
+          {images.map((img, i) => (
+            <div class:list={['gallery-item', 'reveal', `d${Math.min(i + 1, 4)}`, { 'gallery-featured': i === 0 }]}>
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PROJECT NARRATIVE — Left-aligned text
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="narrative">
+      <div class="narrative-inner">
+        <div class="narrative-meta reveal">
+          <div class="meta-item">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">{project.location}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Type</span>
+            <span class="meta-value">{project.type}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">{project.status}</span>
+          </div>
+        </div>
+
+        <div class="narrative-body">
+          <p class="narrative-lead reveal">A complete luxury interior commission for a villa mansion in the Netherlands. By Shakir designed the full scope of the project: spatial planning, material selection, bespoke joinery, furniture procurement and installation. The result is a home that balances contemporary Dutch proportions with warm, tactile materials throughout.</p>
+
+          <h2 class="narrative-h2 gold-dot reveal">The Brief</h2>
+          <p class="narrative-text reveal">The clients approached By Shakir with a newly built villa and a clear ambition: an interior that felt warm and collected, not showroom-new. The architecture provided generous proportions and abundant natural light. The design brief was to complement those qualities without competing with them.</p>
+
+          <h2 class="narrative-h2 gold-dot reveal">The Approach</h2>
+          <p class="narrative-text reveal">The material palette took its cues from the surrounding landscape. Natural stone flooring, warm timber joinery and linen-upholstered furnishings create a layered, inhabitable quality throughout. Every room connects to the next through a consistent material language, while each space retains its own character.</p>
+          <p class="narrative-text reveal">The living areas open onto the garden through full-height glazing. Furniture was positioned to frame the view rather than dominate it. In the evening, layered lighting transforms the same spaces into something quieter and more intimate.</p>
+
+          <h2 class="narrative-h2 gold-dot reveal">The Detail</h2>
+          <p class="narrative-text reveal">Bespoke joinery runs through the entire villa: the kitchen cabinetry, a built-in media wall in the living room and full-height wardrobes in the primary bedroom. Each piece was designed in <a href="/services/3d-design/" class="narrative-link">3D</a> and approved by the client before manufacture began.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         RELATED PROJECTS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="related">
+      <div class="related-inner">
+        <span class="overline overline-terracotta reveal">More Projects</span>
+        <h2 class="related-h2 gold-dot reveal">Related Commissions</h2>
+
+        <div class="related-grid">
+          {relatedProjects.map((rp, i) => (
+            <a href={`/projects/${rp.slug}/`} class:list={['related-card', 'reveal', `d${i + 1}`]}>
+              <div class="related-card-img">
+                <img
+                  src={`/media/projects/${rp.slug}/cover.webp`}
+                  alt={`${rp.title}, ${rp.location} \u2014 interior design by By Shakir`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="related-card-text">
+                <span class="related-card-location">{rp.location}</span>
+                <span class="related-card-title">{rp.title}</span>
+                <span class="related-card-tagline">{rp.tagline}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CTA
+         ═══════════════════════════════════════════════════════════════ -->
+    <CtaSection
+      heading="Considering a New Interior?"
+      body="Whether you are planning a new build or reimagining an existing home \u2014 a conversation is where every project begins."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ── SHARED UTILITIES ───────────────────────────────────── */
+  .overline {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1;
+    display: block;
+  }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .overline-terracotta { color: var(--color-terracotta); margin-bottom: 0.875rem; }
+  .gold-dot::after { content: '.'; color: var(--color-gold); }
+  .grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.27;
+  }
+
+  /* ── PROJECT HERO ───────────────────────────────────────── */
+  .project-hero {
+    position: relative;
+    min-height: clamp(40vh, 50vh, 65vh);
+    background: var(--color-dark);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .project-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 5vw, 6rem);
+    padding-top: 8rem;
+  }
+  .project-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 2.5rem + 4vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+  }
+  .gold-comma { color: var(--color-gold); }
+  .h1-location {
+    font-weight: 300;
+    color: var(--color-text-muted-dark);
+  }
+
+  /* ── IMAGE GALLERY ──────────────────────────────────────── */
+  .gallery {
+    background: var(--color-bg);
+    padding-block: clamp(3rem, 4vw + 1rem, 6rem);
+  }
+  .gallery-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(220px, 24vw, 380px);
+    gap: clamp(0.75rem, 1.2vw, 1.125rem);
+  }
+  .gallery-featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.03);
+  }
+
+  /* ── NARRATIVE ──────────────────────────────────────────── */
+  .narrative {
+    background: var(--color-bg);
+    padding-block: clamp(2rem, 3vw, 4rem) clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .narrative-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+  .narrative-meta {
+    display: flex;
+    gap: clamp(2rem, 4vw, 4rem);
+    padding-bottom: clamp(2rem, 3vw, 3.5rem);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .meta-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.375rem;
+  }
+  .meta-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+  .narrative-body {
+    max-width: 65ch;
+  }
+  .narrative-lead {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .narrative-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    margin-top: clamp(2rem, 3vw, 3rem);
+  }
+  .narrative-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 1em;
+  }
+  .narrative-link {
+    color: var(--color-terracotta);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-terracotta);
+    transition: opacity 0.3s;
+  }
+  .narrative-link:hover { opacity: 0.65; }
+
+  /* ── RELATED PROJECTS ───────────────────────────────────── */
+  .related {
+    background: var(--color-surface);
+    padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+  }
+  .related-inner {
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+  .related-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+  }
+  .related-card {
+    display: block;
+    text-decoration: none;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .related-card-img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .related-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .related-card:hover .related-card-img img {
+    transform: scale(1.03);
+  }
+  .related-card-text {
+    padding: clamp(1rem, 1.5vw, 1.5rem) 0;
+  }
+  .related-card-location {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+    margin-bottom: 0.3rem;
+  }
+  .related-card-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 0.375rem;
+  }
+  .related-card-tagline {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-featured {
+      grid-column: span 2;
+      grid-row: span 1;
+      aspect-ratio: 16/9;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-hero-h1 {
+      font-size: clamp(2.25rem, 9vw, 4rem);
+    }
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: clamp(240px, 65vw, 360px);
+    }
+    .gallery-featured {
+      grid-column: 1;
+      grid-row: span 1;
+      aspect-ratio: auto;
+    }
+    .narrative-meta {
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

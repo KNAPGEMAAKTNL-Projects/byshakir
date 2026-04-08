@@ -1,0 +1,378 @@
+---
+// Services Hub — /services/
+// Content: CONTENT/services/services.md
+// Layout: alternating light/dark sections, NOT duplicating homepage grid
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Services — Luxury Interior Design | By Shakir"
+  description="Complete luxury interior design from concept through installation. By Shakir works across the Netherlands, Dubai, Barcelona and Malaga. Begin a conversation."
+>
+  <Header currentPage="/services/" />
+
+  <main>
+    <!-- Page header — dark, compact -->
+    <section class="page-hero">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-sh"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-sh)"/>
+      </svg>
+      <div class="page-hero-content hero-content">
+        <span class="overline overline-gold">Our Services</span>
+        <h1 class="page-hero-h1">Luxury Interior Design Services</h1>
+        <Breadcrumb items={[{ label: 'Services' }]} />
+      </div>
+    </section>
+
+    <!-- Answer capsule + description -->
+    <section class="content-section">
+      <div class="content-inner">
+        <p class="answer-capsule reveal">
+          By Shakir offers complete luxury interior design for private residential clients. Every commission runs from first conversation through concept development, 3D visualisation, procurement, joinery and final dressing. The studio works across the Netherlands, Dubai, Barcelona, Antwerpen and Malaga, designing interiors shaped entirely around how each client lives.
+        </p>
+
+        <div class="description reveal d1">
+          <h2 class="section-h2">What Is Included in a Complete Interior Project<span class="gold-mark">?</span></h2>
+          <p class="body-text">A By Shakir commission covers everything between your first conversation and the moment you walk into a finished home. Spatial planning, material selection, furniture specification, bespoke joinery, procurement of every item and coordination of all trades through to installation and final dressing.</p>
+          <p class="body-text">The scope is deliberately broad. Most clients come to us because they do not want to manage ten different suppliers, coordinate deliveries or second-guess material choices alone. We take on that complexity so you can focus on the decisions that matter: the feeling you want, the way you live, the pieces you love.</p>
+          <p class="body-text">For clients who want to focus on a single element, individual services such as <a href="/services/3d-design/">3D visualisation</a> or furniture procurement are also available. The scope is shaped around what your project needs, not a fixed package.</p>
+          <p class="body-text">This service is designed for homeowners planning a complete renovation, new build or significant refurbishment. Projects typically begin at a scale where professional coordination genuinely saves time and cost: full-home interiors, multi-room renovations, or international properties where managing suppliers remotely would be impractical.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why choose — dark section, different layout from homepage about -->
+    <section class="why-section">
+      <svg class="grain" aria-hidden="true">
+        <filter id="g-sw"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+        <rect width="100%" height="100%" filter="url(#g-sw)"/>
+      </svg>
+      <div class="why-inner">
+        <h2 class="why-h2 reveal">What Sets This Studio Apart<span class="gold-mark">?</span></h2>
+        <div class="why-grid">
+          <div class="why-item reveal d1">
+            <span class="gold-rule" aria-hidden="true"></span>
+            <h3 class="why-title">International project experience</h3>
+            <p class="why-desc">Commissions completed in the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. Managing suppliers, regulations and logistics across borders is part of how this studio operates. <a href="/projects/" class="why-link">View completed projects.</a></p>
+          </div>
+          <div class="why-item reveal d2">
+            <span class="gold-rule" aria-hidden="true"></span>
+            <h3 class="why-title">3D visualisation on every project</h3>
+            <p class="why-desc">Every room is rendered in photorealistic detail before construction begins. No surprises mid-build. <a href="/services/3d-design/" class="why-link">Learn how 3D design works.</a></p>
+          </div>
+          <div class="why-item reveal d3">
+            <span class="gold-rule" aria-hidden="true"></span>
+            <h3 class="why-title">Single point of contact</h3>
+            <p class="why-desc">Shakir oversees every commission personally, from first sketch to final cushion placement. One designer who knows your project from the inside.</p>
+          </div>
+          <div class="why-item reveal d4">
+            <span class="gold-rule" aria-hidden="true"></span>
+            <h3 class="why-title">Full procurement and trade coordination</h3>
+            <p class="why-desc">We source materials, manage suppliers and schedule every delivery. You never coordinate a trade yourself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process — light section -->
+    <section class="process-section">
+      <div class="process-inner">
+        <h2 class="section-h2 reveal">How Does the Design Process Work<span class="gold-mark">?</span></h2>
+        <p class="process-intro reveal">Every project follows a clear sequence, though the pace is set by you.</p>
+
+        <div class="process-flow">
+          <div class="process-step reveal d1">
+            <span class="step-marker">1</span>
+            <div>
+              <h3 class="step-name">Conversation</h3>
+              <p class="step-text">Not a sales meeting. A genuine exchange about how you live, what your home needs to do and the feeling you want it to hold.</p>
+            </div>
+          </div>
+          <div class="process-step reveal d2">
+            <span class="step-marker">2</span>
+            <div>
+              <h3 class="step-name">Concept development</h3>
+              <p class="step-text">From the conversation, a design direction takes shape: spatial layouts, a material palette and early visualisation. We present options; you choose a direction.</p>
+            </div>
+          </div>
+          <div class="process-step reveal d3">
+            <span class="step-marker">3</span>
+            <div>
+              <h3 class="step-name">3D visualisation</h3>
+              <p class="step-text">We produce <a href="/services/3d-design/">photorealistic renders</a> of every room. You see your home before construction begins. This is where changes are easiest and cost nothing.</p>
+            </div>
+          </div>
+          <div class="process-step reveal d4">
+            <span class="step-marker">4</span>
+            <div>
+              <h3 class="step-name">Procurement and build</h3>
+              <p class="step-text">With the design approved, we source and order all materials, furniture, fixtures and bespoke joinery. We coordinate every trade, manage every timeline and oversee the build.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <span class="step-marker">5</span>
+            <div>
+              <h3 class="step-name">Dressing and handover</h3>
+              <p class="step-text">The final stage: placing every cushion, every artwork, every object. You walk into a finished home.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ — surface section -->
+    <section class="faq-section">
+      <div class="faq-inner">
+        <h2 class="section-h2 gold-dot reveal">Common Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item reveal d1">
+            <summary class="faq-q">How Long Does a Typical Interior Design Project Take?</summary>
+            <p class="faq-a">It depends on scope. A single-room redesign might take 8 to 12 weeks. A complete home interior, from concept through installation, typically runs 6 to 12 months. International projects can take longer due to shipping and local regulations. We set a realistic timeline together at the start and update you at every stage.</p>
+          </details>
+          <details class="faq-item reveal d2">
+            <summary class="faq-q">Do I Need to Be Present During the Design Process?</summary>
+            <p class="faq-a">Not for most of it. Many clients are based in one country while their property is in another. The <a href="/services/3d-design/">3D visualisation stage</a> is specifically designed for remote approval: you see every room in photorealistic detail and sign off digitally. We handle all site coordination and send regular photo updates during installation.</p>
+          </details>
+          <details class="faq-item reveal d3">
+            <summary class="faq-q">Which Areas Does By Shakir Serve?</summary>
+            <p class="faq-a">The studio is based in Tiel, the Netherlands. Active projects span the Netherlands, Dubai, Barcelona, Antwerpen and Malaga. International projects receive the same level of personal attention: Shakir travels to every project site for key stages including concept presentation, material approval and final dressing.</p>
+          </details>
+          <details class="faq-item reveal d4">
+            <summary class="faq-q">Can I Hire By Shakir for Just One Part of the Process?</summary>
+            <p class="faq-a">Yes. While most clients choose the complete service, individual elements such as concept development, 3D visualisation or procurement are available separately. <a href="/contact/">Begin with a conversation</a> and we will recommend the scope that fits your project.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <CtaSection
+      heading="Considering a New Interior?"
+      body="Every project begins with a conversation about your home and how you want to live in it."
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .overline { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1; display: block; }
+  .overline-gold { color: var(--color-gold); margin-bottom: 1rem; }
+  .gold-dot::after { content: '.'; color: var(--color-gold); }
+  .gold-mark { color: var(--color-gold); }
+  .gold-rule { display: block; width: 40px; height: 1px; background: var(--color-gold); margin-bottom: 1.25rem; }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.27; }
+
+  /* Page hero — compact dark header */
+  .page-hero {
+    background: var(--color-dark);
+    min-height: 45vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-content {
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+    padding-top: 8rem;
+    max-width: 700px;
+  }
+  .page-hero-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-on-dark);
+  }
+
+  /* Content section */
+  .content-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 6vw + 2rem, 9rem);
+  }
+  .content-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .answer-capsule {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--color-text);
+    margin-bottom: clamp(3rem, 4vw, 5rem);
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--color-gold);
+  }
+  .section-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+  .body-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: 1em;
+    max-width: 65ch;
+  }
+  .body-text a {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .body-text a:hover { color: var(--color-text); }
+
+  /* Why section — dark */
+  .why-section {
+    background: var(--color-dark);
+    padding-block: clamp(6rem, 7vw + 2rem, 11rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .why-inner {
+    position: relative;
+    z-index: 2;
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+  .why-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-text-on-dark);
+    margin-bottom: clamp(3rem, 4vw, 5rem);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 4vw, 4rem);
+  }
+  .why-title {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-on-dark);
+    margin-bottom: 0.75rem;
+  }
+  .why-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted-dark);
+  }
+  .why-link {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Process section */
+  .process-section {
+    background: var(--color-bg);
+    padding-block: clamp(5rem, 5vw + 2rem, 8rem);
+  }
+  .process-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .process-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+  .process-flow { display: flex; flex-direction: column; gap: clamp(2rem, 3vw, 3rem); }
+  .process-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .step-marker {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    color: var(--color-gold);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 2.5rem;
+  }
+  .step-name {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+  .step-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+  }
+  .step-text a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* FAQ section */
+  .faq-section {
+    background: var(--color-surface);
+    padding-block: clamp(4.5rem, 5vw + 1rem, 7rem);
+  }
+  .faq-inner { padding-inline: clamp(1.5rem, 5vw, 5rem); max-width: 75ch; }
+  .faq-inner .section-h2 { margin-bottom: clamp(2rem, 3vw, 3rem); }
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item {
+    border-top: 1px solid var(--color-border);
+    padding-block: 1.25rem;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--color-border); }
+  .faq-q {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: '+';
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease);
+  }
+  details[open] .faq-q::after { content: '\2212'; }
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+    max-width: 60ch;
+  }
+  .faq-a a { color: var(--color-terracotta); text-decoration: underline; text-underline-offset: 2px; }
+
+  @media (max-width: 768px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>
