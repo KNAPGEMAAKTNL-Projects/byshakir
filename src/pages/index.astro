@@ -396,10 +396,14 @@ const testimonials = [
   }
   .hero-content {
     position: absolute;
+    top: 5rem;
     bottom: clamp(3rem, 8vh, 5.5rem);
     left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     padding-inline: clamp(1.5rem, 5vw, 6rem);
-    max-width: 700px;
+    max-width: 43.75rem;
     z-index: 2;
   }
   .hero-overline {
@@ -422,7 +426,7 @@ const testimonials = [
     font-weight: 300;
     line-height: 1.68;
     color: var(--color-text-muted-dark);
-    max-width: 400px;
+    max-width: 25rem;
     margin-bottom: 2.5rem;
   }
   .hero-cta {
@@ -695,7 +699,7 @@ const testimonials = [
     line-height: 1.18;
     letter-spacing: -0.015em;
     color: var(--color-text);
-    max-width: 500px;
+    max-width: 31.25rem;
   }
   .process-steps {
     display: grid;
@@ -792,7 +796,7 @@ const testimonials = [
     letter-spacing: 0.01em;
     color: var(--color-text-on-dark);
     line-height: 1.2;
-    max-width: 400px;
+    max-width: 25rem;
   }
   .showroom-link { text-decoration: none; }
 
@@ -808,7 +812,7 @@ const testimonials = [
     }
     .about-inner {
       grid-template-columns: 1fr;
-      max-width: 680px;
+      max-width: 42.5rem;
     }
     .about-portrait { aspect-ratio: 4/3; }
   }
